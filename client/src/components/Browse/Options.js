@@ -169,10 +169,10 @@ const Options = ({
         }
     }
   
-    const handleSubmit = () => {
-        changeChartTitle();
-        setChartTitle("");
-    };
+    // const handleSubmit = () => {
+    //     changeChartTitle();
+    //     setChartTitle("");
+    // };
 
     return (
         <div className="bg-success mb-2 py-2 px-2 rounded-bottom">

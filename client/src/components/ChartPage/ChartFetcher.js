@@ -18,12 +18,12 @@ const ChartFetcher = ({chartData}) => {
             const {
                 chartType: configType,
                 customOptions: { fontSize },
-                data: { 
-                    colorIds, 
-                    customTableNames, 
-                    hours, 
+                data: {
+                    colorIds,
+                    customTableNames,
+                    hours,
                     previousHour,
-                    tableNames, 
+                    tableNames,
                 },
                 id,
             } = chartData;
@@ -77,14 +77,10 @@ const ChartFetcher = ({chartData}) => {
                 hours,
                 tableNames,
                 customTableNames,
-                colorIds,
+                colorIds
             );
 
-            const newConfig = getNewChartConfig(
-                checkedData,
-                config,
-                chartData
-            );
+            const newConfig = getNewChartConfig(checkedData, config, chartData);
             charts.splice(0, 1, newConfig);
             chartDispatch({ type: "addNewChart", payload: charts });
         };
@@ -94,6 +90,7 @@ const ChartFetcher = ({chartData}) => {
         } else {
             fetchData(chartData);
         }
+        // eslint-disable-next-line
     }, [chartData])
 
     const Charts = charts.map((config, i) => {

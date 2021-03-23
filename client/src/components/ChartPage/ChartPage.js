@@ -42,6 +42,7 @@ const ChartPage = (props) => {
             }
         };
         fetchChartInformation();
+        // eslint-disable-next-line
     }, []);
 
     return (

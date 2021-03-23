@@ -46,23 +46,28 @@ const Chart = ({
         } else {
             if (isAuthenticated && customGlobalOptions.fontSize) {
                 const setConfig = () => {
-                    defaults.global.defaultFontSize = customGlobalOptions.fontSize;
-                    defaults.global.legend.labels.defaultFontSize = customGlobalOptions.fontSize;
+                    defaults.global.defaultFontSize =
+                        customGlobalOptions.fontSize;
+                    defaults.global.legend.labels.defaultFontSize =
+                        customGlobalOptions.fontSize;
                     lineChart.current.chartInstance.update();
                 };
-                setConfig();    
+                setConfig();
             } else {
                 defaults.global.defaultFontSize = customGlobalOptions.fontSize;
-                defaults.global.legend.labels.defaultFontSize = customGlobalOptions.fontSize;
+                defaults.global.legend.labels.defaultFontSize =
+                    customGlobalOptions.fontSize;
             }
         }
+        // eslint-disable-next-line
     }, [triggerRerenderAfterDefaultConfigChanged]);
 
 
     useEffect(() => {
-        if (!isSaved){
+        if (!isSaved) {
             setIsSavedChart(false);
         }
+        // eslint-disable-next-line
     }, [data]);
     
     const toggleOptions = () => {

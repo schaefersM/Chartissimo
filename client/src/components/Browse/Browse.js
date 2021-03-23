@@ -16,6 +16,7 @@ const Browse = () => {
 
     useEffect(() => {
         chartDispatch({ type: "resetCharts" });
+        // eslint-disable-next-line
     }, []);
 
     useEffect(() => {
@@ -41,7 +42,7 @@ const Browse = () => {
                 } else {
                     const data = await response.json();
                     const { fontSize } = data;
-                    customGlobalOptions.fontSize = fontSize
+                    customGlobalOptions.fontSize = fontSize;
                     defaults.global.defaultFontSize = fontSize;
                     defaults.global.legend.labels.defaultFontSize = fontSize;
                 }
@@ -52,6 +53,7 @@ const Browse = () => {
             defaults.global.legend.labels.defaultFontSize = 16;
             customGlobalOptions.fontSize = 16;
         }
+        // eslint-disable-next-line
     }, [readyToRender, triggerRerenderAfterDefaultConfigChanged]);
 
     return (
