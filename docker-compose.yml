@@ -1,8 +1,7 @@
-version: '3.7'
+version: '3.3'
 
 networks:
   chartissimo_bridge:
-    name: chartissimo_bridge
     ipam:
       config:
         - subnet: 172.18.1.0/24
