@@ -96,7 +96,7 @@ services:
       MYSQL_DATABASE: ${DOCKER_MYSQL_DB}
 
   mongodatabase: 
-    image: mongo
+    image: mongo:4.4.4
     container_name: chartmongo
     networks: 
       - chartissimo_bridge
