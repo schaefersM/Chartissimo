@@ -27,7 +27,7 @@ Starts up the Docker containers and initializes the databases.
 
 ### User data
 
-I already created a user for you so you can just login:
+I already created a user for you so you can login straight away:
 
 - username: chartissimo
 - password: chartissimo
