@@ -18,7 +18,6 @@ router.route("/")
             const ipAddress = req.ip
             bcrypt.compare(req.body.password, password, async (err, result) => {
                 user.password = undefined;
-                console.log(user)
                 if (result === true) {
                     await RefreshToken.deleteMany({user: user._id});
                     const accessToken = jwt.sign(

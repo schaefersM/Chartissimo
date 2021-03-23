@@ -102,7 +102,7 @@ services:
     volumes: 
       - mongodatabase:/data/db
       - mongoconfigdb:/data/configdb
-      - ./mongo/dump:/dump
+      - ./mongodb/dump:/dump
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${DOCKER_MONGODB_ROOT_USER}
