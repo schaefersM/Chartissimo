@@ -76,7 +76,9 @@ const LoginPage = () => {
                     onKeyDown={(e) => handleKeyDown(e)}
                 >
                     <div className="form-group">
-                        <label htmlFor="login-page-name-input">Name</label>
+                        <label htmlFor="login-page-name-input">
+                            Username
+                        </label>
                         <input
                             id="login-page-name-input"
                             className="mr-2 form-control"

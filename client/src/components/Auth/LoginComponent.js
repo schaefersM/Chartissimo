@@ -67,7 +67,9 @@ const LoginComponent = () => {
             {errorText ? <p className="text-danger">{errorText}</p> : null}
             <form onKeyDown={(e) => handleKeyDown(e)}>
                 <div className="form-group">
-                    <label htmlFor="login-component-name-input">Name</label>
+                    <label htmlFor="login-component-name-input">
+                        Username
+                    </label>
                     <input
                         id="login-component-name-input"
                         className="mr-2 form-control"
