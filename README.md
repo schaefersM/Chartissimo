@@ -21,7 +21,12 @@ Chartissimo is a web application to visualize randomly generated weather data of
 
 ### startup.sh
 
-Starts up the Docker containers and initializes the databases.
+Executes the shell script "startup.sh". This script will start up the Docker containers and initialize the databases.
+
+After a successfull initialization you can use the "docker-compose up" command to start up your container.
+
+Only use the startup script for the **initial** installation otherwise it will cause intialization errors on the databases.
+
 
 ## Data
 
