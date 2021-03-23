@@ -211,6 +211,7 @@ const FetchModal = () => {
             duration: 1500,
             delay: 200,
             smooth: true,
+            offset: -100
         });
     };
 
@@ -242,11 +243,12 @@ const FetchModal = () => {
         };
         charts.push(newConfig);
         chartDispatch({ type: "addNewChart", payload: charts });
-        // scroller.scrollTo(`${newConfig.id}`, {
-        //     duration: 1500,
-        //     delay: 200,
-        //     smooth: true,
-        // });
+        scroller.scrollTo(`${newConfig.id}`, {
+            duration: 1500,
+            delay: 200,
+            smooth: true,
+            offset: -100
+        });
     };
 
     const resetHourButton =
