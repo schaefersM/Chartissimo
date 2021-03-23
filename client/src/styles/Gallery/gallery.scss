@@ -1,0 +1,38 @@
+.gallery-filter-container {
+  border: black solid 1px;
+  margin-bottom: 2em;
+} 
+.gallery-filter-container > div {
+  padding: 0.3em;
+}
+.gallery-search-container {
+  padding: 0.3em;
+  border: black solid 1px;
+}
+.gallery-container {
+  flex-direction: column;
+}
+
+.gallery-item-header {
+  margin-left: 50%;
+}
+
+.gallery-graph-image {
+  width: 100%;
+}
+
+.gallery-filter-container {
+      flex-direction: column;
+    }
+    .gallery-filter-item {
+        width: 100%
+    }
+
+@media only screen and (min-width: 550px){
+    .gallery-filter-container {
+      flex-direction: row;
+    }
+    .gallery-filter-item {
+        width: 100%
+    }
+}

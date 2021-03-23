@@ -1,0 +1,1 @@
+update informatik set datum=date_add(datum,interval 1 year);

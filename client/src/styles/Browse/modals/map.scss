@@ -1,0 +1,126 @@
+$background-image-mobile: url("./../../../png/mobile.png");
+$background-image-nomap: url("./../../../png/nomap.png");
+$background-image-rotate: url("./../../../png/rotate.png");
+$content-height-mobile: 33em;
+$content-width-mobile: 37em;
+$center-map-modal: 50%;
+
+
+@mixin mapmodalDefault($height, $width, $left, $background, $padding: 0px) {
+    .map-modal-dialog{
+        max-width: $width;
+        max-height: $height;
+        left: $left;
+        // left: $left !important;
+        padding-top: $padding;
+        display: flex;
+    }
+
+    .map-modal-dialog>div.modal-content{
+        width: $width;
+        height: $height;
+    }
+
+    .map-modal-body {
+        background-repeat: no-repeat;
+        padding: 0 !important;
+        background-image: $background;
+    }
+
+    .map-modal-header>button.close {
+        margin-left: auto;
+        margin-right: auto; 
+        font-size: 3em;
+    }
+}
+
+.map-modal {
+    font-size: 16px;
+}
+
+.map-modal-dialog {
+    @include modalcenterModal();
+    
+    .modal-content{
+        padding: 0.5em;
+    }
+}
+
+.map-modal-header {
+    padding: 0 !important;
+    border-bottom: 0 !important; 
+
+    button.close {
+        font-size: 2em;
+        margin: 0 auto;
+        padding: 0 !important;
+
+    }
+}
+
+.map-modal-body {
+    margin-top: 1em;
+}
+
+@media only screen {
+    .map-modal-dialog {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 300px) and (max-width:567px) and (min-height: 568px) and (max-height: 5000px) {
+    @include mapmodalDefault(15em, 19em, 47.5%, $background-image-rotate);
+    @include hideMarker();
+    .map-modal-dialog {
+        margin-left: 0.5rem !important;
+    }
+}
+
+@media only screen and (min-width: 568px) and (min-height: 180px) and (max-height: 530px) {
+    @include mapmodalDefault($content-height-mobile, $content-width-mobile, $center-map-modal, $background-image-mobile);
+    @include displayMarkerMobile();
+    .map-modal-dialog {
+        top: 0%;
+        padding-top: 33em !important;
+    }
+}
+
+@media only screen and (min-width: 568px) and (min-height: 530px) and (max-height: 1000px) {
+    @include mapmodalDefault($content-height-mobile, $content-width-mobile, $center-map-modal, $background-image-mobile);
+    @include displayMarkerMobile();
+}
+
+
+@media only screen and (min-width: 750px) and (min-height: 700px) {
+
+    .map-modal-dialog{
+        max-width: 45em;
+        max-height: 35.5em;
+        left: 50% !important;
+        padding-top: 0px !important;
+    }
+
+    .map-modal-dialog>div.modal-content{
+        width: 45em;
+        height: 35.5em;
+    }
+
+    .map-modal-body {
+        background-image: url("./../../../png/Karte.png");
+        background-repeat: no-repeat;
+        padding: 0 !important;
+    }
+    @include displayMarkerFullscreen();
+}
+
+@media only screen and (min-width: 1200px) {
+    .content-wrapper {
+        margin: 0em 5em 0em 5em !important;
+    }
+}
+
+@media only screen and (min-width: 1500px) {
+    .content-wrapper {
+        margin: 0em 13em 0em 13em !important;
+    }
+}

@@ -1,0 +1,26 @@
+.graph-table-background-color {
+    background-color: #26461c
+}
+.graph-table>thead>tr>th {
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+}
+.graph-table>thead>tr>th {
+    background-color: #4d4d4d;
+    color: white;
+}
+
+.graph-table>tbody>tr:nth-child(odd)>td, 
+.graph-table>tbody>tr:nth-child(odd)>th {
+    background-color: rgb(168, 168, 168);
+ }
+.graph-table>tbody>tr:nth-child(even)>td, 
+.graph-table>tbody>tr:nth-child(even)>th {
+    background-color: rgb(224, 224, 224);
+ }
+.graph-table>tbody>tr:last-child>td:last-child {
+    border-bottom-right-radius: 0.25rem;
+}
+.graph-table>tbody>tr:last-child>td:first-child {
+    border-bottom-left-radius: 0.25rem;
+}

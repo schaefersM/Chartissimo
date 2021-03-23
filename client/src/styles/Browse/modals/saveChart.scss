@@ -1,0 +1,37 @@
+.savechart-modal-content {
+    margin: auto 4rem;
+}
+
+.savechart-modal-dialog {
+    @include modalcenterModal();
+}
+
+.savechart-modal-header>button.close {
+    margin-left: auto;
+    margin-right: auto; 
+    font-size: 3em;
+    padding-top: 0;
+    padding-bottom: 0.2em;
+}
+
+.savechart-modal-dialog {
+    width: 100%;
+}
+
+@media only screen and (min-width: 390px){
+    .savechart-modal-login-text {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+        .savechart-modal-dialog {
+        width: auto !important;
+    }
+}
+
+@media only screen and (max-height: 290px){
+    .savechart-modal-dialog {
+        top: 9em;
+        width: auto !important;
+    }
+}

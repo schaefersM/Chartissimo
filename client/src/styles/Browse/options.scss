@@ -1,0 +1,53 @@
+@media only screen and (max-width: 456px){
+    .fontsize-container {
+        flex-direction: column !important;
+    }
+    .fontsize-container>span {
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .fontsize-slider {
+        width: 100%;
+    }
+    .rc-slider {
+        margin-left: 0 !important;
+    }
+    .charttitle-container {
+        flex-direction: column;
+    }
+    .charttitle-input {
+        margin-bottom: 0.5em;
+        width: 100% !important;
+        margin-left: 0 !important;
+    }
+}
+
+@media only screen and (min-width: 457px) and (max-width: 768px){
+    .fontsize-slider {
+        width: 100%;
+    }
+    .charttitle-label {
+        margin-bottom: 0 !important;
+    }
+    .charttitle-input {
+        width: 50% !important;
+        flex-grow: 2;
+        margin-left: 0.5em;
+    }
+    .charttitle-submit-button {
+        margin-left: 0.5em
+    }
+}
+
+@media only screen and (min-width: 768px){
+    .fontsize-slider {
+        width: 50% !important;
+    }
+    .charttitle-input {
+        width: 40% !important;
+        margin-left: 0.5em;
+    }
+    .charttitle-submit-button {
+        margin-left: 0.5em
+    }
+}
