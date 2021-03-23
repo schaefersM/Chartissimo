@@ -95,7 +95,7 @@ router.get("/comparison", (req, res) => {
         if (err) {
             res.send(err);
         } else if (!results[0].length) {
-            return res.status(404).json("No data available!");
+            return res.status(404).json({errorMessage: "No data available!"});
         } else {
             console.log(`query compare at ${new Date().toUTCString()}`);
             return res.json([...results]);

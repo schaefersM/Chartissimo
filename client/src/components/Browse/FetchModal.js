@@ -20,6 +20,7 @@ const FetchModal = () => {
         showModal,
     } = useChartStore();
 
+    const [errorMessage, setErrorMessage] = useState("");
     const [fetchHour, setHour] = useState("25");
     
     const fetchData = async (type) => {
@@ -34,9 +35,13 @@ const FetchModal = () => {
             `http://${process.env.REACT_APP_BACKEND_IP}:5000/api/data/categories/${type}?date=${date}&location=${host}&hour=${fetchHour}`,
             options
             );
-            if (response.status === 404) {
-                alert(await response.json());
-                return null;
+            if (!response.ok) {
+                const { errorMessage: error } = (await response.json());
+                setErrorMessage(error)
+                setHour("25")
+                return {
+                    error,
+                };
             } else {
                 const data = await response.json();
                 return data;
@@ -47,7 +52,7 @@ const FetchModal = () => {
     };
     const toggleFetch = (e) => {
         if (date === "") {
-            window.alert("Date must contain a value");
+            setErrorMessage("Date must contain a value");
         } else {
             chartDispatch({
                 type: "fetchData",
@@ -86,7 +91,7 @@ const FetchModal = () => {
             if (position === "addGraph") {
                 config = charts[chartId];
                 if (config.graphs.includes(checkString)) {
-                    window.alert("This Graph was already drawn");
+                    setErrorMessage("Graph was already drawn");
                 } else {
                     const check =
                         type === "comparison"
@@ -99,7 +104,7 @@ const FetchModal = () => {
                     if (fetch) {
                         const data = type === "comparison" ? await fetchData(type) : [await fetchData(type)]
                         // const data = await fetchData(type)
-                        if (data) {
+                        if (!data.error) {
                             const checkedData = reset
                                 ? checkFetchedBrowseData(
                                       data,
@@ -127,7 +132,7 @@ const FetchModal = () => {
                 config = { ...getConfig(type), id };
                 const data = type === "comparison" ? await fetchData(type) : [await fetchData(type)]
                 // const data = await fetchData(type)
-                if (data) {
+                if (!data.error) {
                     const checkedData = checkFetchedBrowseData(
                         data,
                         config,
@@ -294,6 +299,10 @@ const FetchModal = () => {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body className="marker-modal-body">
+                    { 
+                        errorMessage &&
+                        <p className="text-danger font-weight-bold">{errorMessage}</p>
+                    }
                     <div className="marker-modal-body-datepick-wrapper">
                         <input
                             className="marker-modal-body-datepick"
