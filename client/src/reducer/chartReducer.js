@@ -6,8 +6,8 @@ export default function chartReducer (state, action) {
         case "addNewChart":
             return {
                 ...state,
-                showMap: !state.showMap,
-                showModal: !state.showModal,
+                showMapModal: !state.showMapModal,
+                showFetchModal: !state.showFetchModal,
                 charts: [...payload],
             };
         case "changeDate":
@@ -64,19 +64,11 @@ export default function chartReducer (state, action) {
                     ...payload,
                 },
             };
-        case "toggleMap":
+        case "toggleFetchModal":
             return {
                 ...state,
-                chartId: payload.chartId,
-                position: payload.position,
-                showMap: !state.showMap,
-                chartType: payload.chartType,
-            };
-        case "toggleModal":
-            return {
-                ...state,
-                showModal: !state.showModal,
-                modalLabel: payload.labelName,
+                showFetchModal: !state.showFetchModal,
+                fetchModalLabel: payload.fetchLabelName,
                 fetchInformation: {
                     ...state.fetchInformation,
                     date: "",
@@ -84,6 +76,15 @@ export default function chartReducer (state, action) {
                     hostLocation: payload.hostLocation,
                 },
             };
+        case "toggleMapModal":
+            return {
+                ...state,
+                chartId: payload.chartId,
+                position: payload.position,
+                showMapModal: !state.showMapModal,
+                chartType: payload.chartType,
+            };
+
         case "updateChart":
             return {
                 ...state,

@@ -15,9 +15,9 @@ const FetchModal = () => {
         chartId,
         chartType,
         fetchInformation: { host, date },
-        modalLabel,
+        fetchModalLabel,
         position,
-        showModal,
+        showFetchModal,
     } = useChartStore();
 
     const [errorMessage, setErrorMessage] = useState("");
@@ -277,12 +277,12 @@ const FetchModal = () => {
     return (
         <div>
             <Modal
-                show={showModal}
+                show={showFetchModal}
                 aria-labelledby="example-custom-modal-styling-title"
                 onHide={() =>
                     chartDispatch({
-                        type: "toggleModal",
-                        payload: { labelName: "", host: "" },
+                        type: "toggleFetchModal",
+                        payload: { fetchLabelName: "", host: "" },
                     })
                 }
                 centered={true}
@@ -292,7 +292,7 @@ const FetchModal = () => {
                 <Modal.Header closeButton className="marker-modal-header">
                     <Modal.Title className="marker-modal-header-title">
                         <span className="marker-modal-header-title-label">
-                            {modalLabel}
+                            {fetchModalLabel}
                         </span>
                     </Modal.Title>
                 </Modal.Header>

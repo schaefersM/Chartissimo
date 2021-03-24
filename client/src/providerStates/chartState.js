@@ -11,10 +11,10 @@ const ChartState = {
         hour: "",
         type: "",
     },
-    modalLabel: "",
+    fetchModalLabel: "",
     position: "",
-    showMap: false,
-    showModal: false,
+    showMapModal: false,
+    showFetchModal: false,
     triggerRerenderAfterDefaultConfigChanged: false,
 };
 

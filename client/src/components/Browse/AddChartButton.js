@@ -1,7 +1,7 @@
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from 'react'
-import MapComponent from "./MapComponent";
+import MapModal from "./MapModal";
 import { useChartStore, useChartDispatch } from "../../stores/chartStore";
 
 
@@ -9,12 +9,12 @@ const AddChartButton = () => {
 
     const chartDispatch = useChartDispatch();
     
-    const { charts, showMap } = useChartStore();
+    const { charts, showMapModal } = useChartStore();
     
     return (
         <div>
             {
-                showMap && <MapComponent />
+                showMapModal && <MapModal />
             }
             <div style={{ textAlign: "center" }}>
                 <div>
@@ -23,7 +23,7 @@ const AddChartButton = () => {
                         size="4x"
                         onClick={() =>
                             chartDispatch({
-                                type: "toggleMap",
+                                type: "toggleMapModal",
                                 payload: {
                                     chartId: charts.length,
                                     position: "",

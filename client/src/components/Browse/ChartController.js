@@ -19,7 +19,7 @@ const ChartController = ({
         {
             dispatcher: true,
             dispatchFunction: {
-                type: "toggleMap",
+                type: "toggleMapModal",
                 payload: { chartId: id, position: "addGraph", chartType },
             },
             icon: faPlusCircle,

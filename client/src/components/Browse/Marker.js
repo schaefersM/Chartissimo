@@ -7,19 +7,19 @@ import { useChartStore, useChartDispatch } from "../../stores/chartStore";
 const Marker = ({data : { name, id, host }}) => {
  
     const chartDispatch = useChartDispatch();
-    const { showMap } = useChartStore();
+    const { showMapModal } = useChartStore();
 
     const styles = {
         position: "relative",
-        display: showMap === true ? 'block' : 'none'
+        display: showMapModal === true ? 'block' : 'none'
     }
     return (
         <input 
             className="marker" 
             id={id} 
             onClick={() => chartDispatch({
-                type: 'toggleModal', payload: { 
-                    labelName: name, 
+                type: 'toggleFetchModal', payload: { 
+                    fetchLabelName: name, 
                     host, 
                     hostLocation: name 
                 }

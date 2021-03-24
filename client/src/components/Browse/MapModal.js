@@ -1,11 +1,11 @@
-import MapModal from 'react-bootstrap/Modal' 
+import Modal from 'react-bootstrap/Modal' 
 import React from 'react'
 import FetchModal from './FetchModal'
 import Marker from './Marker'
 import { useChartStore, useChartDispatch } from "../../stores/chartStore";
 
 
-const MapComponent = () => {
+const MapModal = () => {
 
     const data = 
     [
@@ -48,29 +48,29 @@ const MapComponent = () => {
     ]
 
     const chartDispatch = useChartDispatch();
-    const { showMap, showModal } = useChartStore();
+    const { showMapModal, showFetchModal } = useChartStore();
 
     const MapMarker = data ? data.map((data, i) => {
         return <Marker key={i} data={data} />;
     }) : null;
 
     return (
-            <MapModal 
-                show={showMap} 
-                onHide={() => chartDispatch({type: "toggleMap", payload: {chartId: null, position: null, chartType: "all"}})}
+            <Modal 
+                show={showMapModal} 
+                onHide={() => chartDispatch({type: "toggleMapModal", payload: {chartId: null, position: null, chartType: "all"}})}
                 centered={true}
                 dialogClassName="map-modal-dialog"
             >
-                <MapModal.Header closeButton className="map-modal-header">
-                </MapModal.Header>
-                <MapModal.Body className="map-modal-body">
+                <Modal.Header closeButton className="map-modal-header">
+                </Modal.Header>
+                <Modal.Body className="map-modal-body">
                     {MapMarker}
-                </MapModal.Body>
-                {showMap && showModal &&
+                </Modal.Body>
+                {showMapModal && showFetchModal &&
                     <FetchModal />
                 }
-            </MapModal>
+            </Modal>
         )
     }
 
-export default MapComponent;
+export default MapModal;
