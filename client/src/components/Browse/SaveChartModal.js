@@ -198,7 +198,6 @@ const SaveChartModal = ({
             }
         } else {
             setErrorText("Type in a name");
-            // toggleSaveChart();
         }
     };
 

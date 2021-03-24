@@ -26,7 +26,6 @@ const queryBuilder = (host, startMonth, endMonth, randomRatio) => {
             dates.push(`2021-${month}-31`);
         }
     }
-    // const hosts = ["kostbar", "architektur", "wirtschaft", "informatik"]
     const getValues = (partial, host, hour, minute, date) => {
         const getRandomValue = (type) => {
             const getRandomRange = () => Math.floor(Math.random() * 40);
@@ -65,16 +64,6 @@ const queryBuilder = (host, startMonth, endMonth, randomRatio) => {
             if (insertHost) {
                 queries.push([host, value, hour, minute, date]);
             }
-            // const query = 'SELECT * FROM kostbar'
-
-            // connection.query(query, (err, results) => {
-            //     if (err) {
-            //         console.log(err);
-            //     } else {
-            //         console.log(`query compare at ${new Date().toUTCString()}`);
-            //         console.log(results);
-            //     }
-            // });
         })
     }
 
@@ -85,11 +74,8 @@ const queryBuilder = (host, startMonth, endMonth, randomRatio) => {
     );
 
     const queries = []
-        // console.log("hours")
         dates.forEach((date) => {
-            // console.log("date")
             hours.forEach((hour) => {
-                // console.log("hours")
                 minutes.forEach((minute) => {
                     const dateCase = date.split("-")[2] % 3;
                     switch (dateCase) {
@@ -111,32 +97,10 @@ const queryBuilder = (host, startMonth, endMonth, randomRatio) => {
 }
 
 
-// const insertHost = "kostbar";
-// const host =  `${insertHost}_hum`;
-// const value = 40;
-// const hour = 23;
-// const minute = 0;
-// const date = "2021-03-22";
 
 
-// const query = `INSERT INTO ${insertHost}2021 (host, value, hour, minute, datum) VALUES ('${host}',${value},${hour},${minute},'${date}')`;
-// connection.query(query, (err, results) => {
-//     if (err) {
-//         console.log(err);
-//     } else {
-//         console.log(`query compare at ${new Date().toUTCString()}`);
-//         console.log(results);
-//         return null;
-//     }
-// });
 const hosts = ["kostbar", "architektur", "wirtschaft", "informatik"]
 
-// const test = queryBuilder(hosts[0]);
-// const sql = `INSERT INTO ${hosts[0]}2021 (host, value, hour, minute, datum) VALUES ?`;
-// connection.query(sql, [test], function (err, result) {
-//     if (err) throw err;
-//     console.log("Number of records inserted: " + result.affectedRows);
-// });
 
 hosts.forEach(host => {
     const test = queryBuilder(host, 3, 5, 0.7);

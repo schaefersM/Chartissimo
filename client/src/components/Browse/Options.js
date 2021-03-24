@@ -61,74 +61,58 @@ const Options = ({
     };
 
     const handleRange = (e) => {
-          // defaults.global.defaultFontSize = e;
-          // defaults.global.legend.labels.defaultFontSize = e;
-          // lineChart.current.chartInstance.update();
-          setFontSize(e);
+        setFontSize(e);
 
-          let newChart = charts[id];
-          const newYAxes = charts[id].options.scales.yAxes.map((scale, _) => {
-              return {
-                  ticks: {
-                      ...scale.ticks,
-                      fontSize: e,
-                  },
-                  scaleLabel: {
-                      ...scale.scaleLabel,
-                      fontSize: e,
-                  },
-              };
-          });
-          newChart = {
-              ...newChart,
-              options: {
-                  ...newChart.options,
-                  customOptions: {
-                      ...newChart.options.customOptions,
-                      fontSize: e,
-                  },
-                  title: {
-                      ...newChart.options.title,
-                      fontSize: e,
-                  },
-                  legend: {
-                      ...newChart.options.legend,
-                      labels: {
-                          ...newChart.options.legend.labels,
-                          fontSize: e,
-                      },
-                  },
-                  scales: {
-                      xAxes: [
-                          {
-                              ...newChart.options.scales.xAxes[0],
-                              ticks: {
-                                  ...newChart.options.scales.xAxes[0].ticks,
-                                  fontSize: e,
-                              },
-                          },
-                      ],
-                      yAxes: newYAxes,
-                  },
-              },
-          };
-          charts.splice(id, 1, newChart);
-          chartDispatch({ type: "updateChart", payload: charts });
+        //computed Values in charts[id] object not possible
 
-          //computed Values in charts[id] object not possible
-          // let newChart = charts[id];
-          // newChart = {
-          //     ...newChart,
-          //     options: {
-          //         ...newChart.options,
-          //         customOptions: {
-          //             fontSize: e,
-          //         },
-
-          //     }
-          // };
-          // charts.splice(id, 1, newChart);
-          // chartDispatch({ type: "updateChart", payload: charts });
+        let newChart = charts[id];
+        const newYAxes = charts[id].options.scales.yAxes.map((scale, _) => {
+            return {
+                ticks: {
+                    ...scale.ticks,
+                    fontSize: e,
+                },
+                scaleLabel: {
+                    ...scale.scaleLabel,
+                    fontSize: e,
+                },
+            };
+        });
+        newChart = {
+            ...newChart,
+            options: {
+                ...newChart.options,
+                customOptions: {
+                    ...newChart.options.customOptions,
+                    fontSize: e,
+                },
+                title: {
+                    ...newChart.options.title,
+                    fontSize: e,
+                },
+                legend: {
+                    ...newChart.options.legend,
+                    labels: {
+                        ...newChart.options.legend.labels,
+                        fontSize: e,
+                    },
+                },
+                scales: {
+                    xAxes: [
+                        {
+                            ...newChart.options.scales.xAxes[0],
+                            ticks: {
+                                ...newChart.options.scales.xAxes[0].ticks,
+                                fontSize: e,
+                            },
+                        },
+                    ],
+                    yAxes: newYAxes,
+                },
+            },
+        };
+        charts.splice(id, 1, newChart);
+        chartDispatch({ type: "updateChart", payload: charts });
     };
 
     const handleSave = async (e) => {
@@ -157,8 +141,6 @@ const Options = ({
                 console.log("nope")
                 return null;
             } else {
-                // defaults.global.defaultFontSize = fontSize;
-                // defaults.global.legend.labels.defaultFontSize = fontSize;
                 chartDispatch({
                     type: "setCustomGlobalOptions",
                     payload: { fontSize },

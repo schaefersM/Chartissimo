@@ -19,67 +19,18 @@ export default function checkFetchedDataGallery (
     let validData = [];
     let labels;
 
-    //testing!
     if (data[0][0] && typeof data[0][0].hour === "number") {
         validData = data.map((item) => checkDayData(item));
-        //testing!
         labels = labelGenerator("hour", fetchHour, reset);
-        // labels = Array.from(new Array(24), (_, hour) =>
-        //     hour < 10 ? `0${hour}:00` : `${hour}:00`
-        // );
     } else if (data[0][0] && typeof data[0][0].minute === "number") {
         validData = data.map((item) => checkHourData(item));
-        //testing!
         labels = reset
             ? labelGenerator("minute", fetchHour, reset)
             : labelGenerator("minute", fetchHour, reset, config.hours);
-        // labels = reset
-        //     ? checkDuplicateHourData(fetchHour, [])
-        //     : checkDuplicateHourData(fetchHour, config.hours);
     } else {
-        console.log(data)
         console.log("invalid Data");
     }
 
-    // if (type === "comparison") {
-    //     if (typeof data[0][0].hour === "number") {
-    //         console.log(1)
-    //         validData = data.map((item) => checkDayData(item));
-    //         labels = Array.from(new Array(24), (_, hour) =>
-    //             hour < 10 ? `0${hour}:00` : `${hour}:00`
-    //         );
-    //     } else {
-    //         console.log(2)
-    //         validData = data.map((item) => checkHourData(item));
-    //         labels = Array.from(new Array(60), (_, minute) =>
-    //             minute < 10
-    //                 ? `${hour}:0${minute}`
-    //                 : `${hour}:${minute}`
-    //         );
-    //     }
-    // } else {
-    //     if (typeof data[0][0].hour === "number") {
-    //         console.log(3)
-    //         validData = data.map((item) => checkDayData(item));
-    //         labels = Array.from(new Array(24), (_, hour) =>
-    //             hour < 10 ? `0${hour}:00` : `${hour}:00`
-    //         );
-    //     } else if (typeof data[0][0].minute === "number") {
-    //         console.log(4)
-    //         validData = data.map((item) => checkHourData(item));
-    //         labels = checkDuplicateHourData(fetchHour, hours);
-    //     } else if (typeof data[0].hour === "number") {
-    //         console.log(5)
-    //         validData = [data].map((item) => checkDayData(item));
-    //         labels = Array.from(new Array(24), (_, hour) =>
-    //             hour < 10 ? `0${hour}:00` : `${hour}:00`
-    //         );
-    //     } else {
-    //         console.log(6);
-    //         validData = [data].map((item) => checkHourData(item));
-    //         labels = checkDuplicateHourData(fetchHour, hours);
-    //     }
-    // }
 
     //TODO Datasetslabel in einer Funktion für Browser and ChartPage Komponent
 

@@ -103,7 +103,6 @@ const FetchModal = () => {
                     const { fetch, reset } = check;
                     if (fetch) {
                         const data = type === "comparison" ? await fetchData(type) : [await fetchData(type)]
-                        // const data = await fetchData(type)
                         if (!data.error) {
                             const checkedData = reset
                                 ? checkFetchedBrowseData(
@@ -131,7 +130,6 @@ const FetchModal = () => {
                 const id = 100000 * Math.random();
                 config = { ...getConfig(type), id };
                 const data = type === "comparison" ? await fetchData(type) : [await fetchData(type)]
-                // const data = await fetchData(type)
                 if (!data.error) {
                     const checkedData = checkFetchedBrowseData(
                         data,

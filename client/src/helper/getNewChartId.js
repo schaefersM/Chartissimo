@@ -7,7 +7,6 @@
 
 export default function getNewChartId (position, chartId) {
 
-    //calculates the new chartId when a Chart is added
     if (!position && chartId - 1) {
         return 0;
     } else if (position === "before" && chartId < 1) {
