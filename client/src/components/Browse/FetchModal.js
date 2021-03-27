@@ -214,7 +214,6 @@ const FetchModal = () => {
             duration: 1500,
             delay: 200,
             smooth: true,
-            offset: -100
         });
     };
 
@@ -286,24 +285,24 @@ const FetchModal = () => {
                     })
                 }
                 centered={true}
-                className="marker-modal"
-                dialogClassName="marker-modal-dialog"
+                className="fetch-modal"
+                dialogClassName="fetch-modal-dialog"
             >
-                <Modal.Header closeButton className="marker-modal-header">
-                    <Modal.Title className="marker-modal-header-title">
-                        <span className="marker-modal-header-title-label">
+                <Modal.Header closeButton className="fetch-modal-header">
+                    <Modal.Title className="fetch-modal-header-title">
+                        <span className="fetch-modal-header-title-label">
                             {fetchModalLabel}
                         </span>
                     </Modal.Title>
                 </Modal.Header>
-                <Modal.Body className="marker-modal-body">
+                <Modal.Body className="fetch-modal-body">
                     { 
                         errorMessage &&
                         <p className="text-danger font-weight-bold">{errorMessage}</p>
                     }
-                    <div className="marker-modal-body-datepick-wrapper">
+                    <div className="fetch-modal-body-datepick-wrapper">
                         <input
-                            className="marker-modal-body-datepick"
+                            className="fetch-modal-body-datepick"
                             type="date"
                             name="listDate"
                             onChange={(e) =>
@@ -314,9 +313,9 @@ const FetchModal = () => {
                             }
                         />
                     </div>
-                    <div className="marker-modal-body-timeselect-wrapper">
+                    <div className="fetch-modal-body-timeselect-wrapper">
                         <select
-                            className="marker-modal-body-timeselect"
+                            className="fetch-modal-body-timeselect"
                             onChange={(e) => setHour(e.target.value)}
                             value={fetchHour}
                         >
@@ -325,9 +324,9 @@ const FetchModal = () => {
                         </select>
                         {resetHourButton}
                     </div>
-                    <div className="marker-modal-body-chooseGraphContainer">
+                    <div className="fetch-modal-body-chooseGraphContainer">
                         {chartType === "all" && (
-                            <div className="marker-modal-body-chooseGraph">
+                            <div className="fetch-modal-body-chooseGraph">
                                 <input
                                     type="image"
                                     src={Comparison}
@@ -352,7 +351,7 @@ const FetchModal = () => {
                             </div>
                         )}
                         {chartType === "comparison" && (
-                            <div className="marker-modal-body-chooseGraph">
+                            <div className="fetch-modal-body-chooseGraph">
                                 <input
                                     type="image"
                                     src={Comparison}
@@ -363,7 +362,7 @@ const FetchModal = () => {
                             </div>
                         )}
                         {chartType === "temperature" && (
-                            <div className="marker-modal-body-chooseGraph">
+                            <div className="fetch-modal-body-chooseGraph">
                                 <input
                                     type="image"
                                     src={Celsius}
@@ -374,7 +373,7 @@ const FetchModal = () => {
                             </div>
                         )}
                         {chartType === "humidity" && (
-                            <div className="marker-modal-body-chooseGraph">
+                            <div className="fetch-modal-body-chooseGraph">
                                 <input
                                     type="image"
                                     src={Humidity}
