@@ -55,22 +55,30 @@ const MapModal = () => {
     }) : null;
 
     return (
-            <Modal 
-                show={showMapModal} 
-                onHide={() => chartDispatch({type: "toggleMapModal", payload: {chartId: null, position: null, chartType: "all"}})}
-                centered={true}
-                dialogClassName="map-modal-dialog"
-            >
-                <Modal.Header closeButton className="map-modal-header">
-                </Modal.Header>
-                <Modal.Body className="map-modal-body">
-                    {MapMarker}
-                </Modal.Body>
-                {showMapModal && showFetchModal &&
-                    <FetchModal />
-                }
-            </Modal>
-        )
+        <Modal
+            show={showMapModal}
+            onHide={() =>
+                chartDispatch({
+                    type: "toggleMapModal",
+                    payload: {
+                        chartId: null,
+                        position: null,
+                        chartType: "all",
+                    },
+                })
+            }
+            centered={true}
+            dialogClassName="map-modal-dialog"
+        >
+            <Modal.Header closeButton className="map-modal-header">
+                <Modal.Title >
+                    <span className="text-white">.</span>
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body className="map-modal-body">{MapMarker}</Modal.Body>
+            {showMapModal && showFetchModal && <FetchModal />}
+        </Modal>
+    );
     }
 
 export default MapModal;
