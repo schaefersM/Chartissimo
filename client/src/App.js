@@ -55,54 +55,52 @@ const App = () => {
      
 	return (
         <Router>
-            <div>
-                <Navbar />
-                <Switch>
-                    <Route
-                        path="/"
-                        exact
-                        render={(props) => (
-                            <BrowseProvider>
-                                <Browse {...props} />
-                            </BrowseProvider>
-                        )}
-                    />
-                    <PublicOnlyRoute
-                        path="/login"
-                        exact
-                        render={(props) => <LoginPage {...props} />}
-                    />
-                    <PublicOnlyRoute
-                        path="/register"
-                        exact
-                        render={(props) => <Register {...props} />}
-                    />
-                    <PrivateRoute
-                        path="/logout"
-                        exact
-                        render={(props) => <Logout {...props} />}
-                    />
-                    <PrivateRoute
-                        path="/gallery"
-                        exact
-                        render={(props) => <Gallery {...props} />}
-                    />
-                    <PrivateRoute
-                        path="/chart/:chartId"
-                        exact
-                        render={(props) => (
-                            <BrowseProvider>
-                                <ChartPage {...props} />
-                            </BrowseProvider>
-                        )}
-                    />
-                    <Route 
-                        path="/404"
-                        exact
-                        render={(props) => <NotFoundPage {...props} />}
-                    />
-                </Switch>
-            </div>
+            <Navbar />
+            <Switch>
+                <Route
+                    path="/"
+                    exact
+                    render={(props) => (
+                        <BrowseProvider>
+                            <Browse {...props} />
+                        </BrowseProvider>
+                    )}
+                />
+                <PublicOnlyRoute
+                    path="/login"
+                    exact
+                    render={(props) => <LoginPage {...props} />}
+                />
+                <PublicOnlyRoute
+                    path="/register"
+                    exact
+                    render={(props) => <Register {...props} />}
+                />
+                <PrivateRoute
+                    path="/logout"
+                    exact
+                    render={(props) => <Logout {...props} />}
+                />
+                <PrivateRoute
+                    path="/gallery"
+                    exact
+                    render={(props) => <Gallery {...props} />}
+                />
+                <PrivateRoute
+                    path="/chart/:chartId"
+                    exact
+                    render={(props) => (
+                        <BrowseProvider>
+                            <ChartPage {...props} />
+                        </BrowseProvider>
+                    )}
+                />
+                <Route 
+                    path="/404"
+                    exact
+                    render={(props) => <NotFoundPage {...props} />}
+                />
+            </Switch>
         </Router>
     );
 }
