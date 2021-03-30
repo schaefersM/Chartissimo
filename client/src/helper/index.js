@@ -9,4 +9,5 @@ export { default as getNewChartConfig } from "./getNewChartConfig";
 export { default as getNewChartId } from "./getNewChartId";
 export { default as labelGenerator } from "./labelGenerator";
 export { default as randomColor } from "./randomColor";
+export { default as truncateString } from "./trucateString"
 export { default as urlGenerator } from "./urlGenerator"
