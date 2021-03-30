@@ -13,7 +13,7 @@ const EditGraphModal = ({datasets, chartId}) => {
     const Container = datasets[0]
         ? datasets.map(({ backgroundColor, yAxisID, label }, i) => {
                 return (
-                    <div>
+                    <>
                         <EditGraphContainer
                             key={label}
                             backgroundColor={backgroundColor}
@@ -25,13 +25,12 @@ const EditGraphModal = ({datasets, chartId}) => {
                         <hr 
                             className="edit-graph-container-hr"
                         />
-                    </div>
+                    </>
                 );
             })
         : null;
 
     return (
-        <div>
             <Modal
                 show={showEditGraphModal}
                 aria-labelledby="example-custom-modal-styling-title"
@@ -65,7 +64,6 @@ const EditGraphModal = ({datasets, chartId}) => {
                     </div>
                 </Modal.Body>
             </Modal>
-        </div>
     );
 };
 
