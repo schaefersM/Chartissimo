@@ -1,0 +1,125 @@
+.edit-graph-modal-dialog {
+    @include modalcenterModal();
+    max-width: calc(100vw - 20px);
+}
+
+.edit-graph-modal-dialog-mobile {
+    @include modalcenterModal();
+    max-width: 200em;
+    .modal-content{
+        max-height: 100%;
+        max-width: 100%;
+        height: calc(100vh - 20px);
+        height: 100vh;
+        width: 100vw;
+    }
+}
+
+.input-overlay {
+    width: 100%;
+}
+
+.edit-graph-modal-header>button.close {
+    font-size: 3em;
+    margin: 0 auto;
+    padding: 0 !important;
+    line-height: 0.5;
+}
+
+.edit-graph-modal-header-mobile {
+    padding-top: 2rem;
+    padding-bottom: 0;
+    border-bottom: none;
+    >button.close {
+        font-size: 3em;
+        margin: 0 auto;
+        padding: 0 !important;
+        line-height: 0.5;
+    }
+}
+
+.edit-graph-modal-body {
+    height: 100%;
+    padding: 0 !important;
+    max-height: calc(100vh);
+    overflow-y: auto;
+}
+
+.edit-graph-container, .edit-graph-container-mobile {
+    margin-top: 1em;
+}
+
+.edit-graph-container-color-input {
+    border-radius: 3px;
+    border-style: none;
+    background-color: darkgray;
+}
+
+.edit-graph-modal-container {
+    padding: 0 1em 1em 1em;
+}
+
+.edit-graph-container-hr {
+    border-top: 2px solid green;
+    margin: 0 !important;
+}
+
+.edit-graph-container-label-mobile, .edit-graph-container-label {
+    max-width: auto;
+    display: inline-block;
+    overflow: hidden;
+    margin: auto;
+    text-overflow: ellipsis;
+    text-align: center;
+    white-space: nowrap;
+    width: 100%;
+}
+
+@media only screen and (max-width: 560px) {
+    .edit-graph-container-mobile, .edit-graph-container {
+        flex-direction: column !important;
+    }   
+    .edit-graph-container-label {
+        text-align: center;
+        margin: auto;
+        max-width: 100%;
+        margin-bottom: 0.25em;
+        vertical-align: middle;
+    }
+    .edit-graph-container-update-name {
+        margin: 0 auto !important;
+        margin-bottom: 0.25em !important;
+        padding: 0 !important;
+    }
+    
+    .edit-graph-container-update-color, .edit-graph-container-delete-graph {
+        margin: auto !important;
+        padding: 0 !important;
+    }
+}
+
+.edit-graph-container-label-mobile {
+    margin: auto;
+    max-width: 100%;
+    margin-bottom: 0.3em;
+    vertical-align: middle;
+}
+
+//desktop
+@media only screen and (max-width: 850px) and (min-height: 600px) {
+    .edit-graph-container-label {
+        text-align: center;
+        margin: auto;
+        max-width: 100%;
+        margin-bottom: 0.3em;
+        vertical-align: middle;
+    }
+}
+
+
+//default
+@media only screen and (max-width: 300px) and (max-height: 80px) {
+    .edit-graph-modal-dialog {
+        display: none;
+    }
+}

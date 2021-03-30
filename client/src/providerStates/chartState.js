@@ -13,6 +13,7 @@ const ChartState = {
     },
     fetchModalLabel: "",
     position: "",
+    showEditGraphModal: false,
     showMapModal: false,
     showFetchModal: false,
     triggerRerenderAfterDefaultConfigChanged: false,

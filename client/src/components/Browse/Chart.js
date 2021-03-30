@@ -2,9 +2,9 @@ import { Line, defaults } from "react-chartjs-2";
 import PropTypes from "prop-types";
 import React, { useState, useRef, useEffect } from "react";
 import ChartController from "./ChartController";
+import EditGraphModal from "./EditGraphModal"
 import Options from "./Options";
 import SaveChartModal from "./SaveChartModal";
-import Table from "./Table";
 import { useChartStore } from "../../stores/chartStore";
 import { useAuthStore } from "../../stores/authStore";
 
@@ -30,7 +30,7 @@ const Chart = ({
 }) => {
         
     const { isAuthenticated } = useAuthStore();
-    const { triggerRerenderAfterDefaultConfigChanged, customGlobalOptions } = useChartStore();
+    const { triggerRerenderAfterDefaultConfigChanged, customGlobalOptions, showEditGraphModal } = useChartStore();
 
     const initialRender = useRef(true);
     const lineChart = useRef();
@@ -38,7 +38,6 @@ const Chart = ({
     const [isSavedChart, setIsSavedChart] = useState(isSaved ? true : false);
     const [showOptions, setShowOptions] = useState(false);
     const [showSaveChartModal, setShowSaveChartModal] = useState(false);
-    const [showTable, setShowTable] = useState(false);
 
     useEffect(() => {
         if (initialRender.current) {
@@ -72,21 +71,12 @@ const Chart = ({
     
     const toggleOptions = () => {
         setShowOptions((prevState) => !prevState);
-        if (showTable) {
-            setShowTable((prevState) => !prevState);
-        }
     };
     
     const toggleSaveChart = () => {
         setShowSaveChartModal((prevState) => !prevState);
     };
 
-    const toggleTable = () => {
-        setShowTable((prevState) => !prevState);
-        if (showOptions) {
-            setShowOptions((prevState) => !prevState);
-        }
-    };
 
     return (
         <div>
@@ -98,34 +88,35 @@ const Chart = ({
                     ref={lineChart}
                 />
                 <ChartController
-                    toggleTable={toggleTable}
                     toggleOptions={toggleOptions}
                     toggleSaveChart={toggleSaveChart}
-                    showTable={showTable}
                     showOptions={showOptions}
                     isSavedChart={isSavedChart}
                     id={id}
                     chartType={type}
                 />
-                {showTable && (
-                    <Table
+                {showEditGraphModal && 
+                    <EditGraphModal 
                         datasets={data.datasets}
-                        chartId={id}
-                        toggleTable={toggleTable}
-                    />
-                )}
+                        chartId={id}                    
+                    />}
                 {showOptions && (
-                    <Options
-                        options={options}
-                        id={id}
-                        lineChart={lineChart}
-                    />
+                    <Options options={options} id={id} lineChart={lineChart} />
                 )}
                 {showSaveChartModal && (
                     <SaveChartModal
                         toggleSaveChart={toggleSaveChart}
                         show={showSaveChartModal}
-                        data={{ graphs, tableNames, customTableNames, hosts, customOptions, colorIds, hours, previousHour }}
+                        data={{
+                            graphs,
+                            tableNames,
+                            customTableNames,
+                            hosts,
+                            customOptions,
+                            colorIds,
+                            hours,
+                            previousHour,
+                        }}
                         name={name}
                         setIsSavedChart={setIsSavedChart}
                         isSavedChart={isSavedChart}

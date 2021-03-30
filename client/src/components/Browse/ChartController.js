@@ -8,10 +8,8 @@ const ChartController = ({
     chartType, 
     id, 
     isSavedChart,
-    toggleTable, 
     toggleOptions, 
     toggleSaveChart, 
-    showTable, 
     showOptions
 }) => { 
   
@@ -25,11 +23,14 @@ const ChartController = ({
             icon: faPlusCircle,
             shown: false,
         },
-        { 
-            cb: toggleTable, 
-            dispatcher: false, 
-            icon: faEdit, 
-            shown: showTable },
+        {
+            dispatcher: true,
+            dispatchFunction: {
+                type: "toggleEditGraphModal",
+            },
+            icon: faEdit,
+            shown: false,
+        },
         {
             cb: toggleOptions,
             dispatcher: false,
@@ -64,7 +65,7 @@ const ChartController = ({
     })
 
     return(
-        <div className="d-flex flex-row flex-nowrap justify-content-around bg-dark">
+        <div className="d-flex flex-row flex-nowrap justify-content-around chart-controller">
             {Icons}       
         </div>
     )
@@ -74,11 +75,9 @@ ChartController.propTypes = {
     chartType: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
     isSavedChart: PropTypes.bool.isRequired,
-    showTable: PropTypes.bool.isRequired,
     showOptions: PropTypes.bool.isRequired,
     toggleOptions: PropTypes.func.isRequired,
     toggleSaveChart: PropTypes.func.isRequired,
-    toggleTable: PropTypes.func.isRequired,
 };
 
 

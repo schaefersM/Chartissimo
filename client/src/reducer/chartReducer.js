@@ -64,6 +64,11 @@ export default function chartReducer (state, action) {
                     ...payload,
                 },
             };
+        case "toggleEditGraphModal":
+            return {
+                ...state,
+                showEditGraphModal: !state.showEditGraphModal,
+            };
         case "toggleFetchModal":
             return {
                 ...state,
