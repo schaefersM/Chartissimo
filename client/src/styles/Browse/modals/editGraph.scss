@@ -5,11 +5,8 @@
 
 .edit-graph-modal-dialog-mobile {
     @include modalcenterModal();
-    max-width: 200em;
+    max-width: 100%;
     .modal-content{
-        max-height: 100%;
-        max-width: 100%;
-        height: calc(100vh - 20px);
         height: 100vh;
         width: 100vw;
     }
@@ -23,7 +20,7 @@
 }
 
 .edit-graph-modal-header-mobile {
-    padding-top: 2rem;
+    padding-top: 5%;
     padding-bottom: 0;
     border-bottom: none;
     >button.close {
@@ -65,22 +62,19 @@
     display: inline-block;
     overflow: hidden;
     margin: auto;
+    vertical-align: middle;
     text-overflow: ellipsis;
     text-align: center;
     white-space: nowrap;
     width: 100%;
 }
 
-@media only screen and (max-width: 560px) {
+@mixin responsiveContainer {
     .edit-graph-container-mobile, .edit-graph-container {
         flex-direction: column !important;
     }   
-    .edit-graph-container-label {
-        text-align: center;
-        margin: auto;
-        max-width: 100%;
+    .edit-graph-container-label, .edit-graph-container-label-mobile {
         margin-bottom: 0.25em;
-        vertical-align: middle;
     }
     .edit-graph-container-update-name {
         margin: 0 auto !important;
@@ -94,27 +88,16 @@
     }
 }
 
-//tablet
-@media only screen and (min-width: 560px) and (min-height: 500px) {
-    .edit-graph-modal-dialog-mobile {
-        @include modalcenterModal();
-        max-width: calc(100vw - 20px);
-        .modal-content {
-            height: auto;
-        }
-    }
+
+//smartphone
+@media only screen and (orientation: portrait) and (max-width: 450px) {
+    @include responsiveContainer();
 }
 
-//desktop
-@media only screen and (max-width: 850px) and (min-height: 600px) {
-    .edit-graph-container-label {
-        text-align: center;
-        margin: auto;
-        max-width: 100%;
-        margin-bottom: 0.3em;
-        vertical-align: middle;
-    }
+@media only screen and (max-width: 580px) {
+    @include responsiveContainer();
 }
+
 
 //default
 @media only screen and (max-width: 300px) and (max-height: 80px) {
