@@ -18,21 +18,23 @@ const AddChartButton = () => {
             }
             <div className="d-flex flex-column">
                 <FontAwesomeIcon
+                    className="cursor-pointer mx-auto"
                     icon={faPlusCircle}
-                    size="4x"
                     onClick={() =>
                         chartDispatch({
                             type: "toggleMapModal",
                             payload: {
                                 chartId: charts.length,
-                                position: "",
                                 chartType: "all",
+                                position: "",
                             },
                         })
                     }
-                    className="cursor-pointer mx-auto"
+                    size="4x"
                 />
-                <span className="mx-auto" >Click to add a chart</span>
+                <span className="mx-auto" >
+                    Click to add a chart
+                </span>
             </div>
         </div>
     );
