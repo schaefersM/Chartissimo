@@ -10,100 +10,118 @@ $content-height-small: 33em;
 $content-width-small: 32em;
 $min-device-height: 150px;
 
-
 @mixin mapmodalDefault($height, $width, $background, $left: 50%) {
-    .map-modal-dialog{
-        max-width: $width;
-        max-height: $height;
-        left: $left;
-        padding-top: 0;
-        display: flex;
-    }
+	.map-modal-dialog {
+		max-width: $width;
+		max-height: $height;
+		left: $left;
+		padding-top: 0;
+		display: flex;
+	}
 
-    .map-modal-dialog>div.modal-content{
-        width: $width;
-        height: $height;
-    }
+	.map-modal-dialog > div.modal-content {
+		width: $width;
+		height: $height;
+	}
 
-    .map-modal-body {
-        background-repeat: no-repeat;
-        background-image: $background;
-        margin: 0 0.5em 0.5em 0.5em;
-        padding: 0 !important;
-    }
+	.map-modal-body {
+		background-repeat: no-repeat;
+		background-image: $background;
+		margin: 0 0.5em 0.5em 0.5em;
+		padding: 0 !important;
+	}
 
-    .map-modal-header>button.close {
-        font-size: 3em;
-        padding: 0 !important;
-        margin: 0 auto;
-        line-height: 0.5;
-    }
-
+	.map-modal-header > button.close {
+		font-size: 3em;
+		padding: 0 !important;
+		margin: 0 auto;
+		line-height: 0.5;
+	}
 }
 
 .map-modal {
-    font-size: 16px;
+	font-size: 16px;
 }
 
 .map-modal-dialog {
-    @include modalcenterModal();
+	@include modalcenterModal();
 }
 
 .map-modal-header {
-    // padding: 0 !important;
-    border-bottom: 0 !important; 
+	// padding: 0 !important;
+	border-bottom: 0 !important;
 }
 
 //no map
 @media only screen {
-    .map-modal-dialog {
-        display: none;
-    }
+	.map-modal-dialog {
+		display: none;
+	}
 }
 
 //rotate
-@media only screen and (min-width: 300px) and (max-width:480px) and (min-height: 480px) and (max-height: 5000px) {
-    @include mapmodalDefault(15em, 19em, $background-image-rotate, 47.5%);
-    @include hideMarker();
-    .map-modal-dialog {
-        margin-left: 0.5rem !important;
-    }
+@media only screen and (min-width: 300px) and (max-width: 480px) and (min-height: 480px) and (max-height: 5000px) {
+	@include mapmodalDefault(15em, 19em, $background-image-rotate, 47.5%);
+	@include hideMarker();
+	.map-modal-dialog {
+		margin-left: 0.5rem !important;
+	}
 }
 
 //sticks small map to the top of the screen
 @media only screen and (min-width: 480px) and (min-height: $min-device-height) and (max-height: 530px) {
-    @include mapmodalDefault($content-height-small, $content-width-small, $background-image-small);
-    @include displayMarkerSmall();
-    .map-modal-dialog {
-        top: 0%;
-        padding-top: 33em !important;
-    }
+	@include mapmodalDefault(
+		$content-height-small,
+		$content-width-small,
+		$background-image-small
+	);
+	@include displayMarkerSmall();
+	.map-modal-dialog {
+		top: 0%;
+		padding-top: 33em !important;
+	}
 }
 
 //small
 @media only screen and (min-width: 480px) and (min-height: 530px) {
-    @include mapmodalDefault($content-height-small, $content-width-small, $background-image-small);
-    @include displayMarkerSmall();
+	@include mapmodalDefault(
+		$content-height-small,
+		$content-width-small,
+		$background-image-small
+	);
+	@include displayMarkerSmall();
 }
 
 //sticks mobile map to the top of the screen
-@media only screen and (min-width: 600px)  and (min-height: $min-device-height) and (max-height: 530px) {
-    @include mapmodalDefault($content-height-mobile, $content-width-mobile, $background-image-mobile);
-    @include displayMarkerMobile();
-    .map-modal-dialog {
-        top: 0%;
-        padding-top: 33em !important;
-    }
+@media only screen and (min-width: 600px) and (min-height: $min-device-height) and (max-height: 530px) {
+	@include mapmodalDefault(
+		$content-height-mobile,
+		$content-width-mobile,
+		$background-image-mobile
+	);
+	@include displayMarkerMobile();
+	.map-modal-dialog {
+		top: 0%;
+		padding-top: 33em !important;
+	}
 }
 
 //mobile
 @media only screen and (min-width: 600px) and (min-height: 530px) {
-    @include mapmodalDefault($content-height-mobile, $content-width-mobile, $background-image-mobile);
-    @include displayMarkerMobile();
+	@include mapmodalDefault(
+		$content-height-mobile,
+		$content-width-mobile,
+		$background-image-mobile
+	);
+	@include displayMarkerMobile();
 }
 
 //desktop
 @media only screen and (min-width: 750px) and (min-height: 700px) {
-    @include mapmodalDefault($content-height-desktop, $content-width-desktop, $background-image-desktop);
-    @include displayMarkerFullscreen();
+	@include mapmodalDefault(
+		$content-height-desktop,
+		$content-width-desktop,
+		$background-image-desktop
+	);
+	@include displayMarkerFullscreen();
 }

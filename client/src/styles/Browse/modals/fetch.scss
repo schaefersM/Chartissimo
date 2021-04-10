@@ -1,75 +1,64 @@
 .fetch-modal-dialog {
-    @include modalcenterModal();
-    max-width: 13rem;
-    .modal-content{
-        padding: 0.5em;
-        width: 13rem;
-    }
+	@include modalcenterModal();
+	max-width: 13rem;
+	.modal-content {
+		padding: 0.5em;
+		width: 13rem;
+	}
 }
 
 .fetch-modal {
-    font-size: 16px;
+	font-size: 16px;
 }
 
 .fetch-modal-header {
-    padding: 0 !important;
-    .fetch-modal-header-title {
-        font-size: 1.2rem;
-        .fetch-modal-header-title-label {
-            padding: 0 !important;
-        }
-        .fetch-modal-header-title-tooltip {
-            padding-left: 5rem;
-            opacity: 0.5;
-            font-weight: 700;
-        }
-    }
-    button.close {
-        font-size: 3em;
-        margin: -0.3em 0 0 0;
-        padding: 0;
-    }
+	padding: 0 !important;
+	.fetch-modal-header-title {
+		font-size: 1.2rem;
+		.fetch-modal-header-title-label {
+			padding: 0 !important;
+		}
+		.fetch-modal-header-title-tooltip {
+			padding-left: 5rem;
+			opacity: 0.5;
+			font-weight: 700;
+		}
+	}
+	button.close {
+		font-size: 3em;
+		margin: -0.3em 0 0 0;
+		padding: 0;
+	}
 }
 
 .fetch-modal-body {
-    margin-top: 0.5em;
-    padding: 0 !important;
-    .fetch-modal-body-datepick-wrapper {
-        margin-bottom: 0.5em;
-        .fetch-modal-body-datepick{
-            font-size: 1rem;
-        }
-    }
-    .fetch-modal-body-timeselect-wrapper{
-        margin-bottom: 0.5em;
-        .fetch-modal-body-timeselect{
-            width: 5rem;
-            height: 1.5rem;
-            font-size: 1rem;
-        }
-    }
-    .fetch-modal-body-chooseGraphContainer{
-        float: left;
-        width: auto;
-        .fetch-modal-body-chooseGraph{
-            background-color: lightgray;
-            border-radius: 4px;
-            display: flex;
-            input {
-                margin: 0.5em;
-                width: 2rem;
-            }
-        }
-    }
+	margin-top: 0.5em;
+	padding: 0 !important;
+	.fetch-modal-body-datepick-wrapper {
+		margin-bottom: 0.5em;
+		.fetch-modal-body-datepick {
+			font-size: 1rem;
+		}
+	}
+	.fetch-modal-body-timeselect-wrapper {
+		margin-bottom: 0.5em;
+		.fetch-modal-body-timeselect {
+			width: 5rem;
+			height: 1.5rem;
+			font-size: 1rem;
+		}
+	}
+	.fetch-modal-body-chooseGraphContainer {
+		float: left;
+		width: auto;
+		.fetch-modal-body-chooseGraph {
+			background-color: lightgray;
+			border-radius: 4px;
+			display: flex;
+			input {
+				margin: 0.5em;
+				width: 2rem;
+			}
+		}
+	}
 }
-
-
-
-
-
-
-
-
-
-
-

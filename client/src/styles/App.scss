@@ -1,44 +1,43 @@
-@import './Auth/login.scss';
-@import './Auth/register.scss';
-@import './Browse/mixins.scss';
-@import './Browse/graphTable.scss';
-@import './Browse/modals/editGraph.scss';
-@import './Browse/modals/map.scss';
-@import './Browse/modals/fetch.scss';
-@import './Browse/modals/saveChart.scss';
-@import './Browse/options.scss';
-@import './Gallery/gallery.scss';
-
+@import "./Auth/login.scss";
+@import "./Auth/register.scss";
+@import "./Browse/mixins.scss";
+@import "./Browse/graphTable.scss";
+@import "./Browse/modals/editGraph.scss";
+@import "./Browse/modals/map.scss";
+@import "./Browse/modals/fetch.scss";
+@import "./Browse/modals/saveChart.scss";
+@import "./Browse/options.scss";
+@import "./Gallery/gallery.scss";
 
 .cursor-pointer {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 .chart-hr {
-  border: 3px solid;
+	border: 3px solid;
 }
 
 .chart-controller {
-    background-color: rgb(18, 56, 24);
+	background-color: rgb(18, 56, 24);
 }
 
 .error-placeholder::placeholder {
-    color: #c90000;
-    font-weight: bold;
+	color: #c90000;
+	font-weight: bold;
 }
 
 .light-placeholder::placeholder {
-    color: black;
+	color: black;
 }
 
 @media only screen and (min-width: 1200px) {
-    .content-wrapper {
-        margin: 0 5em 0 5em !important;
-    }
+	.content-wrapper {
+		margin: 0 5em 0 5em !important;
+	}
 }
 
 @media only screen and (min-width: 1500px) {
-    .content-wrapper {
-        margin: 0 13em 0 13em !important;
-    }
+	.content-wrapper {
+		margin: 0 13em 0 13em !important;
+	}
 }

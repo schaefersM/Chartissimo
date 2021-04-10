@@ -20,21 +20,21 @@
         * ]
     **/
 
-export default function checkDayData (data) {
-    const checkHours = Array.from(new Array(24), (_, hour) => ({
-        hour,
-        value: null,
-    }));
+export default function checkDayData(data) {
+	const checkHours = Array.from(new Array(24), (_, hour) => ({
+		hour,
+		value: null,
+	}));
 
-    data = [...data, ...checkHours];
+	data = [...data, ...checkHours];
 
-    const newData = data.filter((elem, index) => {
-        return index === data.findIndex((obj) => obj.hour === elem.hour);
-    });
+	const newData = data.filter((elem, index) => {
+		return index === data.findIndex((obj) => obj.hour === elem.hour);
+	});
 
-    newData.sort((a, b) => a.hour - b.hour);
+	newData.sort((a, b) => a.hour - b.hour);
 
-    const values = newData.map((item) => item.value);
-    
-    return values;
-};
+	const values = newData.map((item) => item.value);
+
+	return values;
+}

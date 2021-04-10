@@ -4,30 +4,30 @@ import { Route, Redirect } from "react-router-dom";
 import { useAuthStore } from "../../stores/authStore";
 
 const PublicOnlyRoute = ({ props, render, ...rest }) => {
-    const { isAuthenticated, readyToRender } = useAuthStore();
-    return (
-        <div>
-            {readyToRender ? (
-                <Route
-                    {...rest}
-                    render={(props) => {
-                        return !isAuthenticated ? (
-                            render(props)
-                        ) : (
-                            <Redirect to="/" />
-                        );
-                    }}
-                />
-            ) : (
-                <h1>Proceeding...</h1>
-            )}
-        </div>
-    );
+	const { isAuthenticated, readyToRender } = useAuthStore();
+	return (
+		<div>
+			{readyToRender ? (
+				<Route
+					{...rest}
+					render={(props) => {
+						return !isAuthenticated ? (
+							render(props)
+						) : (
+							<Redirect to="/" />
+						);
+					}}
+				/>
+			) : (
+				<h1>Proceeding...</h1>
+			)}
+		</div>
+	);
 };
 
 PublicOnlyRoute.propTypes = {
-    props: PropTypes.object,
-    render: PropTypes.func.isRequired,
+	props: PropTypes.object,
+	render: PropTypes.func.isRequired,
 };
 
 export default PublicOnlyRoute;
