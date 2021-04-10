@@ -20,7 +20,7 @@
 }
 
 .edit-graph-modal-header-mobile {
-    padding-top: 5%;
+    padding-top: calc(100vh - 90.5vh);
     padding-bottom: 0;
     border-bottom: none;
     >button.close {
@@ -70,6 +70,9 @@
 }
 
 @mixin responsiveContainer {
+    .edit-graph-modal-header-mobile {
+        padding-top: 10%;
+    }
     .edit-graph-container-mobile, .edit-graph-container {
         flex-direction: column !important;
     }   
