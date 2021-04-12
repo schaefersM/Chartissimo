@@ -1,15 +1,15 @@
 .register-page-form {
-    width: 100%;
+	width: 100%;
 }
 
-@media only screen and (min-width: 550px){
-    .register-page-form {
-        width: 75%
-    }
+@media only screen and (min-width: 550px) {
+	.register-page-form {
+		width: 75%;
+	}
 }
 
-@media only screen and (min-width: 800px){
-    .register-page-form {
-        width: 50%
-    }
+@media only screen and (min-width: 800px) {
+	.register-page-form {
+		width: 50%;
+	}
 }

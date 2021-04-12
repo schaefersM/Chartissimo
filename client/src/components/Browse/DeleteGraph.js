@@ -1,32 +1,32 @@
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import React from "react";
-import checkDuplicateHourData from "../../helper/checkDuplicateHourData"
-import { useChartStore, useChartDispatch } from "../../stores/chartStore"
-
+import { checkDuplicateHourData } from "../../helper";
+import { useChartStore, useChartDispatch } from "../../stores/chartStore";
 
 const DeleteGraph = ({ chartId, rowId }) => {
-
 	const { charts } = useChartStore();
 	const chartDispatch = useChartDispatch();
 
 	const deleteGraph = () => {
 		let newChart = { ...charts[chartId] };
 		const {
-			tableNames,
-			customTableNames,
-			graphs,
-			hours,
-			hosts,
-			data,
 			colorIds,
+			customTableNames,
+			data,
 			data: { datasets },
 			data: { labels },
+			graphs,
+			hosts,
+			hours,
 			options,
 			options: { scales },
-			options: { scales: { yAxes } },
-			type
+			options: {
+				scales: { yAxes },
+			},
+			tableNames,
+			type,
 		} = newChart;
 		const newDatasets = [...datasets];
 		newDatasets.splice(rowId, 1);
@@ -35,10 +35,10 @@ const DeleteGraph = ({ chartId, rowId }) => {
 		const newCustomTableNames = [...customTableNames];
 		newCustomTableNames.splice(rowId, 1);
 		const newGraphs = [...graphs];
-		newGraphs.splice(rowId, 1)
+		newGraphs.splice(rowId, 1);
 		const newHours = [...hours];
-		const newColorIds = [...colorIds]
-		const newHosts = [...hosts]
+		const newColorIds = [...colorIds];
+		const newHosts = [...hosts];
 		let newLabels;
 		if (type !== "comparison") {
 			newHours.splice(rowId, 1);
@@ -47,8 +47,7 @@ const DeleteGraph = ({ chartId, rowId }) => {
 		}
 		if (!newDatasets.length) {
 			charts.splice(chartId, 1);
-			chartDispatch({type: "toggleEditGraphModal"})
-			
+			chartDispatch({ type: "toggleEditGraphModal" });
 		} else {
 			const newYAxes = [...yAxes];
 			if (type === "comparison") {
@@ -59,45 +58,45 @@ const DeleteGraph = ({ chartId, rowId }) => {
 			}
 			newChart = {
 				...newChart,
-				tableNames: newTableNames,
-				customTableNames: newCustomTableNames,
-				hours: type !== "comparison" ? newHours : hours,
-				hosts: type !== "comparison" ? newHosts : hosts,
 				colorIds: newColorIds,
+				customTableNames: newCustomTableNames,
 				data: {
 					...data,
-					labels: type !== "comparison" ? newLabels : labels,
 					datasets: newDatasets,
+					labels: type !== "comparison" ? newLabels : labels,
 				},
+				graphs: type === "comparison" ? [] : newGraphs,
+				hosts: type !== "comparison" ? newHosts : hosts,
+				hours: type !== "comparison" ? newHours : hours,
 				options: {
 					...options,
 					scales: {
 						...scales,
-						yAxes: newYAxes
+						yAxes: newYAxes,
 					},
 				},
-				graphs: type === "comparison" ? [] : newGraphs
+				tableNames: newTableNames,
 			};
 			charts.splice(chartId, 1, newChart);
 		}
 
-		chartDispatch({ type: "updateChart", payload: charts })
-	}
+		chartDispatch({ type: "updateChart", payload: charts });
+	};
 
 	return (
 		<div>
 			<FontAwesomeIcon
+				className="cursor-pointer"
 				icon={faTrash}
 				onClick={deleteGraph}
-				className="cursor-pointer"
 			/>
 		</div>
 	);
 };
 
 DeleteGraph.propTypes = {
-    chartId: PropTypes.number.isRequired,
-    rowId: PropTypes.number.isRequired,
+	chartId: PropTypes.number.isRequired,
+	rowId: PropTypes.number.isRequired,
 };
 
 export default DeleteGraph;

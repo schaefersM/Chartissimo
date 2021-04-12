@@ -1,7 +1,7 @@
 const AuthState = {
-    isAuthenticated: false,
-    readyToRender: false,
-    user: "",
+	isAuthenticated: false,
+	readyToRender: false,
+	user: "",
 };
 
 export default AuthState;

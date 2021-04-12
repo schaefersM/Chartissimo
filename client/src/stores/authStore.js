@@ -3,8 +3,8 @@ import { AuthState } from "../providerStates";
 import makeStore from "./makeStore";
 
 const [AuthProvider, useAuthDispatch, useAuthStore] = makeStore(
-    AuthReducer,
-    AuthState
+	AuthReducer,
+	AuthState
 );
 
 export { AuthProvider, useAuthDispatch, useAuthStore };

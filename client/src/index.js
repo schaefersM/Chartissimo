@@ -1,16 +1,15 @@
-import * as serviceWorker from './serviceWorker';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import { AuthProvider } from "./stores/authStore"
-import './index.css';
-
+import * as serviceWorker from "./serviceWorker";
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import { AuthProvider } from "./stores/authStore";
+import "./index.css";
 
 ReactDOM.render(
-      <AuthProvider>
-        <App />
-      </AuthProvider>,
-    document.getElementById("root")
+	<AuthProvider>
+		<App />
+	</AuthProvider>,
+	document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change

@@ -1,22 +1,22 @@
 .edit-graph-modal-dialog {
-    @include modalcenterModal();
-    max-width: calc(100vw - 20px);
+	@include modalcenterModal();
+	max-width: calc(100vw - 20px);
 }
 
 .edit-graph-modal-dialog-mobile {
-    @include modalcenterModal();
-    max-width: 100%;
-    .modal-content{
-        height: 100vh;
-        width: 100vw;
-    }
+	@include modalcenterModal();
+	max-width: 100%;
+	.modal-content {
+		height: 100vh;
+		width: 100vw;
+	}
 }
 
-.edit-graph-modal-header>button.close {
-    font-size: 3em;
-    margin: 0 auto;
-    padding: 0 !important;
-    line-height: 0.5;
+.edit-graph-modal-header > button.close {
+	font-size: 3em;
+	margin: 0 auto;
+	padding: 0 !important;
+	line-height: 0.5;
 }
 
 .edit-graph-modal-header-mobile {
@@ -32,41 +32,43 @@
 }
 
 .edit-graph-modal-body {
-    height: 100%;
-    padding: 0 !important;
-    max-height: calc(100vh);
-    overflow-y: auto;
+	height: 100%;
+	padding: 0 !important;
+	max-height: calc(100vh);
+	overflow-y: auto;
 }
 
-.edit-graph-container, .edit-graph-container-mobile {
-    margin-top: 1em;
+.edit-graph-container,
+.edit-graph-container-mobile {
+	margin-top: 1em;
 }
 
 .edit-graph-container-color-input {
-    border-radius: 3px;
-    border-style: none;
-    background-color: darkgray;
+	border-radius: 3px;
+	border-style: none;
+	background-color: darkgray;
 }
 
 .edit-graph-modal-container {
-    padding: 0 1em 1em 1em;
+	padding: 0 1em 1em 1em;
 }
 
 .edit-graph-container-hr {
-    border-top: 2px solid green;
-    margin: 0 !important;
+	border-top: 2px solid green;
+	margin: 0 !important;
 }
 
-.edit-graph-container-label-mobile, .edit-graph-container-label {
-    max-width: auto;
-    display: inline-block;
-    overflow: hidden;
-    margin: auto;
-    vertical-align: middle;
-    text-overflow: ellipsis;
-    text-align: center;
-    white-space: nowrap;
-    width: 100%;
+.edit-graph-container-label-mobile,
+.edit-graph-container-label {
+	max-width: auto;
+	display: inline-block;
+	overflow: hidden;
+	margin: auto;
+	vertical-align: middle;
+	text-overflow: ellipsis;
+	text-align: center;
+	white-space: nowrap;
+	width: 100%;
 }
 
 @mixin responsiveContainer {
@@ -91,20 +93,25 @@
     }
 }
 
+.edit-graph-container-update-color,
+.edit-graph-container-delete-graph {
+    margin: auto !important;
+    padding: 0 !important;
+}
+
 
 //smartphone
 @media only screen and (orientation: portrait) and (max-width: 450px) {
-    @include responsiveContainer();
+	@include responsiveContainer();
 }
 
 @media only screen and (max-width: 580px) {
-    @include responsiveContainer();
+	@include responsiveContainer();
 }
-
 
 //default
 @media only screen and (max-width: 300px) and (max-height: 80px) {
-    .edit-graph-modal-dialog {
-        display: none;
-    }
+	.edit-graph-modal-dialog {
+		display: none;
+	}
 }

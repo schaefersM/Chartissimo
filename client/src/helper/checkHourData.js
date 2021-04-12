@@ -21,22 +21,21 @@
         * ]
     **/
 
-export default function checkHourData (data) {
+export default function checkHourData(data) {
+	const checkHours = Array.from(new Array(60), (_, minute) => ({
+		minute,
+		value: null,
+	}));
 
-    const checkHours = Array.from(new Array(60), (_, minute) => ({
-        minute,
-        value: null,
-    }));
+	data = [...data, ...checkHours];
 
-    data = [...data, ...checkHours];
+	const newData = data.filter((elem, index) => {
+		return index === data.findIndex((obj) => obj.minute === elem.minute);
+	});
 
-    const newData = data.filter((elem, index) => {
-        return index === data.findIndex((obj) => obj.minute === elem.minute);
-    });
+	newData.sort((a, b) => a.minute - b.minute);
 
-    newData.sort((a, b) => a.minute - b.minute);
+	const values = newData.map((item) => item.value);
 
-    const values = newData.map((item) => item.value);
-    
-    return values;
-};
+	return values;
+}

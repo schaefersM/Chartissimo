@@ -1,75 +1,122 @@
 @mixin displayMarkerSmall() {
-    #markerWirtschaft{left: 1em; top: 17.7em; z-index: 10;}
-    #markerInformatik{left: 11.7em; top: 10.5em; z-index: 10;}
-    #markerKostbar{left: 16em; top: -0.5em; z-index: 10;}
-    #markerArchitektur{left: 28em; top: 1.5em; z-index: 10;}    
+	#markerWirtschaft {
+		left: 1em;
+		top: 17.7em;
+		z-index: 10;
+	}
+	#markerInformatik {
+		left: 11.7em;
+		top: 10.5em;
+		z-index: 10;
+	}
+	#markerKostbar {
+		left: 16em;
+		top: -0.5em;
+		z-index: 10;
+	}
+	#markerArchitektur {
+		left: 28em;
+		top: 1.5em;
+		z-index: 10;
+	}
 }
 
 @mixin displayMarkerMobile() {
-    #markerWirtschaft{left: 5.5em; top: 17.7em; z-index: 10;}
-    #markerInformatik{left: 16.2em; top: 10.5em; z-index: 10;}
-    #markerKostbar{left: 20.5em; top: -0.5em; z-index: 10;}
-    #markerArchitektur{left: 32.5em; top: 1.5em; z-index: 10;}    
+	#markerWirtschaft {
+		left: 5.5em;
+		top: 17.7em;
+		z-index: 10;
+	}
+	#markerInformatik {
+		left: 16.2em;
+		top: 10.5em;
+		z-index: 10;
+	}
+	#markerKostbar {
+		left: 20.5em;
+		top: -0.5em;
+		z-index: 10;
+	}
+	#markerArchitektur {
+		left: 32.5em;
+		top: 1.5em;
+		z-index: 10;
+	}
 }
 
 @mixin displayMarkerFullscreen() {
-    #markerWirtschaft{left: 9.9em; top: 19.3em; z-index: 10;}
-    #markerInformatik{left: 20.3em; top: 13em; z-index: 10;}
-    #markerKostbar{left: 24.5em; top: 1.5em; z-index: 10;}
-    #markerArchitektur{left: 36em; top: 3.5em; z-index: 10;}
+	#markerWirtschaft {
+		left: 9.9em;
+		top: 19.3em;
+		z-index: 10;
+	}
+	#markerInformatik {
+		left: 20.3em;
+		top: 13em;
+		z-index: 10;
+	}
+	#markerKostbar {
+		left: 24.5em;
+		top: 1.5em;
+		z-index: 10;
+	}
+	#markerArchitektur {
+		left: 36em;
+		top: 3.5em;
+		z-index: 10;
+	}
 }
 
 @mixin hideMarker() {
-    #markerWirtschaft, 
-    #markerInformatik, 
-    #markerKostbar, 
-    #markerArchitektur{
-      z-index: -10;
-    }
+	#markerWirtschaft,
+	#markerInformatik,
+	#markerKostbar,
+	#markerArchitektur {
+		z-index: -10;
+	}
 }
 
 @mixin modalcenterModal($left: 50%, $top: 50%) {
-    position: absolute;
-    top: $top;
-    left: $left;
-    transform: translate(-50%, -50%) !important;
-    margin-top: 0 !important;    
-    margin-right: auto;
-    margin-left: auto;
+	position: absolute;
+	top: $top;
+	left: $left;
+	transform: translate(-50%, -50%) !important;
+	margin-top: 0 !important;
+	margin-right: auto;
+	margin-left: auto;
 }
 
-@mixin media($minHeight: null, $maxHeight: null, $minWidth: null, $maxWidth: null) {
-  @media only screen and 
-  (min-height: $minHeight) and (max-height: $maxHeight) and
-  (min-width: $minWidth) and (max-width: $maxWidth) {
-    @content;
-  }
+@mixin media(
+	$minHeight: null,
+	$maxHeight: null,
+	$minWidth: null,
+	$maxWidth: null
+) {
+	@media only screen and (min-height: $minHeight) and (max-height: $maxHeight) and (min-width: $minWidth) and (max-width: $maxWidth) {
+		@content;
+	}
 }
 
 @mixin mediaH($minHeight: null, $maxHeight: null) {
-  @media only screen and 
-  (min-height: $minHeight) and (max-height: $maxHeight){
-    @content;
-  }
+	@media only screen and (min-height: $minHeight) and (max-height: $maxHeight) {
+		@content;
+	}
 }
 
 @mixin mediaW($minWidth: null, $maxWidth: null) {
-  @media only screen and 
-  (min-width: $minWidth) and (max-width: $maxWidth) {
-    @content;
-  }
+	@media only screen and (min-width: $minWidth) and (max-width: $maxWidth) {
+		@content;
+	}
 }
 
 @mixin mediaMin($minHeight: null, $minWidth: null) {
-  @media only screen and 
-  (min-height: $minHeight) and (min-width: $minWidth) {
-    @content;
-  }
+	@media only screen and (min-height: $minHeight) and (min-width: $minWidth) {
+		@content;
+	}
 }
 
 @mixin mediaMax($maxHeight: null, $maxWidth: null) {
-  @media only screen and 
-  (max-height: $maxHeight) and (max-width: $maxWidth) {
-    @content;
-  }
+	@media only screen and (max-height: $maxHeight) and (max-width: $maxWidth) {
+		@content;
+	}
 }
