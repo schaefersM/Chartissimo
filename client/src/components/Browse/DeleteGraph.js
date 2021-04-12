@@ -47,7 +47,6 @@ const DeleteGraph = ({ chartId, rowId }) => {
 		}
 		if (!newDatasets.length) {
 			charts.splice(chartId, 1);
-			chartDispatch({ type: "toggleEditGraphModal" });
 		} else {
 			const newYAxes = [...yAxes];
 			if (type === "comparison") {
