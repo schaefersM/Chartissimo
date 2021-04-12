@@ -8,6 +8,8 @@
 githubtoken
 mariadb/db/
 .vs/
+.eslintrc.json
+.prettierrc
 
 #gifs
 /gifs
