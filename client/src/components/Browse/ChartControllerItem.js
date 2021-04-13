@@ -40,11 +40,11 @@ const ChartControllerItem = ({
 };
 
 ChartControllerItem.propTypes = {
-	cb: PropTypes.func,
-	dispatcher: PropTypes.bool,
-	dispatchFunction: PropTypes.object,
-	icon: PropTypes.object.isRequired,
-	shown: PropTypes.bool.isRequired,
+    cb: PropTypes.func,
+    dispatcher: PropTypes.bool.isRequired,
+    dispatchFunction: PropTypes.object,
+    icon: PropTypes.object.isRequired,
+    shown: PropTypes.bool
 };
 
 export default ChartControllerItem;
