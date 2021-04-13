@@ -1,5 +1,6 @@
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { isMobile } from "react-device-detect";
 import PropTypes from "prop-types";
 import React from "react";
 import { checkDuplicateHourData } from "../../helper";
@@ -88,6 +89,7 @@ const DeleteGraph = ({ chartId, rowId }) => {
 				className="cursor-pointer"
 				icon={faTrash}
 				onClick={deleteGraph}
+				size={isMobile ? "2x" : "1x"}
 			/>
 		</div>
 	);
