@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import React, { useState, useRef, useEffect } from "react";
 import ChartController from "./ChartController";
 import EditGraphModal from "./EditGraphModal";
-import Options from "./Options";
+import EditChartModal from "./EditChartModal";
 import SaveChartModal from "./SaveChartModal";
 import { useChartStore } from "../../stores/chartStore";
 import { useAuthStore } from "../../stores/authStore";
@@ -30,14 +30,14 @@ const Chart = ({
 	const {
 		triggerRerenderAfterDefaultConfigChanged,
 		customGlobalOptions,
-		showEditGraphModal,
 	} = useChartStore();
 
 	const initialRender = useRef(true);
 	const lineChart = useRef();
 
 	const [isSavedChart, setIsSavedChart] = useState(isSaved ? true : false);
-	const [showOptions, setShowOptions] = useState(false);
+	const [showEditGraphModal, setShowEditGraphModal] = useState(false);
+	const [showEditChartModal, setShowEditChartModal] = useState(false);
 	const [showSaveChartModal, setShowSaveChartModal] = useState(false);
 
 	useEffect(() => {
@@ -69,11 +69,15 @@ const Chart = ({
 		// eslint-disable-next-line
 	}, [data]);
 
-	const toggleOptions = () => {
-		setShowOptions((prevState) => !prevState);
+	const toggleEditGraphModal = () => {
+		setShowEditGraphModal((prevState) => !prevState);
 	};
 
-	const toggleSaveChart = () => {
+	const toggleEditChartModal = () => {
+		setShowEditChartModal((prevState) => !prevState);
+	};
+
+	const toggleSaveChartModal = () => {
 		setShowSaveChartModal((prevState) => !prevState);
 	};
 
@@ -81,8 +85,8 @@ const Chart = ({
 		<div>
 			<div id={id}>
 				<Line
-					data={data}
 					name={name}
+					data={data}
 					options={options}
 					ref={lineChart}
 				/>
@@ -90,34 +94,49 @@ const Chart = ({
 					chartType={type}
 					id={id}
 					isSavedChart={isSavedChart}
-					showOptions={showOptions}
-					toggleOptions={toggleOptions}
-					toggleSaveChart={toggleSaveChart}
+					showEditChartModal={showEditChartModal}
+					showEditGraphModal={showEditGraphModal}
+					toggleEditChartModal={toggleEditChartModal}
+					toggleEditGraphModal={toggleEditGraphModal}
+					toggleSaveChartModal={toggleSaveChartModal}
 				/>
 				{showEditGraphModal && (
-					<EditGraphModal chartId={id} datasets={data.datasets} />
+					<EditGraphModal
+						chartId={id}
+						datasets={data.datasets}
+						lineChart={lineChart}
+						setShowEditGraphModal={setShowEditGraphModal}
+						showEditGraphModal={showEditGraphModal}
+					/>
 				)}
-				{showOptions && <Options id={id} options={options} />}
+				{showEditChartModal && (
+					<EditChartModal
+						id={id}
+						name={name}
+						setShowEditChartModal={setShowEditChartModal}
+						showEditChartModal={showEditChartModal}
+					/>
+				)}
 				{showSaveChartModal && (
 					<SaveChartModal
-						chartRef={lineChart}
+						toggleSaveChartModal={toggleSaveChartModal}
+						showSaveChartModal={showSaveChartModal}
 						data={{
-							colorIds,
-							customTableNames,
-							customOptions,
-							hours,
 							graphs,
-							hosts,
-							previousHour,
 							tableNames,
+							customTableNames,
+							hosts,
+							customOptions,
+							colorIds,
+							hours,
+							previousHour,
 						}}
-						id={id}
-						isSavedChart={isSavedChart}
 						name={name}
 						setIsSavedChart={setIsSavedChart}
-						show={showSaveChartModal}
-						toggleSaveChart={toggleSaveChart}
+						isSavedChart={isSavedChart}
+						id={id}
 						type={type}
+						chartRef={lineChart}
 					/>
 				)}
 			</div>

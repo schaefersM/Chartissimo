@@ -1,13 +1,14 @@
-@import "./Auth/login.scss";
-@import "./Auth/register.scss";
-@import "./Browse/mixins.scss";
-@import "./Browse/graphTable.scss";
-@import "./Browse/modals/editGraph.scss";
-@import "./Browse/modals/map.scss";
-@import "./Browse/modals/fetch.scss";
-@import "./Browse/modals/saveChart.scss";
-@import "./Browse/options.scss";
-@import "./Gallery/gallery.scss";
+@import './Auth/login.scss';
+@import './Auth/register.scss';
+@import './Browse/mixins.scss';
+@import './Browse/graphTable.scss';
+@import './Browse/modals/editChart.scss';
+@import './Browse/modals/editGraph.scss';
+@import './Browse/modals/map.scss';
+@import './Browse/modals/fetch.scss';
+@import './Browse/modals/saveChart.scss';
+@import './Gallery/gallery.scss';
+
 
 .cursor-pointer {
 	cursor: pointer;
