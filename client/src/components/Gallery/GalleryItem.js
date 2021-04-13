@@ -11,7 +11,7 @@ const GalleryItem = ({ data }) => {
 
 	return (
 		<div className="border border-success mb-4">
-			<div>
+			<div className="text-center">
 				<h6 className="d-inline gallery-item-header">{name}</h6>
 				<FontAwesomeIcon
 					className="cursor-pointer d-inline ml-2"
