@@ -1,28 +1,28 @@
 import { isMobile } from "react-device-detect";
 import Modal from "react-bootstrap/Modal";
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 import React from "react";
-import EditGraphContainer from "./EditGraphContainer";
-import { useChartDispatch, useChartStore } from "../../stores/chartStore";
+import EditGraphContainer from './EditGraphContainer'
 
-const EditGraphModal = ({ chartId, datasets }) => {
-	const { showEditGraphModal } = useChartStore();
-	const chartDispatch = useChartDispatch();
-
+const EditGraphModal = ({
+	chartId,
+	datasets,
+	setShowEditGraphModal,
+	showEditGraphModal,
+}) => {
 	const Container = datasets[0]
 		? datasets.map(({ backgroundColor, label, yAxisID }, i) => {
 				return (
-					<>
+					<div key={label}>
 						<EditGraphContainer
 							backgroundColor={backgroundColor}
 							chartId={chartId}
-							key={label}
 							label={label}
 							rowId={i}
 							rowType={yAxisID}
 						/>
 						<hr className="edit-graph-container-hr" />
-					</>
+					</div>
 				);
 		  })
 		: null;
@@ -33,14 +33,10 @@ const EditGraphModal = ({ chartId, datasets }) => {
 			centered={true}
 			dialogClassName={
 				isMobile
-					? "edit-graph-modal-dialog-mobile"
-					: "edit-graph-modal-dialog"
+				? "edit-graph-modal-dialog-mobile"
+				: "edit-graph-modal-dialog"
 			}
-			onHide={() =>
-				chartDispatch({
-					type: "toggleEditGraphModal",
-				})
-			}
+			onHide={setShowEditGraphModal}
 			show={showEditGraphModal}
 		>
 			<Modal.Header

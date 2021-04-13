@@ -22,11 +22,10 @@ const SaveChartModal = ({
 	isSavedChart,
 	name,
 	setIsSavedChart,
-	show,
-	toggleSaveChart,
+	showSaveChartModal,
+	toggleSaveChartModal,
 	type,
 }) => {
-
 	const { isAuthenticated, user } = useAuthStore();
 
 	const chartDispatch = useChartDispatch();
@@ -81,7 +80,7 @@ const SaveChartModal = ({
 				chartDispatch({ type: "updateChart", payload: charts });
 				setChartName("");
 				setIsSavedChart(false);
-				toggleSaveChart();
+				toggleSaveChartModal();
 			}
 		} catch (e) {
 			console.log(e);
@@ -154,7 +153,7 @@ const SaveChartModal = ({
 					charts[id].isSaved = true;
 					chartDispatch({ type: "updateChart", payload: charts });
 					setIsSavedChart(true);
-					toggleSaveChart();
+					toggleSaveChartModal();
 				}
 			} catch (e) {
 				console.log(e);
@@ -166,7 +165,6 @@ const SaveChartModal = ({
 
 	const handleUpdate = async () => {
 		if (chartName !== "" || savingChartName) {
-			console.log(customOptions);
 			try {
 				const { user_id } = user;
 				const options = {
@@ -210,7 +208,7 @@ const SaveChartModal = ({
 					chartDispatch({ type: "updateChart", payload: charts });
 					setChartName("");
 					setIsSavedChart(true);
-					toggleSaveChart();
+					toggleSaveChartModal();
 				}
 			} catch (e) {
 				console.log(e);
@@ -234,8 +232,8 @@ const SaveChartModal = ({
 					? "savechart-modal-login-dialog"
 					: "savechart-modal-dialog"
 			}
-			onHide={toggleSaveChart}
-			show={show}
+			onHide={toggleSaveChartModal}
+			show={showSaveChartModal}
 		>
 			<Modal.Header
 				className="savechart-modal-header"
@@ -319,7 +317,7 @@ const SaveChartModal = ({
 							<button
 								className="btn btn-secondary  mt-2"
 								onClick={() => {
-									toggleSaveChart();
+									toggleSaveChartModal();
 								}}
 							>
 								Continue without login and saving
@@ -338,8 +336,8 @@ SaveChartModal.propTypes = {
 	isSavedChart: PropTypes.bool.isRequired,
 	name: PropTypes.number.isRequired,
 	setIsSavedChart: PropTypes.func.isRequired,
-	show: PropTypes.bool.isRequired,
-	toggleSaveChart: PropTypes.func.isRequired,
+	showSaveChartModal: PropTypes.bool.isRequired,
+	toggleSaveChartModal: PropTypes.func.isRequired,
 	type: PropTypes.string.isRequired,
 };
 
