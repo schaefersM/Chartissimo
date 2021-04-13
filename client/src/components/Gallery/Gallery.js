@@ -44,59 +44,58 @@ const Gallery = () => {
 				urlData
 			);
 
-			const response = await fetch(url, options);
+            const response = await fetch(url,options)
 
-			if (!response.ok) {
-				const { error } = await response.json();
-				console.log(error);
-				return null;
-			} else {
-				const { results } = await response.json();
-				setResults(results);
-			}
-		};
-		if (initialRender.current) {
-			initialRender.current = false;
-		} else {
-			if (typeValues.length || locationValues.length) {
-				try {
-					fetchCharts();
-				} catch (e) {
-					console.log(e);
-				}
-			}
-		}
-		// eslint-disable-next-line
-	}, [typeValues, locationValues, user]);
+            if (!response.ok) {
+                const { error } = await response.json();
+                console.log(error);
+                return null;
+            } else {
+                const { results } = await response.json();
+                setResults(results);
+            }
+        };
+        if (initialRender.current) {
+            initialRender.current = false;
+        } else {
+            if (typeValues.length || locationValues.length) {
+                try {
+                    fetchCharts();
+                } catch (e) {
+                    console.log(e)
+                }
+            } else {
+                setResults([])
+            }
+        }
+        // eslint-disable-next-line
+    }, [typeValues, locationValues, user]);
 
 	const Results = results.map((data, i) => {
 		return (
 			<div key={data.id}>
-				{/* <pre>
-                    <code>
-                        {JSON.stringify(data, null, 2)}
-                    </code>
-                </pre> */}
 				<GalleryItem data={data} />
 			</div>
 		);
 	});
 
-	return (
-		<div className="content-wrapper">
-			<div className="d-flex flex-column gallery-container p-3">
-				<div className="gallery-filter-container d-flex">
-					<GalleryFilter
-						locationValues={locationValues}
-						typeValues={typeValues}
-						setLocationValues={setLocationValues}
-						setTypeValues={setTypeValues}
-					/>
-				</div>
-				<div className="gallery-filter-results">{Results}</div>
-			</div>
-		</div>
-	);
+    return (
+        <div className="content-wrapper">
+            <div className="d-flex flex-column gallery-container p-3">
+                <div className="gallery-filter-container d-flex">
+                    <GalleryFilter
+                        locationValues={locationValues}
+                        typeValues={typeValues}
+                        setLocationValues={setLocationValues}
+                        setTypeValues={setTypeValues}
+                    />
+                </div>
+                <div className="gallery-filter-results">
+                    {results.length ? Results : <h3 className="text-center">Search in your gallery by applying a filter</h3>}
+                </div>
+            </div>
+        </div>
+    );
 };
 
 export default Gallery;
