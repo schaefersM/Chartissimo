@@ -9,14 +9,17 @@ import React from "react";
 import ChartControllerItem from "./ChartControllerItem";
 
 const ChartController = ({
-	chartType,
-	id,
-	isSavedChart,
-	toggleOptions,
-	toggleSaveChart,
-	showOptions,
-}) => {
-	const icons = [
+    chartType, 
+    id, 
+    isSavedChart,
+    toggleEditGraphModal,
+    toggleEditChartModal, 
+    toggleSaveChartModal, 
+    showEditGraphModal,
+    showEditChartModal,
+}) => { 
+  
+    const icons = [
 		{
 			dispatcher: true,
 			dispatchFunction: {
@@ -27,28 +30,26 @@ const ChartController = ({
 			shown: false,
 		},
 		{
-			dispatcher: true,
-			dispatchFunction: {
-				type: "toggleEditGraphModal",
-			},
+			cb: toggleEditGraphModal,
+			dispatcher: false,
 			icon: faEdit,
-			shown: false,
+			shown: showEditGraphModal,
 		},
 		{
-			cb: toggleOptions,
+			cb: toggleEditChartModal,
 			dispatcher: false,
 			icon: faCog,
-			shown: showOptions,
+			shown: showEditChartModal,
 		},
 		{
-			cb: toggleSaveChart,
+			cb: toggleSaveChartModal,
 			dispatcher: false,
 			icon: faStar,
 			shown: isSavedChart,
 		},
 	];
 
-	let Icons = icons.map(
+	const Icons = icons.map(
 		({ cb, dispatcher, dispatchFunction, icon, shown }, i) => {
 			return (
 				<ChartControllerItem
@@ -74,9 +75,9 @@ ChartController.propTypes = {
 	chartType: PropTypes.string.isRequired,
 	id: PropTypes.number.isRequired,
 	isSavedChart: PropTypes.bool.isRequired,
-	showOptions: PropTypes.bool.isRequired,
-	toggleOptions: PropTypes.func.isRequired,
-	toggleSaveChart: PropTypes.func.isRequired,
+	toggleEditGraphModal: PropTypes.func.isRequired,
+	toggleEditChartModal: PropTypes.func.isRequired,
+	toggleSaveChartModal: PropTypes.func.isRequired,
 };
 
 export default React.memo(ChartController);
