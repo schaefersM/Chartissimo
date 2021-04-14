@@ -52,13 +52,13 @@ The generated weather are structured in a three day rotation like:
 
 #### Customize the data
 
-![edit your chart](https://media.giphy.com/media/DUjn1FqP3LLvykDCJy/giphy.gif)
+![edit your chart](https://media.giphy.com/media/ndUp0xoIJuq707w97l/giphy.gif)
 
 #### Customize the fontsize
 
-![customize your chart](https://media.giphy.com/media/Jqvbzyv43h8C3HnnqZ/giphy.gif)
+![customize your chart](https://media.giphy.com/media/mAjSMk529L5OkknMLa/giphy.gif)
 
 #### Save the chart and view it in the Gallery
 
-![save and view your chart](https://media.giphy.com/media/HZr1leygeiCTTygKPS/giphy.gif)
+![save and view your chart](https://media.giphy.com/media/tlkCxy9XFzd6zhOSNT/giphy.gif)
 
