@@ -71,10 +71,18 @@ export default function checkFetchedBrowseData(
 						{
 							...newOptions.scales.yAxes[0],
 							display: true,
+							scaleLabel: {
+								...newOptions.scales.yAxes[0].scaleLabel,
+								fontColor: "#f44242",
+							},
 						},
 						{
 							...newOptions.scales.yAxes[1],
 							display: true,
+							scaleLabel: {
+								...newOptions.scales.yAxes[1].scaleLabel,
+								fontColor: "#6242f4",
+							},
 						},
 					],
 				},

@@ -230,7 +230,7 @@ const FetchModal = () => {
 	 */
 
 	const addNewChart = (checkedData, type, config) => {
-		const { datasets, labels, colorId } = checkedData;
+		const { datasets, labels, colorId, options } = checkedData;
 		const checkString = `${type}-${host}-${date}-${fetchHour}`;
 		const newConfig = {
 			...config,
@@ -239,6 +239,7 @@ const FetchModal = () => {
 			customOptions: customGlobalOptions,
 			hours: [fetchHour],
 			hosts: [host],
+			options,
 			tableNames:
 				datasets.length > 1
 					? [datasets[0].label, datasets[1].label]
