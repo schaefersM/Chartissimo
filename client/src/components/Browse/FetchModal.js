@@ -236,7 +236,7 @@ const FetchModal = () => {
 			...config,
 			data: { labels, datasets },
 			previousHour: fetchHour,
-			customOptions: customGlobalOptions,
+			// customOptions: customGlobalOptions,
 			hours: [fetchHour],
 			hosts: [host],
 			options,
