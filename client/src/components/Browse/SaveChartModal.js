@@ -125,7 +125,7 @@ const SaveChartModal = ({
 						name: chartName,
 						chartType: type,
 						hosts,
-						customOptions: customOptions
+						customOptions: customOptions.fontSize
 							? customOptions
 							: {
 									fontSize:
@@ -180,7 +180,7 @@ const SaveChartModal = ({
 						tableNames,
 						customTableNames,
 						colorIds,
-						customOptions: customOptions
+						customOptions: customOptions.fontSize
 							? customOptions
 							: {
 									fontSize:
