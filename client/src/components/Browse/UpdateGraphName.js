@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import React, { useState, useRef } from "react";
 import { useChartDispatch, useChartStore } from "../../stores/chartStore";
 
-const UpdateGraphName = ({ chartId, rowId }) => {
+const UpdateGraphName = ({ chartIndex, rowIndex }) => {
 	const chartDispatch = useChartDispatch();
 	const { charts } = useChartStore();
 
@@ -15,27 +15,27 @@ const UpdateGraphName = ({ chartId, rowId }) => {
 	const [name, setName] = useState("");
 
 	const changeGraphName = () => {
-		let newChart = { ...charts[chartId] };
+		let newChart = { ...charts[chartIndex] };
 		const {
-			customTableNames,
+			customGraphNames,
 			data,
 			data: { datasets },
 		} = newChart;
-		if (customTableNames.includes(name)) {
+		if (customGraphNames.includes(name)) {
 			setErrorText("Name already taken");
 		} else {
-			customTableNames.splice(rowId, 1, name);
-			datasets[rowId].label = name;
+			customGraphNames.splice(rowIndex, 1, name);
+			datasets[rowIndex].label = name;
 			newChart = {
 				...newChart,
-				customTableNames,
+				customGraphNames,
 				data: {
 					...data,
 					datasets,
 				},
 			};
 			setErrorText("Insert a new name");
-			charts.splice(chartId, 1, newChart);
+			charts.splice(chartIndex, 1, newChart);
 			chartDispatch({ type: "updateChart", payload: charts });
 		}
 	};
@@ -96,8 +96,8 @@ const UpdateGraphName = ({ chartId, rowId }) => {
 };
 
 UpdateGraphName.propTypes = {
-	chartId: PropTypes.number.isRequired,
-	rowId: PropTypes.number.isRequired,
+	chartIndex: PropTypes.number.isRequired,
+	rowIndex: PropTypes.number.isRequired,
 };
 
 export default UpdateGraphName;

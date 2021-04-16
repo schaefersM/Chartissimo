@@ -12,73 +12,62 @@ export default function chartReducer(state, action) {
 		case "changeDate":
 			return {
 				...state,
-				fetchInformation: {
-					...state.fetchInformation,
+				fetchParameter: {
+					...state.fetchParameter,
 					date: payload,
 				},
 			};
 		case "changeHour":
 			return {
 				...state,
-				fetchInformation: {
-					...state.fetchInformation,
+				fetchParameter: {
+					...state.fetchParameter,
 					hour: payload,
-				},
-			};
-		case "fetchData":
-			return {
-				...state,
-				fetchInformation: {
-					...state.fetchInformation,
-					type: payload.type,
-					hour: payload.hour,
 				},
 			};
 		case "rerenderCharts":
 			return {
 				...state,
-				triggerRerenderAfterDefaultConfigChanged: !state.triggerRerenderAfterDefaultConfigChanged,
+				triggerRerenderCharts: !state.triggerRerenderCharts,
 			};
-		case "resetCharts":
+		case "eraseCharts":
 			return {
 				...state,
 				charts: [],
 			};
-		case "resetFetchData":
+		case "setDefaultOptions":
 			return {
 				...state,
-				fetchInformation: {
-					hour: "",
-					type: "",
-					date: "",
-					host: "",
+				triggerRerenderCharts: !state.triggerRerenderCharts,
+				defaultOptions: {
+					...state.defaultOptions,
+					...payload,
 				},
 			};
-		case "setCustomGlobalOptions":
+		case "setFetchParameter":
 			return {
 				...state,
-				triggerRerenderAfterDefaultConfigChanged: !state.triggerRerenderAfterDefaultConfigChanged,
-				customGlobalOptions: {
-					...state.customGlobalOptions,
-					...payload,
+				fetchParameter: {
+					...state.fetchParameter,
+					type: payload.type,
+					hour: payload.hour,
 				},
 			};
 		case "toggleFetchModal":
 			return {
 				...state,
 				showFetchModal: !state.showFetchModal,
-				fetchModalLabel: payload.fetchLabelName,
-				fetchInformation: {
-					...state.fetchInformation,
+				fetchModalTitle: payload.fetchModalTitle,
+				fetchParameter: {
+					...state.fetchParameter,
 					date: "",
 					host: payload.host,
-					hostLocation: payload.hostLocation,
 				},
 			};
 		case "toggleMapModal":
 			return {
 				...state,
-				chartId: payload.chartId,
+				chartIndex: payload.chartIndex,
 				position: payload.position,
 				showMapModal: !state.showMapModal,
 				chartType: payload.chartType,

@@ -15,11 +15,11 @@ const FetchModal = () => {
 	const chartDispatch = useChartDispatch();
 	const {
 		charts,
-		chartId,
+		chartIndex,
 		chartType,
-		customGlobalOptions,
-		fetchInformation: { host, date },
-		fetchModalLabel,
+		defaultOptions,
+		fetchParameter: { host, date },
+		fetchModalTitle,
 		position,
 		showFetchModal,
 	} = useChartStore();
@@ -56,7 +56,7 @@ const FetchModal = () => {
 			setErrorMessage("Date must contain a value");
 		} else {
 			chartDispatch({
-				type: "fetchData",
+				type: "setFetchParameter",
 				payload: { type: e.target.id, hour: fetchHour },
 			});
 			prepareFetch(e.target.id);
@@ -89,7 +89,7 @@ const FetchModal = () => {
 			let config;
 			const checkString = `${type}-${host}-${date}-${fetchHour}`;
 			if (position === "addGraph") {
-				config = charts[chartId];
+				config = charts[chartIndex];
 				if (config.graphs.includes(checkString)) {
 					setErrorMessage("Graph was already drawn");
 				} else {
@@ -171,11 +171,11 @@ const FetchModal = () => {
 				previousHour: fetchHour,
 				hours: [fetchHour],
 				hosts: [host],
-				tableNames:
+				defaultGraphNames:
 					datasets.length > 1
 						? [datasets[0].label, datasets[1].label]
 						: [datasets[0].label],
-				customTableNames:
+				customGraphNames:
 					datasets.length > 1
 						? [datasets[0].label, datasets[1].label]
 						: [datasets[0].label],
@@ -193,28 +193,28 @@ const FetchModal = () => {
 				previousHour: fetchHour,
 				hours: [...config.hours, fetchHour],
 				hosts: [...config.hosts, host],
-				tableNames:
+				defaultGraphNames:
 					datasets.length > 1
 						? [
-								...config.tableNames,
+								...config.defaultGraphNames,
 								datasets[0].label,
 								datasets[1].label,
 						  ]
-						: [...config.tableNames, datasets[0].label],
-				customTableNames:
+						: [...config.defaultGraphNames, datasets[0].label],
+				customGraphNames:
 					datasets.length > 1
 						? [
-								...config.customTableNames,
+								...config.customGraphNames,
 								datasets[0].label,
 								datasets[1].label,
 						  ]
-						: [...config.customTableNames, datasets[0].label],
+						: [...config.customGraphNames, datasets[0].label],
 
 				graphs: [...config.graphs, checkString],
 				colorIds: [...config.colorIds, ...colorId],
 			};
 		}
-		charts.splice(chartId, 1, config);
+		charts.splice(chartIndex, 1, config);
 		chartDispatch({ type: "addNewChart", payload: charts });
 		scroller.scrollTo(`${config.id}`, {
 			duration: 1500,
@@ -236,15 +236,15 @@ const FetchModal = () => {
 			...config,
 			data: { labels, datasets },
 			previousHour: fetchHour,
-			// customOptions: customGlobalOptions,
+			customOptions: defaultOptions,
 			hours: [fetchHour],
 			hosts: [host],
 			options,
-			tableNames:
+			defaultGraphNames:
 				datasets.length > 1
 					? [datasets[0].label, datasets[1].label]
 					: [datasets[0].label],
-			customTableNames:
+			customGraphNames:
 				datasets.length > 1
 					? [datasets[0].label, datasets[1].label]
 					: [datasets[0].label],
@@ -289,7 +289,7 @@ const FetchModal = () => {
 				onHide={() =>
 					chartDispatch({
 						type: "toggleFetchModal",
-						payload: { fetchLabelName: "", host: "" },
+						payload: { fetchModalTitle: "", host: "" },
 					})
 				}
 				centered={true}
@@ -299,7 +299,7 @@ const FetchModal = () => {
 				<Modal.Header closeButton className="fetch-modal-header">
 					<Modal.Title className="fetch-modal-header-title">
 						<span className="fetch-modal-header-title-label">
-							{fetchModalLabel}
+							{fetchModalTitle}
 						</span>
 					</Modal.Title>
 				</Modal.Header>

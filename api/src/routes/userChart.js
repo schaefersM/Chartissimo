@@ -184,8 +184,8 @@ router
 			name,
 			image,
 			customOptions,
-			tableNames,
-			customTableNames,
+			defaultGraphNames,
+			customGraphNames,
 			colorIds,
 		} = req.body;
 		try {
@@ -204,8 +204,8 @@ router
 						name,
 						image,
 						$set: {
-							"data.tableNames": tableNames,
-							"data.customTableNames": customTableNames,
+							"data.defaultGraphNames": defaultGraphNames,
+							"data.customGraphNames": customGraphNames,
 							"data.colorIds": colorIds,
 						},
 						customOptions,
@@ -233,8 +233,8 @@ router
 							name,
 							image,
 							$set: {
-								"data.tableNames": tableNames,
-								"data.customTableNames": customTableNames,
+								"data.defaultGraphNames": defaultGraphNames,
+								"data.customGraphNames": customGraphNames,
 								"data.colorIds": colorIds,
 							},
 							customOptions,

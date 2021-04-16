@@ -1,6 +1,6 @@
 const AuthState = {
 	isAuthenticated: false,
-	readyToRender: false,
+	readyToRenderAfterAuth: false,
 	user: "",
 };
 

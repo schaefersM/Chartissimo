@@ -4,11 +4,11 @@ export default function getNewChartConfig(checkedData, config, chartData) {
 	const {
 		data: {
 			colorIds,
-			customTableNames,
+			customGraphNames,
 			graphs,
 			hours,
 			previousHour,
-			tableNames,
+			defaultGraphNames,
 		},
 		hosts,
 		name,
@@ -17,7 +17,7 @@ export default function getNewChartConfig(checkedData, config, chartData) {
 	const newConfig = {
 		...config,
 		colorIds,
-		customTableNames,
+		customGraphNames,
 		data: { labels, datasets },
 		graphs,
 		hours,
@@ -26,7 +26,7 @@ export default function getNewChartConfig(checkedData, config, chartData) {
 		options,
 		previousHour,
 		savingChartName: name,
-		tableNames,
+		defaultGraphNames,
 	};
 
 	return newConfig;

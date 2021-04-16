@@ -31,7 +31,7 @@ const ChartControllerItem = ({
 									type: dispatchFunction.type,
 									payload: { ...dispatchFunction.payload },
 								})
-						: () => cb()
+						: cb
 				}
 				size="2x"
 			/>

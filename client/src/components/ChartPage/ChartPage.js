@@ -6,6 +6,7 @@ import { useAuthStore } from "../../stores/authStore";
 import { useChartDispatch } from "../../stores/chartStore";
 
 const ChartPage = (props) => {
+
 	const { chartId } = props.match.params;
 
 	const { user } = useAuthStore();
@@ -17,7 +18,7 @@ const ChartPage = (props) => {
 	const [chartData, setChartData] = useState({});
 
 	useEffect(() => {
-		chartDispatch({ type: "resetCharts" });
+		chartDispatch({ type: "eraseCharts" });
 		const fetchChartInformation = async () => {
 			const { user_id } = user;
 			const options = {

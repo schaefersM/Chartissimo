@@ -6,7 +6,7 @@ export { default as checkHourData } from "./checkHourData";
 export { default as checkTimeChange } from "./checkTimeChange";
 export { default as getConfig } from "./getConfig";
 export { default as getNewChartConfig } from "./getNewChartConfig";
-export { default as getNewChartId } from "./getNewChartId";
+export { default as getNewChartIndex } from "./getNewChartIndex";
 export { default as labelGenerator } from "./labelGenerator";
 export { default as randomColor } from "./randomColor";
 export { default as setChartFontsize } from "./setChartFontsize";

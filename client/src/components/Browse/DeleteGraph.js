@@ -6,18 +6,18 @@ import React from "react";
 import { checkDuplicateHourData } from "../../helper";
 import { useChartStore, useChartDispatch } from "../../stores/chartStore";
 
-const DeleteGraph = ({ chartId, rowId }) => {
+const DeleteGraph = ({ chartIndex, rowIndex }) => {
 	const { charts } = useChartStore();
 	const chartDispatch = useChartDispatch();
 
 	const deleteGraph = () => {
-		let newChart = { ...charts[chartId] };
+		let newChart = { ...charts[chartIndex] };
 		const {
 			colorIds,
-			customTableNames,
+			customGraphNames,
 			data,
-			data: { datasets },
-			data: { labels },
+			data: { datasets, labels },
+			defaultGraphNames,
 			graphs,
 			hosts,
 			hours,
@@ -26,46 +26,45 @@ const DeleteGraph = ({ chartId, rowId }) => {
 			options: {
 				scales: { yAxes },
 			},
-			tableNames,
 			type,
 		} = newChart;
 		const newDatasets = [...datasets];
-		newDatasets.splice(rowId, 1);
-		const newTableNames = [...tableNames];
-		newTableNames.splice(rowId, 1);
-		const newCustomTableNames = [...customTableNames];
-		newCustomTableNames.splice(rowId, 1);
+		newDatasets.splice(rowIndex, 1);
+		const newDefaultGraphNames = [...defaultGraphNames];
+		newDefaultGraphNames.splice(rowIndex, 1);
+		const newCustomGraphNames = [...customGraphNames];
+		newCustomGraphNames.splice(rowIndex, 1);
 		const newGraphs = [...graphs];
-		newGraphs.splice(rowId, 1);
+		newGraphs.splice(rowIndex, 1);
 		const newHours = [...hours];
 		const newColorIds = [...colorIds];
 		const newHosts = [...hosts];
 		let newLabels;
 		if (type !== "comparison") {
-			newHours.splice(rowId, 1);
-			newHosts.splice(rowId, 1);
+			newHours.splice(rowIndex, 1);
+			newHosts.splice(rowIndex, 1);
 			newLabels = checkDuplicateHourData(newHours.slice(-1)[0], newHours);
 		}
 		if (!newDatasets.length) {
-			charts.splice(chartId, 1);
+			charts.splice(chartIndex, 1);
 		} else {
 			const newYAxes = [...yAxes];
 			if (type === "comparison") {
-				newColorIds.splice(rowId, 1);
-				const newYAxe = { ...yAxes[rowId] };
+				newColorIds.splice(rowIndex, 1);
+				const newYAxe = { ...yAxes[rowIndex] };
 				newYAxe.display = false;
-				newYAxes.splice(rowId, 1, newYAxe);
+				newYAxes.splice(rowIndex, 1, newYAxe);
 			}
 			newChart = {
 				...newChart,
 				colorIds: newColorIds,
-				customTableNames: newCustomTableNames,
+				customGraphNames: newCustomGraphNames,
 				data: {
 					...data,
 					datasets: newDatasets,
 					labels: type !== "comparison" ? newLabels : labels,
 				},
-				graphs: type === "comparison" ? [] : newGraphs,
+				graphs: newGraphs,
 				hosts: type !== "comparison" ? newHosts : hosts,
 				hours: type !== "comparison" ? newHours : hours,
 				options: {
@@ -75,9 +74,9 @@ const DeleteGraph = ({ chartId, rowId }) => {
 						yAxes: newYAxes,
 					},
 				},
-				tableNames: newTableNames,
+				defaultGraphNames: newDefaultGraphNames,
 			};
-			charts.splice(chartId, 1, newChart);
+			charts.splice(chartIndex, 1, newChart);
 		}
 
 		chartDispatch({ type: "updateChart", payload: charts });
@@ -96,8 +95,8 @@ const DeleteGraph = ({ chartId, rowId }) => {
 };
 
 DeleteGraph.propTypes = {
-	chartId: PropTypes.number.isRequired,
-	rowId: PropTypes.number.isRequired,
+	chartIndex: PropTypes.number.isRequired,
+	rowIndex: PropTypes.number.isRequired,
 };
 
 export default DeleteGraph;

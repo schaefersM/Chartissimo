@@ -12,8 +12,9 @@ const Chart = ({
 	config: {
 		colorIds,
 		customOptions,
-		customTableNames,
+		customGraphNames,
 		data,
+		defaultGraphNames,
 		graphs,
 		hosts,
 		hours,
@@ -21,16 +22,12 @@ const Chart = ({
 		isSaved,
 		options,
 		previousHour,
-		tableNames,
 		type,
 	},
-	id,
+	chartIndex,
 }) => {
 	const { isAuthenticated } = useAuthStore();
-	const {
-		triggerRerenderAfterDefaultConfigChanged,
-		customGlobalOptions,
-	} = useChartStore();
+	const { triggerRerenderCharts, defaultOptions } = useChartStore();
 
 	const initialRender = useRef(true);
 	const lineChart = useRef();
@@ -44,23 +41,24 @@ const Chart = ({
 		if (initialRender.current) {
 			initialRender.current = false;
 		} else {
-			if (isAuthenticated && customGlobalOptions.fontSize) {
+			//TODO: If ist hier überflüssig & Prüfen, ob das(?) Chart eine custom Config hat
+			if (isAuthenticated && defaultOptions.fontSize) {
 				const setConfig = () => {
 					defaults.global.defaultFontSize =
-						customGlobalOptions.fontSize;
+						defaultOptions.fontSize;
 					defaults.global.legend.labels.defaultFontSize =
-						customGlobalOptions.fontSize;
+						defaultOptions.fontSize;
 					lineChart.current.chartInstance.update();
 				};
 				setConfig();
 			} else {
-				defaults.global.defaultFontSize = customGlobalOptions.fontSize;
+				defaults.global.defaultFontSize = defaultOptions.fontSize;
 				defaults.global.legend.labels.defaultFontSize =
-					customGlobalOptions.fontSize;
+					defaultOptions.fontSize;
 			}
 		}
 		// eslint-disable-next-line
-	}, [triggerRerenderAfterDefaultConfigChanged]);
+	}, [triggerRerenderCharts]);
 
 	useEffect(() => {
 		if (!isSaved) {
@@ -80,10 +78,10 @@ const Chart = ({
 	const toggleSaveChartModal = () => {
 		setShowSaveChartModal((prevState) => !prevState);
 	};
-
+	
 	return (
 		<div>
-			<div id={id}>
+			<div>
 				<Line
 					name={name}
 					data={data}
@@ -92,7 +90,7 @@ const Chart = ({
 				/>
 				<ChartController
 					chartType={type}
-					id={id}
+					chartIndex={chartIndex}
 					isSavedChart={isSavedChart}
 					showEditChartModal={showEditChartModal}
 					showEditGraphModal={showEditGraphModal}
@@ -102,7 +100,7 @@ const Chart = ({
 				/>
 				{showEditGraphModal && (
 					<EditGraphModal
-						chartId={id}
+						chartIndex={chartIndex}
 						datasets={data.datasets}
 						lineChart={lineChart}
 						setShowEditGraphModal={setShowEditGraphModal}
@@ -111,7 +109,7 @@ const Chart = ({
 				)}
 				{showEditChartModal && (
 					<EditChartModal
-						id={id}
+						chartIndex={chartIndex}
 						name={name}
 						setShowEditChartModal={setShowEditChartModal}
 						showEditChartModal={showEditChartModal}
@@ -123,8 +121,8 @@ const Chart = ({
 						showSaveChartModal={showSaveChartModal}
 						data={{
 							graphs,
-							tableNames,
-							customTableNames,
+							defaultGraphNames,
+							customGraphNames,
 							hosts,
 							customOptions,
 							colorIds,
@@ -134,7 +132,7 @@ const Chart = ({
 						name={name}
 						setIsSavedChart={setIsSavedChart}
 						isSavedChart={isSavedChart}
-						id={id}
+						chartIndex={chartIndex}
 						type={type}
 						chartRef={lineChart}
 					/>
@@ -146,7 +144,7 @@ const Chart = ({
 
 Chart.propTypes = {
 	config: PropTypes.object.isRequired,
-	id: PropTypes.number.isRequired,
+	chartIndex: PropTypes.number.isRequired,
 };
 
 export default Chart;

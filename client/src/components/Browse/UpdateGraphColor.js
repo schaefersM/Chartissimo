@@ -2,13 +2,13 @@ import PropTypes from "prop-types";
 import React from "react";
 import { useChartStore, useChartDispatch } from "../../stores/chartStore";
 
-const UpdateGraphColor = ({ chartId, color, rowType, rowId }) => {
+const UpdateGraphColor = ({ chartIndex, color, rowType, rowIndex }) => {
 	const chartDispatch = useChartDispatch();
 	const { charts } = useChartStore();
 
 	const changeGraphColor = (e) => {
 		const newColorValue = e.target.value;
-		let newChart = { ...charts[chartId] };
+		let newChart = { ...charts[chartIndex] };
 		const {
 			colorIds,
 			data,
@@ -33,13 +33,13 @@ const UpdateGraphColor = ({ chartId, color, rowType, rowId }) => {
 				newYAxes.splice(1, 1, newYAxe);
 			}
 		}
-		const newDataset = { ...datasets[rowId] };
+		const newDataset = { ...datasets[rowIndex] };
 		newDataset.backgroundColor = newDataset.borderColor = newColorValue;
 		const newDatasets = [...datasets];
-		newDatasets.splice(rowId, 1, newDataset);
-		const newColorIds = [...colorIds[rowId]];
-		newColorIds.splice(rowId, 1, newColorValue);
-		colorIds.splice(rowId, 1, newColorValue);
+		newDatasets.splice(rowIndex, 1, newDataset);
+		const newColorIds = [...colorIds[rowIndex]];
+		newColorIds.splice(rowIndex, 1, newColorValue);
+		colorIds.splice(rowIndex, 1, newColorValue);
 		newChart = {
 			...newChart,
 			colorIds,
@@ -55,7 +55,7 @@ const UpdateGraphColor = ({ chartId, color, rowType, rowId }) => {
 				},
 			},
 		};
-		charts.splice(chartId, 1, newChart);
+		charts.splice(chartIndex, 1, newChart);
 		chartDispatch({ type: "updateChart", payload: charts });
 	};
 
@@ -70,10 +70,10 @@ const UpdateGraphColor = ({ chartId, color, rowType, rowId }) => {
 };
 
 UpdateGraphColor.propTypes = {
-	chartId: PropTypes.number.isRequired,
+	chartIndex: PropTypes.number.isRequired,
 	color: PropTypes.string.isRequired,
 	rowType: PropTypes.string.isRequired,
-	rowId: PropTypes.number.isRequired,
+	rowIndex: PropTypes.number.isRequired,
 };
 
 export default UpdateGraphColor;

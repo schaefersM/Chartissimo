@@ -1,24 +1,24 @@
 export default function authReducer(state, action) {
-	const { type, payload } = action;
+	const { payload, type } = action;
 
 	switch (type) {
-		case "login":
-			return {
-				...state,
-				isAuthenticated: true,
-				user: payload.user,
-				readyToRender: true,
-			};
 		case "logout":
 			return {
 				...state,
 				isAuthenticated: false,
 				user: null,
 			};
-		case "toggleReadyToRender":
+		case "userAuthenticated":
 			return {
 				...state,
-				readyToRender: !state.readyToRender,
+				isAuthenticated: true,
+				user: payload.user,
+				readyToRenderAfterAuth: true,
+			};
+		case "userNotAuthenticated":
+			return {
+				...state,
+				readyToRenderAfterAuth: true,
 			};
 		default:
 			break;

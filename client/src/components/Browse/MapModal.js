@@ -7,32 +7,32 @@ import { useChartStore, useChartDispatch } from "../../stores/chartStore";
 const MapModal = () => {
 	const data = [
 		{
-			host: "wirtschaft",
-			name: "FB Wirtschaft",
-			id: "markerWirtschaft",
+			hostname: "wirtschaft",
+			displayname: "FB Wirtschaft",
+			hostid: "markerWirtschaft",
 		},
 		{
-			host: "kostbar",
-			name: "Kostbar",
-			id: "markerKostbar",
+			hostname: "kostbar",
+			displayname: "Kostbar",
+			hostid: "markerKostbar",
 		},
 		{
-			host: "informatik",
-			name: "FB Informatik",
-			id: "markerInformatik",
+			hostname: "informatik",
+			displayname: "FB Informatik",
+			hostid: "markerInformatik",
 		},
 		{
-			host: "architektur",
-			name: "FB Architektur",
-			id: "markerArchitektur",
+			hostname: "architektur",
+			displayname: "FB Architektur",
+			hostid: "markerArchitektur",
 		},
 	];
 
 	const chartDispatch = useChartDispatch();
 	const { showFetchModal, showMapModal } = useChartStore();
 
-	const MapMarker = data.map((data) => {
-		return <Marker key={data.id} data={data} />;
+	const MapMarker = data.map(({hostname, displayname, hostid}) => {
+		return <Marker key={hostid} hostname={hostname} displayname={displayname} hostid={hostid} />;
 	});
 
 	return (
@@ -43,7 +43,7 @@ const MapModal = () => {
 				chartDispatch({
 					type: "toggleMapModal",
 					payload: {
-						chartId: null,
+						chartIndex: null,
 						chartType: "all",
 						position: null,
 					},

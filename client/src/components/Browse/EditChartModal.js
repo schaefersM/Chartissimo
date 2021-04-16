@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import React, { useEffect } from "react";
 import EditChartContainer from "./EditChartContainer";
 
-const EditChartModal = ({ id, name, showEditChartModal, setShowEditChartModal }) => {
+const EditChartModal = ({ chartIndex, name, showEditChartModal, setShowEditChartModal }) => {
     useEffect(() => {
 		scroller.scrollTo(`${name}`, {
 			duration: 500,
@@ -44,7 +44,7 @@ const EditChartModal = ({ id, name, showEditChartModal, setShowEditChartModal })
 			<Modal.Body className="edit-chart-modal-body">
 				<div className="d-flex flex-column flex-nowrap justify-content-around edit-chart-modal-container">
 					<EditChartContainer
-						id={id}
+						chartIndex={chartIndex}
 						setShowEditChartModal={setShowEditChartModal}
 					/>
 				</div>
@@ -54,7 +54,7 @@ const EditChartModal = ({ id, name, showEditChartModal, setShowEditChartModal })
 };
 
 EditChartModal.propTypes = {
-	id: PropTypes.number.isRequired,
+	chartIndex: PropTypes.number.isRequired,
 	name: PropTypes.number.isRequired,
 	showEditChartModal: PropTypes.bool.isRequired,
 	setShowEditChartModal: PropTypes.func.isRequired,

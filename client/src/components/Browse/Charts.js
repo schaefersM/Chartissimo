@@ -7,7 +7,7 @@ const Charts = () => {
 
 	const Charts = charts
 		? charts.map((config, i) => {
-				return <ChartWrapper config={config} id={i} key={config.id} />;
+				return <ChartWrapper config={config} chartIndex={i} key={config.id} />;
 		  })
 		: null;
 

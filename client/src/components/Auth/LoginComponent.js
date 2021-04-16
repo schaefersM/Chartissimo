@@ -7,7 +7,7 @@ const LoginComponent = () => {
 	const nameRef = useRef();
 
 	const [errorText, setErrorText] = useState("");
-	const [name, setName] = useState("");
+	const [username, setName] = useState("");
 	const [password, setPassword] = useState("");
 
 	useEffect(() => {
@@ -17,7 +17,7 @@ const LoginComponent = () => {
 	const handleKeyDown = (e) => {
 		if (e.key === "Enter") {
 			e.preventDefault();
-			postData(name, password);
+			postData(username, password);
 		}
 	};
 
@@ -54,7 +54,7 @@ const LoginComponent = () => {
 				setPassword("");
 				return null;
 			} else {
-				authDispatch({ type: "login", payload: await response.json() });
+				authDispatch({ type: "userAuthenticated", payload: await response.json() });
 			}
 		} catch (e) {
 			console.log(e);
@@ -71,7 +71,7 @@ const LoginComponent = () => {
 						id="login-component-name-input"
 						className="mr-2 form-control"
 						type="text"
-						value={name}
+						value={username}
 						onChange={handleNameChange}
 						ref={nameRef}
 					/>
@@ -91,7 +91,7 @@ const LoginComponent = () => {
 			</form>
 			<button
 				className="btn btn-success"
-				onClick={() => postData(name, password)}
+				onClick={() => postData(username, password)}
 			>
 				Login
 			</button>

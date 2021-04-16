@@ -22,16 +22,16 @@ const ChartFetcher = ({ chartData }) => {
 				customOptions: { fontSize },
 				data: {
 					colorIds,
-					customTableNames,
+					customGraphNames,
 					hours,
 					previousHour,
-					tableNames,
+					defaultGraphNames,
 				},
 				id,
 			} = chartData;
 
 			const data = await Promise.all(
-				tableNames.map(async (query, _) => {
+				defaultGraphNames.map(async (query, _) => {
 					let [type, host, year, month, day, hour] = query.split("-");
 					hour = hour ? hour.split(":")[0] : "25";
 					const date = `${year}-${month}-${day}`;
@@ -48,8 +48,7 @@ const ChartFetcher = ({ chartData }) => {
 								options
 							);
 							if (response.status === 404) {
-								alert(await response.json());
-								return null;
+								console.log(await response.json());
 							} else {
 								const data = await response.json();
 								return data;
@@ -71,8 +70,8 @@ const ChartFetcher = ({ chartData }) => {
 				configType,
 				previousHour,
 				hours,
-				tableNames,
-				customTableNames,
+				defaultGraphNames,
+				customGraphNames,
 				colorIds
 			);
 
@@ -91,7 +90,7 @@ const ChartFetcher = ({ chartData }) => {
 	}, [chartData]);
 
 	const Charts = charts.map((config, i) => {
-		return <ChartWrapper key={config.id} id={i} config={config} />;
+		return <ChartWrapper key={config.id} chartIndex={i} config={config} />;
 	});
 
 	return <div>{Charts}</div>;

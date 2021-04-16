@@ -57,7 +57,10 @@ const LoginPage = () => {
 				setPassword("");
 				return null;
 			} else {
-				authDispatch({ type: "login", payload: await response.json() });
+				authDispatch({
+					type: "userAuthenticated",
+					payload: await response.json(),
+				});
 				history.replace("/");
 			}
 		} catch (e) {

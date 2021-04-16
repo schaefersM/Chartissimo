@@ -4,7 +4,7 @@ import routes from "./routes";
 import { useAuthStore } from "../../stores/authStore";
 
 const Navbar = () => {
-	const { isAuthenticated, readyToRender } = useAuthStore();
+	const { isAuthenticated, readyToRenderAfterAuth } = useAuthStore();
 
 	const AuthOnlyRoutes = routes.map(
 		({ authenticationRequired, name, needed, path }, i) => {
@@ -51,11 +51,11 @@ const Navbar = () => {
 
 	return (
 		<div className="sticky-top">
-			{readyToRender && isAuthenticated ? (
+			{readyToRenderAfterAuth && isAuthenticated ? (
 				<ul className="navbar navbar-expand-lg bg-success sticky-top">
 					{AuthOnlyRoutes}
 				</ul>
-			) : readyToRender && !isAuthenticated ? (
+			) : readyToRenderAfterAuth && !isAuthenticated ? (
 				<ul className="navbar navbar-expand-lg bg-success sticky-top">
 					{PublicRoutes}
 				</ul>

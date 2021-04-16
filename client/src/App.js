@@ -35,11 +35,11 @@ const App = () => {
 			);
 			if (!response.ok) {
 				authDispatch({
-					type: "toggleReadyToRender",
+					type: "userNotAuthenticated",
 				});
 			} else {
 				authDispatch({
-					type: "login",
+					type: "userAuthenticated",
 					payload: await response.json(),
 				});
 			}

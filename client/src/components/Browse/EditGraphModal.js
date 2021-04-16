@@ -5,7 +5,7 @@ import React from "react";
 import EditGraphContainer from './EditGraphContainer'
 
 const EditGraphModal = ({
-	chartId,
+	chartIndex,
 	datasets,
 	setShowEditGraphModal,
 	showEditGraphModal,
@@ -15,10 +15,10 @@ const EditGraphModal = ({
 				return (
 					<div key={label}>
 						<EditGraphContainer
-							backgroundColor={backgroundColor}
-							chartId={chartId}
-							label={label}
-							rowId={i}
+							color={backgroundColor}
+							chartIndex={chartIndex}
+							graphName={label}
+							rowIndex={i}
 							rowType={yAxisID}
 						/>
 						<hr className="edit-graph-container-hr" />
@@ -61,7 +61,7 @@ const EditGraphModal = ({
 };
 
 EditGraphModal.propTypes = {
-	chartId: PropTypes.number.isRequired,
+	chartIndex: PropTypes.number.isRequired,
 	datasets: PropTypes.array.isRequired,
 };
 

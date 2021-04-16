@@ -1,21 +1,20 @@
 const ChartState = {
     chartType: "",
-    chartId: null,
+    chartIndex: null,
     charts: [],
     configType: "",
-    customGlobalOptions: {},
-    fetchInformation: {
+    defaultOptions: {},
+    fetchModalTitle: "",
+    fetchParameter: {
         date: "",
         host: "",
-        hostLocation: "",
         hour: "",
         type: "",
     },
-    fetchModalLabel: "",
     position: "",
     showMapModal: false,
     showFetchModal: false,
-    triggerRerenderAfterDefaultConfigChanged: false,
+    triggerRerenderCharts: false,
 };
 
 export default ChartState;

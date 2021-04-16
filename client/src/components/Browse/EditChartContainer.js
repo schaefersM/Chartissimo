@@ -6,30 +6,30 @@ import { setChartFontsize } from "../../helper";
 import { useAuthStore } from "../../stores/authStore";
 import { useChartStore, useChartDispatch } from "../../stores/chartStore";
 
-const EditChartContainer = ({ id, setShowEditChartModal }) => {
+const EditChartContainer = ({ chartIndex, setShowEditChartModal }) => {
 	const { isAuthenticated, user } = useAuthStore();
 	const chartDispatch = useChartDispatch();
-	const { charts, customGlobalOptions } = useChartStore();
+	const { charts, defaultOptions } = useChartStore();
 
 	const [fontSize, setFontSize] = useState(
-		charts[id].customOptions.fontSize
-			? charts[id].customOptions.fontSize
-			: customGlobalOptions.fontSize
+		charts[chartIndex].customOptions.fontSize
+			? charts[chartIndex].customOptions.fontSize
+			: defaultOptions.fontSize
 	);
 	const [initialFontSize] = useState(
-		charts[id].customOptions.fontSize
-			? charts[id].customOptions.fontSize
-			: customGlobalOptions.fontSize
+		charts[chartIndex].customOptions.fontSize
+			? charts[chartIndex].customOptions.fontSize
+			: defaultOptions.fontSize
 	);
 
 	const handleRange = (e) => {
 		setFontSize(e);
-		const newChart = setChartFontsize(charts[id], e);
-		charts.splice(id, 1, newChart);
+		const newChart = setChartFontsize(charts[chartIndex], e);
+		charts.splice(chartIndex, 1, newChart);
 		chartDispatch({ type: "updateChart", payload: charts });
 	};
 
-	const handleSave = async (e) => {
+	const handleSave = async () => {
 		try {
 			const { user_id } = user;
 			const options = {
@@ -51,10 +51,10 @@ const EditChartContainer = ({ id, setShowEditChartModal }) => {
 			);
 
 			if (!response.ok) {
-				alert(await response.json());
+				console.log(await response.json());
 			} else {
 				chartDispatch({
-					type: "setCustomGlobalOptions",
+					type: "setDefaultOptions",
 					payload: { fontSize },
 				});
 				chartDispatch({ type: "rerenderCharts" });
@@ -108,7 +108,7 @@ const EditChartContainer = ({ id, setShowEditChartModal }) => {
 };
 
 EditChartContainer.propTypes = {
-	id: PropTypes.number.isRequired,
+	chartIndex: PropTypes.number.isRequired,
 	setShowEditChartModal: PropTypes.func.isRequired,
 };
 

@@ -10,7 +10,7 @@ const AddChartButton = () => {
 	const { charts, showMapModal } = useChartStore();
 
 	return (
-		<div>
+		<>
 			{showMapModal && <MapModal />}
 			<div className="d-flex flex-column">
 				<FontAwesomeIcon
@@ -20,7 +20,7 @@ const AddChartButton = () => {
 						chartDispatch({
 							type: "toggleMapModal",
 							payload: {
-								chartId: charts.length,
+								chartIndex: charts.length,
 								chartType: "all",
 								position: "",
 							},
@@ -30,7 +30,7 @@ const AddChartButton = () => {
 				/>
 				<span className="mx-auto">Click to add a chart</span>
 			</div>
-		</div>
+		</>
 	);
 };
 

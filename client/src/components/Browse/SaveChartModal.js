@@ -11,14 +11,14 @@ const SaveChartModal = ({
 	data: {
 		colorIds,
 		customOptions,
-		customTableNames,
+		customGraphNames,
 		hours,
 		hosts,
 		graphs,
 		previousHour,
-		tableNames,
+		defaultGraphNames,
 	},
-	id,
+	chartIndex,
 	isSavedChart,
 	name,
 	setIsSavedChart,
@@ -35,7 +35,7 @@ const SaveChartModal = ({
 
 	const [chartName, setChartName] = useState("");
 	const [errorText, setErrorText] = useState("");
-	const [savingChartName] = useState(charts[id].savingChartName);
+	const [savingChartName] = useState(charts[chartIndex].savingChartName);
 	const [showLoginComponent, setShowLoginComponent] = useState(false);
 
 	useEffect(() => {
@@ -75,8 +75,8 @@ const SaveChartModal = ({
 				setChartName("");
 				return null;
 			} else {
-				charts[id].savingChartName = "";
-				charts[id].isSaved = false;
+				charts[chartIndex].savingChartName = "";
+				charts[chartIndex].isSaved = false;
 				chartDispatch({ type: "updateChart", payload: charts });
 				setChartName("");
 				setIsSavedChart(false);
@@ -114,8 +114,8 @@ const SaveChartModal = ({
 					body: JSON.stringify({
 						user_id,
 						data: {
-							tableNames,
-							customTableNames,
+							defaultGraphNames,
+							customGraphNames,
 							graphs,
 							previousHour,
 							hours,
@@ -147,10 +147,10 @@ const SaveChartModal = ({
 					setChartName("");
 					return null;
 				} else {
-					charts[id].savingChartName = chartName
+					charts[chartIndex].savingChartName = chartName
 						? chartName
 						: savingChartName;
-					charts[id].isSaved = true;
+					charts[chartIndex].isSaved = true;
 					chartDispatch({ type: "updateChart", payload: charts });
 					setIsSavedChart(true);
 					toggleSaveChartModal();
@@ -176,9 +176,9 @@ const SaveChartModal = ({
 					},
 					body: JSON.stringify({
 						name: chartName ? chartName : savingChartName,
-						id,
-						tableNames,
-						customTableNames,
+						id: name,
+						defaultGraphNames,
+						customGraphNames,
 						colorIds,
 						customOptions: customOptions.fontSize
 							? customOptions
@@ -201,10 +201,10 @@ const SaveChartModal = ({
 					setChartName("");
 					return null;
 				} else {
-					charts[id].savingChartName = chartName
+					charts[chartIndex].savingChartName = chartName
 						? chartName
 						: savingChartName;
-					charts[id].isSaved = true;
+					charts[chartIndex].isSaved = true;
 					chartDispatch({ type: "updateChart", payload: charts });
 					setChartName("");
 					setIsSavedChart(true);
@@ -332,7 +332,7 @@ const SaveChartModal = ({
 
 SaveChartModal.propTypes = {
 	data: PropTypes.object.isRequired,
-	id: PropTypes.number.isRequired,
+	chartIndex: PropTypes.number.isRequired,
 	isSavedChart: PropTypes.bool.isRequired,
 	name: PropTypes.number.isRequired,
 	setIsSavedChart: PropTypes.func.isRequired,

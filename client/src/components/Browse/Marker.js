@@ -3,38 +3,38 @@ import React from "react";
 import Pi from "../../png/Pi.png";
 import { useChartStore, useChartDispatch } from "../../stores/chartStore";
 
-const Marker = ({ data: { id, host, name } }) => {
+const Marker = ({ displayname, hostid, hostname }) => {
 	const chartDispatch = useChartDispatch();
 	const { showMapModal } = useChartStore();
 
-	const styles = {
-		position: "relative",
-		display: showMapModal === true ? "block" : "none",
-	};
 	return (
-		<input
-			alt={host}
-			className="marker"
-			id={id}
-			onClick={() =>
-				chartDispatch({
-					type: "toggleFetchModal",
-					payload: {
-						fetchLabelName: name,
-						host,
-						hostLocation: name,
-					},
-				})
-			}
-			src={Pi}
-			style={styles}
-			type="image"
-		/>
+		<>
+			{showMapModal && (
+				<input
+					alt={displayname}
+					className={`position-relative d-block`}
+					id={hostid}
+					onClick={() =>
+						chartDispatch({
+							type: "toggleFetchModal",
+							payload: {
+								fetchModalTitle: displayname,
+								host: hostname,
+							},
+						})
+					}
+					src={Pi}
+					type="image"
+				/>
+			)}
+		</>
 	);
 };
 
 Marker.propTypes = {
-	data: PropTypes.object.isRequired,
+	hostname: PropTypes.string.isRequired,
+	hostid: PropTypes.string.isRequired,
+	displayname: PropTypes.string.isRequired,
 };
 
 export default Marker;

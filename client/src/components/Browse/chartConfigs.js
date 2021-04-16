@@ -1,19 +1,24 @@
-/***
+/**
  * @type Diagrammkonfiguration
- * @property string type: Art der Konfiguration
- * @property string previousHour - Letzter Zeitparameter
- * @property Array hours - Alle bisherigen Zeitparameter
- * @property Array graphs - Alle "checkString" der gezeichneten Graphen
  * @property Array colorIds - Alle "colorId" der gezeichneten Graphen
- * @property Array tableNames - Alle "labelNames" der gezeichneten Graphen
- * @property Object customOptions - Object mit den geänderten Optionen des Benutzers
+ * @property Array defaultGraphNames - Alle Namen der ursprünglich gezeichneten Graphen
+ * @property Array customGraphNames - Liste defaultGraphNames und ggf. veränderte Namen der Graphen
+ * @property Object customOptions - Object mit den benutzerdefinierten Optionen (fontSize etc.)
  * @property Object data - ChartsJS Object mit Datensätzen für die Graphen und die X-Achse
+ * @property Array graphs - Alle "checkString" der gezeichneten Graphen
+ * @property Array hosts - Alle Hosts der gezeichneten Graphen
+ * @property Array hours - Alle Zeitparameter der gezeichneten Graphen
+ * @property boolean isSaved - Hat der User den Chart gespeichert?
  * @property Object options - ChartJS Object mit Optionen für das Diagramm
+ * @property string previousHour - Letzter Zeitparameter
+ * @property string savingChartName - Name des Diagramms unter dem der User es gespeichert hat.
+ * @property string type: Art der Konfiguration
  */
 
 const compConfig = {
 	colorIds: [],
-	customTableNames: [],
+	defaultGraphNames: [],
+	customGraphNames: [],
 	customOptions: {},
 	data: {
 		datasets: [],
@@ -33,20 +38,6 @@ const compConfig = {
 			},
 		},
 		responsive: true,
-		title: {
-			display: true,
-			fontColor: "black",
-			fontSize: undefined,
-			fontStyle: "bold",
-			text: "comparison of temperature and humidity",
-		},
-		tooltips: {
-			bodyFontSize: 14,
-			footerFontSize: 14,
-			intersect: true,
-			mode: "index",
-			titleFontSize: 14,
-		},
 		scales: {
 			xAxes: [
 				{
@@ -75,8 +66,8 @@ const compConfig = {
 						fontSize: undefined,
 						fontStyle: "bold",
 						stepSize: 10,
-						suggestedMin: 0, //MinWert der Y-Achse
-						suggestedMax: 40, //MaxWert der Y-Achse
+						suggestedMin: 0,
+						suggestedMax: 40,
 					},
 					type: "linear",
 				},
@@ -86,45 +77,63 @@ const compConfig = {
 					position: "right",
 					scaleLabel: {
 						display: true,
-						labelString: "humidity in %",
 						fontColor: "#6242f4",
-						fontStyle: "bold",
 						fontSize: undefined,
+						fontStyle: "bold",
+						labelString: "humidity in %",
 					},
 					ticks: {
 						fontColor: "black",
 						fontSize: undefined,
 						fontStyle: "bold",
 						stepSize: 10,
-						suggestedMin: 50, //MinWert der Y-Achse
-						suggestedMax: 90, //MaxWert der Y-Achse
+						suggestedMin: 50,
+						suggestedMax: 90,
 					},
 					type: "linear",
 				},
 			],
 		},
+		title: {
+			display: true,
+			fontColor: "black",
+			fontSize: undefined,
+			fontStyle: "bold",
+			text: "comparison of temperature and humidity",
+		},
+		tooltips: {
+			bodyFontSize: 14,
+			footerFontSize: 14,
+			intersect: true,
+			mode: "index",
+			titleFontSize: 14,
+		},
 	},
 	previousHour: "",
 	savingChartName: "",
-	tableNames: [],
 	type: "comparison",
 };
 
-/***
+/**
  * @type Diagrammkonfiguration
- * @property string type: Art der Konfiguration
- * @property string previousHour - Letzter Zeitparameter
- * @property Array hours - Alle bisherigen Zeitparameter
- * @property Array graphs - Alle "checkString" der gezeichneten Graphen
  * @property Array colorIds - Alle "colorId" der gezeichneten Graphen
- * @property Array tableNames - Alle "labelNames" der gezeichneten Graphen
+ * @property Array defaultGraphNames - Alle Namen der ursprünglich gezeichneten Graphen
+ * @property Array customGraphNames - Liste defaultGraphNames und ggf. veränderte Namen der Graphen
+ * @property Object customOptions - Object mit den benutzerdefinierten Optionen (fontSize etc.)
  * @property Object data - ChartsJS Object mit Datensätzen für die Graphen und die X-Achse
+ * @property Array graphs - Alle "checkString" der gezeichneten Graphen
+ * @property Array hosts - Alle Hosts der gezeichneten Graphen
+ * @property Array hours - Alle Zeitparameter der gezeichneten Graphen
+ * @property boolean isSaved - Hat der User den Chart gespeichert?
  * @property Object options - ChartJS Object mit Optionen für das Diagramm
+ * @property string previousHour - Letzter Zeitparameter
+ * @property string savingChartName - Name des Diagramms unter dem der User es gespeichert hat.
+ * @property string type: Art der Konfiguration
  */
-
 const tempConfig = {
 	colorIds: [],
-	customTableNames: [],
+	defaultGraphNames: [],
+	customGraphNames: [],
 	customOptions: {},
 	data: {
 		datasets: [],
@@ -137,26 +146,11 @@ const tempConfig = {
 		legend: {
 			labels: {
 				fontColor: "black",
-				fontStyle: "bold",
 				fontSize: undefined,
+				fontStyle: "bold",
 			},
 		},
 		responsive: true,
-		title: {
-			display: true,
-			fontColor: "black",
-			fontStyle: "bold",
-			fontSize: undefined,
-			text: "comparison of temperature",
-		},
-		tooltips: {
-			mode: "index",
-			// axis: 'x',
-			intersect: true, //Wenn Mobile Device, dann true
-			bodyFontSize: 14,
-			titleFontSize: 14,
-			footerFontSize: 14,
-		},
 		scales: {
 			xAxes: [
 				{
@@ -171,48 +165,67 @@ const tempConfig = {
 			yAxes: [
 				{
 					display: true,
-					ticks: {
-						fontColor: "black",
-						fontSize: undefined,
-						fontStyle: "bold",
-						stepSize: 10,
-						suggestedMin: 0, //MinWert der Y-Achse
-						suggestedMax: 40, //MaxWert der Y-Achse
-					},
+					id: "temperature",
+					position: "left",
 					scaleLabel: {
 						display: true,
 						labelString: "temperature in °C",
 						fontColor: "black",
 						fontSize: undefined,
 					},
-					id: "temperature",
+					ticks: {
+						fontColor: "black",
+						fontSize: undefined,
+						fontStyle: "bold",
+						stepSize: 10,
+						suggestedMin: 0,
+						suggestedMax: 40,
+					},
 					type: "linear",
-					position: "left",
 				},
 			],
+		},
+		title: {
+			display: true,
+			fontColor: "black",
+			fontSize: undefined,
+			fontStyle: "bold",
+			text: "comparison of temperature",
+		},
+		tooltips: {
+			// axis: 'x',
+			bodyFontSize: 14,
+			footerFontSize: 14,
+			intersect: true,
+			mode: "index",
+			titleFontSize: 14,
 		},
 	},
 	previousHour: "",
 	savingChartName: "",
-	tableNames: [],
 	type: "temperature",
 };
 
-/***
+/**
  * @type Diagrammkonfiguration
- * @property string type: Art der Konfiguration
- * @property string previousHour - Letzter Zeitparameter
- * @property Array hours - Alle bisherigen Zeitparameter
- * @property Array graphs - Alle "checkString" der gezeichneten Graphen
  * @property Array colorIds - Alle "colorId" der gezeichneten Graphen
- * @property Array tableNames - Alle "labelNames" der gezeichneten Graphen
+ * @property Array defaultGraphNames - Alle Namen der ursprünglich gezeichneten Graphen
+ * @property Array customGraphNames - Liste defaultGraphNames und ggf. veränderte Namen der Graphen
+ * @property Object customOptions - Object mit den benutzerdefinierten Optionen (fontSize etc.)
  * @property Object data - ChartsJS Object mit Datensätzen für die Graphen und die X-Achse
+ * @property Array graphs - Alle "checkString" der gezeichneten Graphen
+ * @property Array hosts - Alle Hosts der gezeichneten Graphen
+ * @property Array hours - Alle Zeitparameter der gezeichneten Graphen
+ * @property boolean isSaved - Hat der User den Chart gespeichert?
  * @property Object options - ChartJS Object mit Optionen für das Diagramm
+ * @property string previousHour - Letzter Zeitparameter
+ * @property string savingChartName - Name des Diagramms unter dem der User es gespeichert hat.
+ * @property string type: Art der Konfiguration
  */
-
 const humConfig = {
 	colorIds: [],
-	customTableNames: [],
+	defaultGraphNames: [],
+	customGraphNames: [],
 	customOptions: {},
 	data: {
 		datasets: [],
@@ -225,26 +238,11 @@ const humConfig = {
 		legend: {
 			labels: {
 				fontColor: "black",
-				fontStyle: "bold",
 				fontSize: undefined,
+				fontStyle: "bold",
 			},
 		},
 		responsive: true,
-		title: {
-			display: true,
-			fontColor: "black",
-			fontStyle: "bold",
-			fontSize: undefined,
-			text: "comparison of humidity",
-		},
-		tooltips: {
-			mode: "index",
-			// axis: 'x',
-			intersect: true, //Wenn Mobile Device, dann true
-			bodyFontSize: 14,
-			titleFontSize: 14,
-			footerFontSize: 14,
-		},
 		scales: {
 			xAxes: [
 				{
@@ -259,30 +257,44 @@ const humConfig = {
 			yAxes: [
 				{
 					display: true,
+					id: "humidity",
+					position: "left",
+					scaleLabel: {
+						display: true,
+						fontColor: "black",
+						fontSize: undefined,
+						labelString: "humidity in %",
+					},
 					ticks: {
 						fontColor: "black",
 						fontSize: undefined,
 						fontStyle: "bold",
 						stepSize: 10,
-						suggestedMin: 40, //MinWert der Y-Achse
-						suggestedMax: 100, //MaxWert der Y-Achse
+						suggestedMin: 40,
+						suggestedMax: 100,
 					},
-					scaleLabel: {
-						display: true,
-						labelString: "humidity in %",
-						fontColor: "black",
-						fontSize: undefined,
-					},
-					id: "humidity",
 					type: "linear",
-					position: "left",
 				},
 			],
+		},
+		title: {
+			display: true,
+			fontColor: "black",
+			fontSize: undefined,
+			fontStyle: "bold",
+			text: "comparison of humidity",
+		},
+		tooltips: {
+			// axis: 'x',
+			bodyFontSize: 14,
+			intersect: true,
+			footerFontSize: 14,
+			mode: "index",
+			titleFontSize: 14,
 		},
 	},
 	previousHour: "",
 	savingChartName: "",
-	tableNames: [],
 	type: "humidity",
 };
 

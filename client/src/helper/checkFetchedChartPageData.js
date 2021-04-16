@@ -6,8 +6,8 @@ export default function checkFetchedDataGallery(
 	type,
 	fetchHour,
 	hours,
-	tableNames,
-	customTableNames,
+	defaultGraphNames,
+	customGraphNames,
 	colorIds,
 	reset = false
 ) {
@@ -21,7 +21,7 @@ export default function checkFetchedDataGallery(
 		validData = data.map((item) => checkHourData(item));
 		labels = reset
 			? labelGenerator("minute", fetchHour, reset)
-			: labelGenerator("minute", fetchHour, reset, config.hours);
+			: labelGenerator("minute", fetchHour, reset, hours);
 	} else {
 		console.log("invalid Data");
 	}
@@ -29,9 +29,9 @@ export default function checkFetchedDataGallery(
 	//TODO Datasetslabel in einer Funktion für Browser and ChartPage Komponent
 
 	const newDatasets = validData.map((data, index) => {
-		const type = tableNames[index].split("-")[0];
+		const type = defaultGraphNames[index].split("-")[0];
 		return {
-			label: customTableNames[index],
+			label: customGraphNames[index],
 			yAxisID: type,
 			fill: false,
 			pointRadius: 3,
@@ -54,7 +54,7 @@ export default function checkFetchedDataGallery(
 							fontColor: colorIds[0],
 						},
 						display:
-							tableNames[0].split("-")[0] === "temperature"
+							defaultGraphNames[0].split("-")[0] === "temperature"
 								? true
 								: false,
 					},
@@ -63,13 +63,13 @@ export default function checkFetchedDataGallery(
 						scaleLabel: {
 							...newOptions.scales.yAxes[1].scaleLabel,
 							fontColor:
-								tableNames[0].split("-")[0] === "humidity"
+								defaultGraphNames[0].split("-")[0] === "humidity"
 									? colorIds[0]
 									: colorIds[1],
 						},
 						display:
-							tableNames[0].split("-")[0] === "humidity" ||
-							tableNames[1]
+							defaultGraphNames[0].split("-")[0] === "humidity" ||
+							defaultGraphNames[1]
 								? true
 								: false,
 					},

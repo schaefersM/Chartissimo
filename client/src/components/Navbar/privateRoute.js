@@ -4,10 +4,10 @@ import { Route, Redirect } from "react-router-dom";
 import { useAuthStore } from "../../stores/authStore";
 
 const PrivateRoute = ({ render, props, ...rest }) => {
-	const { isAuthenticated, readyToRender } = useAuthStore();
+	const { isAuthenticated, readyToRenderAfterAuth } = useAuthStore();
 	return (
 		<div>
-			{readyToRender ? (
+			{readyToRenderAfterAuth ? (
 				<Route
 					{...rest}
 					render={(props) => {

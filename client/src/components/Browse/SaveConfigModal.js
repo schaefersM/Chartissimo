@@ -32,8 +32,7 @@ const SaveConfigModal = ({ setShowSaveConfigModal, show, config }) => {
 			);
 
 			if (response.status === 404) {
-				alert(await response.json());
-				return null;
+				console.log(await response.json());
 			} else {
 				setShowSaveConfigModal((prevState) => !prevState);
 				chartDispatch({ type: "rerenderCharts" });
