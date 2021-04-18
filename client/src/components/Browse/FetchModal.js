@@ -180,7 +180,7 @@ const FetchModal = () => {
 						? [datasets[0].label, datasets[1].label]
 						: [datasets[0].label],
 				graphs: [checkString],
-				colorIds: [colorId],
+				colorIds: [...colorId],
 			};
 		} else {
 			config = {
