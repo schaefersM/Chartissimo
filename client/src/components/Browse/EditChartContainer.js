@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import React, { useState } from "react";
+import { defaults } from "react-chartjs-2";
 import "rc-slider/assets/index.css";
 import Slider from "rc-slider";
 import { setChartFontsize } from "../../helper";
@@ -53,11 +54,15 @@ const EditChartContainer = ({ chartIndex, setShowEditChartModal }) => {
 			if (!response.ok) {
 				console.log(await response.json());
 			} else {
+				const newChart = setChartFontsize(charts[chartIndex], undefined);
+				charts.splice(chartIndex, 1, newChart);
+				chartDispatch({ type: "updateChart", payload: charts });
 				chartDispatch({
 					type: "setDefaultOptions",
 					payload: { fontSize },
 				});
-				chartDispatch({ type: "rerenderCharts" });
+				defaults.global.defaultFontSize = fontSize;
+				defaults.global.legend.labels.defaultFontSize = fontSize;
 				setShowEditChartModal((prevState) => !prevState);
 			}
 		} catch (e) {
