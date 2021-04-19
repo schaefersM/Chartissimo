@@ -1,4 +1,4 @@
-import { Line, defaults } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 import PropTypes from "prop-types";
 import React, { useState, useRef, useEffect } from "react";
 import ChartController from "./ChartController";
@@ -6,7 +6,6 @@ import EditGraphModal from "./EditGraphModal";
 import EditChartModal from "./EditChartModal";
 import SaveChartModal from "./SaveChartModal";
 import { useChartStore } from "../../stores/chartStore";
-import { useAuthStore } from "../../stores/authStore";
 
 const Chart = ({
 	config: {
@@ -26,8 +25,7 @@ const Chart = ({
 	},
 	chartIndex,
 }) => {
-	const { isAuthenticated } = useAuthStore();
-	const { triggerRerenderCharts, defaultOptions } = useChartStore();
+	const { triggerRerenderCharts } = useChartStore();
 
 	const initialRender = useRef(true);
 	const lineChart = useRef();
@@ -41,20 +39,11 @@ const Chart = ({
 		if (initialRender.current) {
 			initialRender.current = false;
 		} else {
-			//TODO: If ist hier überflüssig & Prüfen, ob das(?) Chart eine custom Config hat
-			if (isAuthenticated && defaultOptions.fontSize) {
-				const setConfig = () => {
-					defaults.global.defaultFontSize =
-						defaultOptions.fontSize;
-					defaults.global.legend.labels.defaultFontSize =
-						defaultOptions.fontSize;
-					lineChart.current.chartInstance.update();
-				};
-				setConfig();
+			if(!customOptions.fontSize) {
+				console.log("update")
+				lineChart.current.chartInstance.update();
 			} else {
-				defaults.global.defaultFontSize = defaultOptions.fontSize;
-				defaults.global.legend.labels.defaultFontSize =
-					defaultOptions.fontSize;
+				console.log("ignore")
 			}
 		}
 		// eslint-disable-next-line

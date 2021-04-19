@@ -6,11 +6,11 @@ import { useAuthStore } from "../../stores/authStore";
 import { useChartStore, useChartDispatch } from "./../../stores/chartStore";
 
 const Browse = () => {
-	const { isAuthenticated, user, readyToRenderAfterAuth } = useAuthStore();
+	const { isAuthenticated, user } = useAuthStore();
 
 	const chartDispatch = useChartDispatch();
 
-	const { triggerRerenderCharts, defaultOptions } = useChartStore();
+	const { defaultOptions } = useChartStore();
 
 	useEffect(() => {
 		chartDispatch({ type: "eraseCharts" });
@@ -19,7 +19,7 @@ const Browse = () => {
 
 	useEffect(() => {
 		if (isAuthenticated) {
-			const fetchConfig = async () => {
+			const fetchDefaultOptions = async () => {
 				const { user_id } = user;
 				const options = {
 					credentials: "include",
@@ -33,26 +33,25 @@ const Browse = () => {
 					`http://${process.env.REACT_APP_BACKEND_IP}:5000/api/user/${user_id}/config`,
 					options
 				);
-				if (response.status === 404) {
-					defaults.global.defaultFontSize = 16;
-					defaults.global.legend.labels.defaultFontSize = 16;
-					defaultOptions.fontSize = 16;
-				} else {
-					const data = await response.json();
-					const { fontSize } = data;
+				if (response.ok) {
+					const { fontSize } = await response.json();
 					defaultOptions.fontSize = fontSize;
 					defaults.global.defaultFontSize = fontSize;
 					defaults.global.legend.labels.defaultFontSize = fontSize;
+				} else {
+					defaultOptions.fontSize = 16;
+					defaults.global.defaultFontSize = 16;
+					defaults.global.legend.labels.defaultFontSize = 16;
 				}
 			};
-			fetchConfig();
+			fetchDefaultOptions();
 		} else {
 			defaultOptions.fontSize = 16;
 			defaults.global.defaultFontSize = 16;
 			defaults.global.legend.labels.defaultFontSize = 16;
 		}
 		// eslint-disable-next-line
-	}, [readyToRenderAfterAuth, triggerRerenderCharts]);
+	}, [isAuthenticated]);
 
 	return (
 		<div>

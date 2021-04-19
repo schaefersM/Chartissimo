@@ -53,11 +53,13 @@ const EditChartContainer = ({ chartIndex, setShowEditChartModal }) => {
 			if (!response.ok) {
 				console.log(await response.json());
 			} else {
+				const newChart = setChartFontsize(charts[chartIndex], undefined);
+				charts.splice(chartIndex, 1, newChart);
+				chartDispatch({ type: "updateChart", payload: charts });
 				chartDispatch({
 					type: "setDefaultOptions",
 					payload: { fontSize },
 				});
-				chartDispatch({ type: "rerenderCharts" });
 				setShowEditChartModal((prevState) => !prevState);
 			}
 		} catch (e) {
