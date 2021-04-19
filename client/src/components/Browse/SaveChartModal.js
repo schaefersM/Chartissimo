@@ -1,4 +1,3 @@
-import { defaults } from "react-chartjs-2";
 import Modal from "react-bootstrap/Modal";
 import PropTypes from "prop-types";
 import React, { useState, useEffect, useRef } from "react";
@@ -29,7 +28,7 @@ const SaveChartModal = ({
 	const { isAuthenticated, user } = useAuthStore();
 
 	const chartDispatch = useChartDispatch();
-	const { charts } = useChartStore();
+	const { charts, defaultOptions } = useChartStore();
 
 	const nameRef = useRef();
 
@@ -127,11 +126,7 @@ const SaveChartModal = ({
 						hosts,
 						customOptions: customOptions.fontSize
 							? customOptions
-							: {
-									fontSize:
-										defaults.global.legend.labels
-											.defaultFontSize,
-							  },
+							: defaultOptions,
 						image,
 					}),
 				};
@@ -182,11 +177,7 @@ const SaveChartModal = ({
 						colorIds,
 						customOptions: customOptions.fontSize
 							? customOptions
-							: {
-									fontSize:
-										defaults.global.legend.labels
-											.defaultFontSize,
-							  },
+							: defaultOptions,
 						image,
 					}),
 				};
