@@ -1,3 +1,4 @@
+import { defaults } from "react-chartjs-2";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
 import "rc-slider/assets/index.css";
@@ -60,6 +61,8 @@ const EditChartContainer = ({ chartIndex, setShowEditChartModal }) => {
 					type: "setDefaultOptions",
 					payload: { fontSize },
 				});
+				defaults.global.defaultFontSize = fontSize;
+				defaults.global.legend.labels.defaultFontSize = fontSize;
 				setShowEditChartModal((prevState) => !prevState);
 			}
 		} catch (e) {
