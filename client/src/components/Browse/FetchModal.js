@@ -161,7 +161,6 @@ const FetchModal = () => {
 	const addGraph = (reset, checkedData, config, type) => {
 		const { datasets, labels, colorId, options } = checkedData;
 		const checkString = `${type}-${host}-${date}-${fetchHour}`;
-		config.id = 100000 * Math.random();
 		if (reset) {
 			config = {
 				...config,
