@@ -5,11 +5,10 @@ const UserChart = require("../model/UserChart");
 function navigationLinks() {
 	return async (req, res, next) => {
 		try {
-			const amountOfDocuments = await UserChart.countDocuments();
 			const limit = parseInt(req.query.limit);
 			const page = parseInt(req.query.page);
 			const baseUrl = req.baseUrl;
-			const lastPageIndex = Math.ceil(amountOfDocuments / limit);
+			const lastPageIndex = Math.ceil(res.amountOfDocuments / limit);
 			const navigationLinks = {
 				lastPageIndex: lastPageIndex !== page ? lastPageIndex : page,
 				self: {
@@ -68,7 +67,6 @@ function paginatedResults() {
 		};
 		location ? (filter.hosts = { $in: location }) : null;
 		type ? (filter.chartType = { $in: type }) : null;
-		console.log(filter);
 		const skipIndex = (page - 1) * limit;
 		try {
 			const results = await UserChart.find(filter)
@@ -76,8 +74,10 @@ function paginatedResults() {
 				.limit(limit)
 				.skip(skipIndex)
 				.exec();
+			const amountOfDocuments = await UserChart.find(filter).countDocuments();
 			if (results.length) {
 				res.results = results
+				res.amountOfDocuments = amountOfDocuments
 				next();
 			} else {
 				return res.status(404).json({ errorMessage: "No data available"})
