@@ -87,13 +87,16 @@ const Gallery = () => {
 		// eslint-disable-next-line
 	}, [typeValues, locationValues, user]);
 
-	const Results = results.map((data, i) => {
-		return (
-			<div key={data.id}>
-				<GalleryItem data={data} />
-			</div>
-		);
-	});
+	const Results = results.length > 0 ? (
+		results.map((data) => {
+			return (
+				<div key={data.id}>
+					<GalleryItem data={data} />
+				</div>
+			);
+		})
+	) : null;
+
 
 	return (
 		<div className="content-wrapper">
@@ -117,9 +120,13 @@ const Gallery = () => {
                     className="infinite-scroll-component"
 				>
 					<div className="gallery-filter-results my-2">
-						{isLoading || results.length ? (
-							Results
-						) : (
+						{!isLoading && isFinished && results.length > 0 && Results}
+						{!isLoading && isFinished && !results.length ? (
+							<h3 className="text-center">
+								No Data Available
+							</h3>
+						) : null}
+						{!results.length && !isLoading && !isFinished && (
 							<h3 className="text-center">
 								Search in your gallery by applying a filter
 							</h3>
