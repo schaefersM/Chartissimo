@@ -14,9 +14,7 @@ volumes:
 services:
   api:
     container_name: chartapi
-    build:
-      context: ./api
-      dockerfile: Dockerfile
+    build: ./api
     image: chart_api:latest
     user: node
     environment:
@@ -37,9 +35,7 @@ services:
 
   authentication:
     container_name: chartauth
-    build:
-      context: ./auth
-      dockerfile: Dockerfile
+    build: ./auth
     image: chart_auth:latest
     user: node
     networks:
@@ -104,6 +100,9 @@ services:
       - mongoconfigdb:/data/configdb
       - ./mongodb/dump:/dump
     restart: always
+    ports:
+      - "27017:27017"
+
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${DOCKER_MONGODB_ROOT_USER}
       MONGO_INITDB_ROOT_PASSWORD: ${DOCKER_MONGODB_ROOT_PASSWORD}
