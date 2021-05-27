@@ -31,7 +31,7 @@ const SaveConfigModal = ({ setShowSaveConfigModal, show, config }) => {
 				options
 			);
 
-			if (response.status === 404) {
+			if (!response.ok) {
 				console.log(await response.json());
 			} else {
 				setShowSaveConfigModal((prevState) => !prevState);

@@ -47,7 +47,7 @@ const ChartFetcher = ({ chartData }) => {
 								`http://${process.env.REACT_APP_BACKEND_IP}:5000/api/data/categories/${type}?date=${date}&location=${host}&hour=${hour}`,
 								options
 							);
-							if (response.status === 404) {
+							if (!response.ok) {
 								console.log(await response.json());
 							} else {
 								const data = await response.json();
