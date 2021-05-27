@@ -30,6 +30,19 @@ const Gallery = () => {
 			values: typeValuesList,
 		},
 	];
+	const changeLocationValue = (e) => {
+		setLocationValues(e);
+		setPage(1);
+		setResults([])
+		setHasMore(false);
+	}
+
+	const changeTypeValue = (e) => {
+		setTypeValues(e);
+		setPage(1);
+		setResults([]);
+		setHasMore(false);
+	}
 
 	const initialRender = useRef(true);
 
@@ -107,8 +120,8 @@ const Gallery = () => {
 					<GalleryFilter
 						locationValues={locationValues}
 						typeValues={typeValues}
-						setLocationValues={setLocationValues}
-						setTypeValues={setTypeValues}
+						changeLocationValue={changeLocationValue}
+						changeTypeValue={changeTypeValue}
 					/>
 				</div>
 				{isLoading && !results.length && (
