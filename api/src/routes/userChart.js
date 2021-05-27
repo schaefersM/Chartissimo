@@ -170,10 +170,8 @@ router
 				{ user: user_id, id },
 				{ image: 0 }
 			);
-			if (singleUserChart.length) {
-				res.data = {
-					...singleUserChart,
-				};
+			if (singleUserChart) {
+				res.data = singleUserChart;
 				return res.status(200).json(res.data);
 			}
 			return res.status(404).json({ errorMessage: "No data available" });
