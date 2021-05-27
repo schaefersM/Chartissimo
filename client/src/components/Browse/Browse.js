@@ -29,16 +29,23 @@ const Browse = () => {
 						"Content-Type": "application/json",
 					},
 				};
-				const response = await fetch(
-					`http://${process.env.REACT_APP_BACKEND_IP}:5000/api/user/${user_id}/config`,
-					options
-				);
-				if (response.ok) {
-					const { fontSize } = await response.json();
-					defaultOptions.fontSize = fontSize;
-					defaults.global.defaultFontSize = fontSize;
-					defaults.global.legend.labels.defaultFontSize = fontSize;
-				} else {
+				try {
+					const response = await fetch(
+						`http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_API_PORT}/api/user/${user_id}/config`,
+						options
+					);
+					if (response.ok) {
+						const { fontSize } = await response.json();
+						defaultOptions.fontSize = fontSize;
+						defaults.global.defaultFontSize = fontSize;
+						defaults.global.legend.labels.defaultFontSize =
+							fontSize;
+					} else {
+						defaultOptions.fontSize = 16;
+						defaults.global.defaultFontSize = 16;
+						defaults.global.legend.labels.defaultFontSize = 16;
+					}
+				} catch (e) {
 					defaultOptions.fontSize = 16;
 					defaults.global.defaultFontSize = 16;
 					defaults.global.legend.labels.defaultFontSize = 16;
