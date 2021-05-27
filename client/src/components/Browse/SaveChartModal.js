@@ -171,6 +171,7 @@ const SaveChartModal = ({
 					},
 					body: JSON.stringify({
 						name: chartName ? chartName : savingChartName,
+						hosts,
 						id: name,
 						data: {
 							defaultGraphNames,

@@ -184,6 +184,7 @@ router
 		const { user_id, id } = req.params;
 		const {
 			name,
+			hosts,
 			image,
 			data,
 			customOptions,
@@ -210,6 +211,7 @@ router
 							// 	"data.colorIds": colorIds,
 							// },
 						customOptions,
+						hosts,
 						lastModified: new Date(),
 					}
 				);
@@ -232,6 +234,7 @@ router
 						},
 						{
 							name,
+							hosts,
 							image,
 							data, 
 							// $set: {
