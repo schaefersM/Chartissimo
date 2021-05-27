@@ -47,23 +47,23 @@ const Gallery = () => {
 			`http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_API_PORT}/api/user/${user_id}/charts?page=${page}&limit=3&`,
 			urlData
 		);
-
 		const response = await fetch(url, options);
-
 		if (!response.ok) {
-			const { error } = await response.json();
-			console.log(error);
-			return null;
+			setIsLoading(false);
+			setIsFinished(true);
+			setHasMore(false);
+			setResults([]);
+			setPage(1);
 		} else {
 			const {
 				results,
 				links: { next },
 			} = await response.json();
-			setTimeout(() => {
-				setHasMore(next ? true : false);
-				setPage((prevState) => (prevState += 1));
-				setResults((prevState) => [...prevState, ...results]);
-			}, 1500);
+			setHasMore(next ? true : false);
+			setPage((prevState) => (prevState += 1));
+			setResults((prevState) => [...prevState, ...results]);
+			setIsLoading(false)
+			setIsFinished(true);
 		}
 	};
 	useEffect(() => {
@@ -73,15 +73,17 @@ const Gallery = () => {
 			if (typeValues.length || locationValues.length) {
 				try {
 					setIsLoading((prevState) => !prevState);
+					setResults([]);
 					fetchCharts();
-					// setIsLoading((prevState) => !prevState);
 				} catch (e) {
 					console.log(e);
 				}
 			} else {
 				setIsLoading(false);
+				setIsFinished(false);
 				setHasMore(false);
 				setResults([]);
+				setPage(1);
 			}
 		}
 		// eslint-disable-next-line
