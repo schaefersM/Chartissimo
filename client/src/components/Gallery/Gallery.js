@@ -12,6 +12,7 @@ const Gallery = () => {
 	const [page, setPage] = useState(1);
 	const [locationValues, setLocationValues] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
+	const [isFinished, setIsFinished] = useState(false);
 	const [typeValues, setTypeValues] = useState([]);
 	const locationValuesList = locationValues
 		? locationValues.map(({ value }) => value)
