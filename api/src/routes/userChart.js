@@ -166,7 +166,7 @@ router
 		}
 
 		try {
-			const singleUserChart = await UserChart.find(
+			const singleUserChart = await UserChart.findOne(
 				{ user: user_id, id },
 				{ image: 0 }
 			);
