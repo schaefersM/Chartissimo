@@ -132,7 +132,7 @@ const Gallery = () => {
 					next={fetchCharts}
 					hasMore={hasMore}
 					loader={<div className="circle pulse bg-success mx-auto" />}
-                    className="infinite-scroll-component"
+					className="infinite-scroll-component"
 				>
 					<div className="gallery-filter-results my-2">
 						{!isLoading && isFinished && results.length > 0 && Results}
