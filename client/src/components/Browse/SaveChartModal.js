@@ -69,8 +69,8 @@ const SaveChartModal = ({
 			);
 
 			if (!response.ok) {
-				const { error } = await response.json();
-				setErrorText(error);
+				const { errorMessage } = await response.json();
+				setErrorText(errorMessage);
 				setChartName("");
 				return null;
 			} else {
@@ -137,8 +137,8 @@ const SaveChartModal = ({
 				);
 
 				if (!response.ok) {
-					const { error } = await response.json();
-					setErrorText(error);
+					const { errorMessage } = await response.json();
+					setErrorText(errorMessage);
 					setChartName("");
 					return null;
 				} else {
@@ -187,8 +187,8 @@ const SaveChartModal = ({
 				);
 
 				if (!response.ok) {
-					const { error } = await response.json();
-					setErrorText(error);
+					const { errorMessage } = await response.json();
+					setErrorText(errorMessage);
 					setChartName("");
 					return null;
 				} else {
