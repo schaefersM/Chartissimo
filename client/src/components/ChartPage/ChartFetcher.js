@@ -44,7 +44,7 @@ const ChartFetcher = ({ chartData }) => {
 								},
 							};
 							const response = await fetch(
-								`http://${process.env.REACT_APP_BACKEND_IP}:5000/api/data/categories/${type}?date=${date}&location=${host}&hour=${hour}`,
+								`http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_API_PORT}/api/data/categories/${type}?date=${date}&location=${host}&hour=${hour}`,
 								options
 							);
 							if (response.status === 404) {

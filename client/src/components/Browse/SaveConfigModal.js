@@ -27,7 +27,7 @@ const SaveConfigModal = ({ setShowSaveConfigModal, show, config }) => {
 				}),
 			};
 			const response = await fetch(
-				`http://${process.env.REACT_APP_BACKEND_IP}:5000/api/user/${user_id}/config`,
+				`http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_API_PORT}/api/user/${user_id}/config`,
 				options
 			);
 

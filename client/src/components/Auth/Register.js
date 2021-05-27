@@ -40,7 +40,7 @@ const Register = () => {
 	const postData = async (name, email, password) => {
 		try {
 			const response = await fetch(
-				`http://${process.env.REACT_APP_BACKEND_IP}:4000/auth/register`,
+				`http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_AUTH_PORT}/auth/register`,
 				{
 					method: "POST",
 					headers: {

@@ -43,7 +43,7 @@ const Gallery = () => {
 		};
 
 		const url = urlGenerator(
-			`http://${process.env.REACT_APP_BACKEND_IP}:5000/api/user/${user_id}/charts?page=${page}}&limit=3&`,
+			`http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_API_PORT}/api/user/${user_id}/charts?page=${page}&limit=3&`,
 			urlData
 		);
 

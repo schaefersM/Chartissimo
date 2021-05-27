@@ -64,7 +64,7 @@ const SaveChartModal = ({
 			};
 
 			const response = await fetch(
-				`http://${process.env.REACT_APP_BACKEND_IP}:5000/api/user/${user_id}/charts/${name}`,
+				`http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_API_PORT}/api/user/${user_id}/charts/${name}`,
 				options
 			);
 
@@ -132,7 +132,7 @@ const SaveChartModal = ({
 				};
 
 				const response = await fetch(
-					`http://${process.env.REACT_APP_BACKEND_IP}:5000/api/user/${user_id}/charts`,
+					`http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_API_PORT}/api/user/${user_id}/charts`,
 					options
 				);
 
@@ -182,7 +182,7 @@ const SaveChartModal = ({
 					}),
 				};
 				const response = await fetch(
-					`http://${process.env.REACT_APP_BACKEND_IP}:5000/api/user/${user_id}/charts/${name}`,
+					`http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_API_PORT}/api/user/${user_id}/charts/${name}`,
 					options
 				);
 
