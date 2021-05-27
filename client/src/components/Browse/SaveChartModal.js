@@ -172,9 +172,14 @@ const SaveChartModal = ({
 					body: JSON.stringify({
 						name: chartName ? chartName : savingChartName,
 						id: name,
-						defaultGraphNames,
-						customGraphNames,
-						colorIds,
+						data: {
+							defaultGraphNames,
+							customGraphNames,
+							colorIds,
+							hours,
+							graphs,
+							previousHour,
+						},
 						customOptions: customOptions.fontSize
 							? customOptions
 							: defaultOptions,

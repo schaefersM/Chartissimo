@@ -185,10 +185,8 @@ router
 		const {
 			name,
 			image,
+			data,
 			customOptions,
-			defaultGraphNames,
-			customGraphNames,
-			colorIds,
 		} = req.body;
 		try {
 			const checkForUpdateName = await UserChart.findOne({
@@ -205,11 +203,12 @@ router
 					{
 						name,
 						image,
-						$set: {
-							"data.defaultGraphNames": defaultGraphNames,
-							"data.customGraphNames": customGraphNames,
-							"data.colorIds": colorIds,
-						},
+						data,
+						// $set: {
+							// 	"data.defaultGraphNames": defaultGraphNames,
+							// 	"data.customGraphNames": customGraphNames,
+							// 	"data.colorIds": colorIds,
+							// },
 						customOptions,
 						lastModified: new Date(),
 					}
@@ -234,11 +233,12 @@ router
 						{
 							name,
 							image,
-							$set: {
-								"data.defaultGraphNames": defaultGraphNames,
-								"data.customGraphNames": customGraphNames,
-								"data.colorIds": colorIds,
-							},
+							data, 
+							// $set: {
+							// 	"data.defaultGraphNames": defaultGraphNames,
+							// 	"data.customGraphNames": customGraphNames,
+							// 	"data.colorIds": colorIds,
+							// },
 							customOptions,
 							lastModified: new Date(),
 						}
