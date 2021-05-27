@@ -51,7 +51,7 @@ function navigationLinks() {
 			next();
 		} catch (e) {
 			console.log(e);
-			res.status(500).json({ message: "Error Occured" });
+			res.status(500).json({ errorMessage: "Error Occured" });
 		}
 	};
 }
@@ -76,11 +76,15 @@ function paginatedResults() {
 				.limit(limit)
 				.skip(skipIndex)
 				.exec();
-			res.results = results;
-			next();
+			if (results.length) {
+				res.results = results
+				next();
+			} else {
+				return res.status(404).json({ errorMessage: "No data available"})
+			}
 		} catch (e) {
 			console.log(e);
-			res.status(500).json({ message: "Error Occured" });
+			res.status(500).json({ errorMessage: "Error Occured" });
 		}
 	};
 }
@@ -106,8 +110,8 @@ router
 			if (checkName) {
 				console.log(`${name} was already taken`);
 				return res
-					.status(404)
-					.json({ error: "Name was already taken" });
+					.status(400)
+					.json({ errorMessage: "Name was already taken" });
 			} else {
 				const userChart = new UserChart({
 					user: user_id,
@@ -143,7 +147,7 @@ router.route("/names").get(async (req, res) => {
 		return res.json(res.data);
 	} catch (e) {
 		console.log(e);
-		res.status(500).json({ message: "Error Occured" });
+		res.status(500).json({ errorMessage: "Error Occured" });
 	}
 });
 
@@ -158,7 +162,7 @@ router
 		const { _id } = verifiedToken.user;
 		const { user_id, id } = req.params;
 		if (_id !== user_id) {
-			return res.status(403).json({ message: "Nope" });
+			return res.status(403).json({ errorMessage: "Invalid Token" });
 		}
 
 		try {
@@ -172,10 +176,10 @@ router
 				};
 				return res.status(200).json(res.data);
 			}
-			return res.status(500).json({ message: "No data available" });
+			return res.status(404).json({ errorMessage: "No data available" });
 		} catch (e) {
 			console.log(e);
-			res.status(500).json({ message: "Error Occured" });
+			res.status(500).json({ errorMessage: "Error Occured" });
 		}
 	})
 	.put(async (req, res) => {
@@ -222,7 +226,7 @@ router
 				});
 				if (checkName) {
 					console.log(`chartname ${name} was already taken`);
-					res.status(500).json({ error: "Name was already taken" });
+					res.status(400).json({ errorMessage: "Name was already taken" });
 				} else {
 					await UserChart.updateOne(
 						{
