@@ -37,7 +37,7 @@ const ChartPage = (props) => {
 				history.push("/404");
 			} else {
 				const data = await response.json();
-				setChartData(data[0]);
+				setChartData(data);
 			}
 		};
 		fetchChartInformation();
