@@ -35,7 +35,7 @@ const LoginPage = () => {
 	const postData = async (name, password) => {
 		try {
 			const response = await fetch(
-				`http://${process.env.REACT_APP_BACKEND_IP}:4000/auth/login`,
+				`http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_AUTH_PORT}/auth/login`,
 				{
 					credentials: "include",
 					method: "POST",

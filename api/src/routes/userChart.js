@@ -5,11 +5,10 @@ const UserChart = require("../model/UserChart");
 function navigationLinks() {
 	return async (req, res, next) => {
 		try {
-			const amountOfDocuments = await UserChart.countDocuments();
 			const limit = parseInt(req.query.limit);
 			const page = parseInt(req.query.page);
 			const baseUrl = req.baseUrl;
-			const lastPageIndex = Math.ceil(amountOfDocuments / limit);
+			const lastPageIndex = Math.ceil(res.amountOfDocuments / limit);
 			const navigationLinks = {
 				lastPageIndex: lastPageIndex !== page ? lastPageIndex : page,
 				self: {
@@ -51,7 +50,7 @@ function navigationLinks() {
 			next();
 		} catch (e) {
 			console.log(e);
-			res.status(500).json({ message: "Error Occured" });
+			res.status(500).json({ errorMessage: "Error Occured" });
 		}
 	};
 }
@@ -68,7 +67,6 @@ function paginatedResults() {
 		};
 		location ? (filter.hosts = { $in: location }) : null;
 		type ? (filter.chartType = { $in: type }) : null;
-		console.log(filter);
 		const skipIndex = (page - 1) * limit;
 		try {
 			const results = await UserChart.find(filter)
@@ -76,11 +74,17 @@ function paginatedResults() {
 				.limit(limit)
 				.skip(skipIndex)
 				.exec();
-			res.results = results;
-			next();
+			const amountOfDocuments = await UserChart.find(filter).countDocuments();
+			if (results.length) {
+				res.results = results
+				res.amountOfDocuments = amountOfDocuments
+				next();
+			} else {
+				return res.status(404).json({ errorMessage: "No data available"})
+			}
 		} catch (e) {
 			console.log(e);
-			res.status(500).json({ message: "Error Occured" });
+			res.status(500).json({ errorMessage: "Error Occured" });
 		}
 	};
 }
@@ -106,8 +110,8 @@ router
 			if (checkName) {
 				console.log(`${name} was already taken`);
 				return res
-					.status(404)
-					.json({ error: "Name was already taken" });
+					.status(400)
+					.json({ errorMessage: "Name was already taken" });
 			} else {
 				const userChart = new UserChart({
 					user: user_id,
@@ -143,7 +147,7 @@ router.route("/names").get(async (req, res) => {
 		return res.json(res.data);
 	} catch (e) {
 		console.log(e);
-		res.status(500).json({ message: "Error Occured" });
+		res.status(500).json({ errorMessage: "Error Occured" });
 	}
 });
 
@@ -158,35 +162,32 @@ router
 		const { _id } = verifiedToken.user;
 		const { user_id, id } = req.params;
 		if (_id !== user_id) {
-			return res.status(403).json({ message: "Nope" });
+			return res.status(403).json({ errorMessage: "Invalid Token" });
 		}
 
 		try {
-			const singleUserChart = await UserChart.find(
+			const singleUserChart = await UserChart.findOne(
 				{ user: user_id, id },
 				{ image: 0 }
 			);
-			if (singleUserChart.length) {
-				res.data = {
-					...singleUserChart,
-				};
+			if (singleUserChart) {
+				res.data = singleUserChart;
 				return res.status(200).json(res.data);
 			}
-			return res.status(500).json({ message: "No data available" });
+			return res.status(404).json({ errorMessage: "No data available" });
 		} catch (e) {
 			console.log(e);
-			res.status(500).json({ message: "Error Occured" });
+			res.status(500).json({ errorMessage: "Error Occured" });
 		}
 	})
 	.put(async (req, res) => {
 		const { user_id, id } = req.params;
 		const {
 			name,
+			hosts,
 			image,
+			data,
 			customOptions,
-			defaultGraphNames,
-			customGraphNames,
-			colorIds,
 		} = req.body;
 		try {
 			const checkForUpdateName = await UserChart.findOne({
@@ -203,12 +204,14 @@ router
 					{
 						name,
 						image,
-						$set: {
-							"data.defaultGraphNames": defaultGraphNames,
-							"data.customGraphNames": customGraphNames,
-							"data.colorIds": colorIds,
-						},
+						data,
+						// $set: {
+							// 	"data.defaultGraphNames": defaultGraphNames,
+							// 	"data.customGraphNames": customGraphNames,
+							// 	"data.colorIds": colorIds,
+							// },
 						customOptions,
+						hosts,
 						lastModified: new Date(),
 					}
 				);
@@ -222,7 +225,7 @@ router
 				});
 				if (checkName) {
 					console.log(`chartname ${name} was already taken`);
-					res.status(500).json({ error: "Name was already taken" });
+					res.status(400).json({ errorMessage: "Name was already taken" });
 				} else {
 					await UserChart.updateOne(
 						{
@@ -231,12 +234,14 @@ router
 						},
 						{
 							name,
+							hosts,
 							image,
-							$set: {
-								"data.defaultGraphNames": defaultGraphNames,
-								"data.customGraphNames": customGraphNames,
-								"data.colorIds": colorIds,
-							},
+							data, 
+							// $set: {
+							// 	"data.defaultGraphNames": defaultGraphNames,
+							// 	"data.customGraphNames": customGraphNames,
+							// 	"data.colorIds": colorIds,
+							// },
 							customOptions,
 							lastModified: new Date(),
 						}

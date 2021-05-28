@@ -18,7 +18,7 @@ const Logout = () => {
 				},
 			};
 			const response = await fetch(
-				`http://${process.env.REACT_APP_BACKEND_IP}:4000/auth/logout`,
+				`http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_AUTH_PORT}/auth/logout`,
 				options
 			);
 			if (!response.ok) {

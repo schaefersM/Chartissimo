@@ -30,14 +30,14 @@ const ChartPage = (props) => {
 				},
 			};
 			const response = await fetch(
-				`http://${process.env.REACT_APP_BACKEND_IP}:5000/api/user/${user_id}/charts/${chartId}`,
+				`http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_API_PORT}/api/user/${user_id}/charts/${chartId}`,
 				options
 			);
 			if (!response.ok) {
 				history.push("/404");
 			} else {
 				const data = await response.json();
-				setChartData(data[0]);
+				setChartData(data);
 			}
 		};
 		fetchChartInformation();

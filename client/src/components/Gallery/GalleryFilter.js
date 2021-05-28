@@ -4,8 +4,8 @@ import Select from "react-select";
 
 const GalleryFilter = ({
 	locationValues,
-	setLocationValues,
-	setTypeValues,
+	changeLocationValue,
+	changeTypeValue,
 	typeValues,
 }) => {
 	const locationOptions = [
@@ -28,7 +28,7 @@ const GalleryFilter = ({
 					isClearable={true}
 					isMulti={true}
 					isSearchable={false}
-					onChange={setLocationValues}
+					onChange={changeLocationValue}
 					options={locationOptions}
 					placeholder={"Location..."}
 					value={locationValues}
@@ -39,7 +39,7 @@ const GalleryFilter = ({
 					isClearable={true}
 					isMulti={true}
 					isSearchable={false}
-					onChange={setTypeValues}
+					onChange={changeTypeValue}
 					options={typeOptions}
 					placeholder={"Charttype..."}
 					value={typeValues}
@@ -51,8 +51,8 @@ const GalleryFilter = ({
 
 GalleryFilter.propTypes = {
 	locationValues: PropTypes.array.isRequired,
-	setLocationValues: PropTypes.func.isRequired,
-	setTypeValues: PropTypes.func.isRequired,
+	changeLocationValue: PropTypes.func.isRequired,
+	changeTypeValue: PropTypes.func.isRequired,
 	typeValues: PropTypes.array.isRequired,
 };
 

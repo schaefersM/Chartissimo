@@ -30,7 +30,7 @@ const App = () => {
 				},
 			};
 			const response = await fetch(
-				`http://${process.env.REACT_APP_BACKEND_IP}:4000/auth/refresh`,
+				`http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_AUTH_PORT}/auth/refresh`,
 				options
 			);
 			if (!response.ok) {

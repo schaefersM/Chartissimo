@@ -12,6 +12,7 @@ const Gallery = () => {
 	const [page, setPage] = useState(1);
 	const [locationValues, setLocationValues] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
+	const [isFinished, setIsFinished] = useState(false);
 	const [typeValues, setTypeValues] = useState([]);
 	const locationValuesList = locationValues
 		? locationValues.map(({ value }) => value)
@@ -29,6 +30,19 @@ const Gallery = () => {
 			values: typeValuesList,
 		},
 	];
+	const changeLocationValue = (e) => {
+		setLocationValues(e);
+		setPage(1);
+		setResults([])
+		setHasMore(false);
+	}
+
+	const changeTypeValue = (e) => {
+		setTypeValues(e);
+		setPage(1);
+		setResults([]);
+		setHasMore(false);
+	}
 
 	const initialRender = useRef(true);
 
@@ -43,26 +57,26 @@ const Gallery = () => {
 		};
 
 		const url = urlGenerator(
-			`http://${process.env.REACT_APP_BACKEND_IP}:5000/api/user/${user_id}/charts?page=${page}}&limit=3&`,
+			`http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_API_PORT}/api/user/${user_id}/charts?page=${page}&limit=3&`,
 			urlData
 		);
-
 		const response = await fetch(url, options);
-
 		if (!response.ok) {
-			const { error } = await response.json();
-			console.log(error);
-			return null;
+			setIsLoading(false);
+			setIsFinished(true);
+			setHasMore(false);
+			setResults([]);
+			setPage(1);
 		} else {
 			const {
 				results,
 				links: { next },
 			} = await response.json();
-			setTimeout(() => {
-				setHasMore(next ? true : false);
-				setPage((prevState) => (prevState += 1));
-				setResults((prevState) => [...prevState, ...results]);
-			}, 1500);
+			setHasMore(next ? true : false);
+			setPage((prevState) => (prevState += 1));
+			setResults((prevState) => [...prevState, ...results]);
+			setIsLoading(false)
+			setIsFinished(true);
 		}
 	};
 	useEffect(() => {
@@ -72,27 +86,32 @@ const Gallery = () => {
 			if (typeValues.length || locationValues.length) {
 				try {
 					setIsLoading((prevState) => !prevState);
+					setResults([]);
 					fetchCharts();
-					// setIsLoading((prevState) => !prevState);
 				} catch (e) {
 					console.log(e);
 				}
 			} else {
 				setIsLoading(false);
+				setIsFinished(false);
 				setHasMore(false);
 				setResults([]);
+				setPage(1);
 			}
 		}
 		// eslint-disable-next-line
 	}, [typeValues, locationValues, user]);
 
-	const Results = results.map((data, i) => {
-		return (
-			<div key={data.id}>
-				<GalleryItem data={data} />
-			</div>
-		);
-	});
+	const Results = results.length > 0 ? (
+		results.map((data) => {
+			return (
+				<div key={data.id}>
+					<GalleryItem data={data} />
+				</div>
+			);
+		})
+	) : null;
+
 
 	return (
 		<div className="content-wrapper">
@@ -101,8 +120,8 @@ const Gallery = () => {
 					<GalleryFilter
 						locationValues={locationValues}
 						typeValues={typeValues}
-						setLocationValues={setLocationValues}
-						setTypeValues={setTypeValues}
+						changeLocationValue={changeLocationValue}
+						changeTypeValue={changeTypeValue}
 					/>
 				</div>
 				{isLoading && !results.length && (
@@ -113,12 +132,16 @@ const Gallery = () => {
 					next={fetchCharts}
 					hasMore={hasMore}
 					loader={<div className="circle pulse bg-success mx-auto" />}
-                    className="infinite-scroll-component"
+					className="infinite-scroll-component"
 				>
 					<div className="gallery-filter-results my-2">
-						{isLoading || results.length ? (
-							Results
-						) : (
+						{!isLoading && isFinished && results.length > 0 && Results}
+						{!isLoading && isFinished && !results.length ? (
+							<h3 className="text-center">
+								No Data Available
+							</h3>
+						) : null}
+						{!results.length && !isLoading && !isFinished && (
 							<h3 className="text-center">
 								Search in your gallery by applying a filter
 							</h3>

@@ -64,13 +64,13 @@ const SaveChartModal = ({
 			};
 
 			const response = await fetch(
-				`http://${process.env.REACT_APP_BACKEND_IP}:5000/api/user/${user_id}/charts/${name}`,
+				`http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_API_PORT}/api/user/${user_id}/charts/${name}`,
 				options
 			);
 
 			if (!response.ok) {
-				const { error } = await response.json();
-				setErrorText(error);
+				const { errorMessage } = await response.json();
+				setErrorText(errorMessage);
 				setChartName("");
 				return null;
 			} else {
@@ -132,13 +132,13 @@ const SaveChartModal = ({
 				};
 
 				const response = await fetch(
-					`http://${process.env.REACT_APP_BACKEND_IP}:5000/api/user/${user_id}/charts`,
+					`http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_API_PORT}/api/user/${user_id}/charts`,
 					options
 				);
 
 				if (!response.ok) {
-					const { error } = await response.json();
-					setErrorText(error);
+					const { errorMessage } = await response.json();
+					setErrorText(errorMessage);
 					setChartName("");
 					return null;
 				} else {
@@ -171,10 +171,16 @@ const SaveChartModal = ({
 					},
 					body: JSON.stringify({
 						name: chartName ? chartName : savingChartName,
+						hosts,
 						id: name,
-						defaultGraphNames,
-						customGraphNames,
-						colorIds,
+						data: {
+							defaultGraphNames,
+							customGraphNames,
+							colorIds,
+							hours,
+							graphs,
+							previousHour,
+						},
 						customOptions: customOptions.fontSize
 							? customOptions
 							: defaultOptions,
@@ -182,13 +188,13 @@ const SaveChartModal = ({
 					}),
 				};
 				const response = await fetch(
-					`http://${process.env.REACT_APP_BACKEND_IP}:5000/api/user/${user_id}/charts/${name}`,
+					`http://${process.env.REACT_APP_BACKEND_IP}:${process.env.REACT_APP_API_PORT}/api/user/${user_id}/charts/${name}`,
 					options
 				);
 
 				if (!response.ok) {
-					const { error } = await response.json();
-					setErrorText(error);
+					const { errorMessage } = await response.json();
+					setErrorText(errorMessage);
 					setChartName("");
 					return null;
 				} else {
