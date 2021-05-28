@@ -1,4 +1,4 @@
-import { Line, defaults } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 import PropTypes from "prop-types";
 import React, { useState, useRef, useEffect } from "react";
 import ChartController from "./ChartController";
