@@ -8,6 +8,7 @@ const connection = mysql.createConnection({
 	multipleStatements: true,
 	host: process.env.DB_HOST,
 	user: process.env.DB_USER,
+	port: "30004",
 	password: process.env.DB_PASSWORD,
 	database: process.env.DB_NAME,
 });
@@ -15,7 +16,7 @@ const connection = mysql.createConnection({
 connection.connect((err) => {
 	if (err) {
 		console.log(new Date(), err);
-		return err;
+		throw err;
 	} else {
 		console.log(new Date(), "connected to MySQL");
 	}
@@ -50,7 +51,6 @@ router.get("/comparison", (req, res) => {
 					.status(404)
 					.json({ errorMessage: "No data available!" });
 			} else {
-				console.log(results);
 				console.log(`query compare at ${new Date().toUTCString()}`);
 				return res.json([...results]);
 			}

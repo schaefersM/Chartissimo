@@ -55,16 +55,16 @@ services:
   frontend:
     container_name: chartfront
     build: ./client
-    image: chart_frontend:latest
+    image: chart_frontend:build
     user: node
     stdin_open: true
     tty: true
     environment:
       CHOKIDAR_USEPOLLING: 'true'
-    volumes:
-      - ./client/public/:/home/node/app/public
-      - ./client/src/:/home/node/app/src
-      - ./client/.env:/home/node/app/.env
+#    volumes:
+#      - ./client/public/:/home/node/app/public
+#      - ./client/src/:/home/node/app/src
+#      - ./client/.env:/home/node/app/.env
     networks:
       - chartissimo_bridge
     restart: always

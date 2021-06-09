@@ -3,5 +3,6 @@ Dockerfile
 README.md
 node_modules
 package.json.bak
-src/
-public/
+#src/
+#public/
+#.env

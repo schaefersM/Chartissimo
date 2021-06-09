@@ -4,10 +4,7 @@
   "description": "authentication with jwt",
   "main": "src/server/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/server.js",
-    "start.nodemon": "nodemon",
-    "start.absolute": "nodemon -w .env -w ./src"
+    "start": "node /home/node/app/src/server/index.js"
   },
   "nodemonConfig": {
     "ignore": ["test/*", "docs/*"],
@@ -25,6 +22,5 @@
     "express-jwt": "^6.0.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.9",
-    "nodemon": "^2.0.6"
   }
 }

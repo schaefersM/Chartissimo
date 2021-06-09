@@ -11,15 +11,28 @@ dotenv.config();
 
 const app = express();
 
-mongoose.connect(process.env.MONGODB_CONNECT, { useNewUrlParser: true }, () =>
-	console.log(new Date(), "Api connected to MongoContainer")
-);
+console.log("Hi");
+
+
+mongoose.connect(process.env.MONGODB_CONNECT, { useNewUrlParser: true }, (err) => {
+	if (err) {
+		throw new Error(err)
+	} else {
+	 	console.log(new Date(), "Authentication connected to MongoContainer")
+	}
+});
+
+
+// mongoose.connect(process.env.MONGODB_CONNECT, { useNewUrlParser: true }, () => {
+// 	console.log(new Date(), "Authentication connected to MongoContainer")
+// });
+
 
 app.use(cookieParser());
 
 app.use(express.json({ urlencoded: true, limit: "200kb" }));
 
-let whitelist = ["http://localhost", "http://192.168.0.11"];
+let whitelist = ["http://localhost", "http://192.168.0.11", "http://localhost:30000", "http://192.168.72.132:30000"];
 
 app.use(
 	cors({

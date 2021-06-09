@@ -2,20 +2,23 @@
 
 ls /dumps
 
-RET=1
-until [ ${RET} -eq 0 ]; do
-    mongo chartissimo -u admin -p admin --authenticationDatabase admin --host mongodatabase < createDbUser.js
-    RET=$?
-    if [ "$RET" != 0 ]; then
-        echo "Creating user FAILED. Trying it again..."
-    else 
-        echo "Creation successfull"
-    fi
-done
+#RET=1
+#until [ ${RET} -eq 0 ]; do
+#    mongo chartissimo -u admin -p admin --authenticationDatabase admin --host mongodatabase < createDbUser.js
+#    RET=$?
+#    if [ "$RET" != 0 ]; then
+#        echo "Creating user FAILED. Trying it again..."
+#    else 
+#        echo "Creation successfull"
+#    fi
+#done
 
-mongorestore -u admin -p admin --authenticationDatabase admin --host mongodatabase --db chartissimo --drop --archive < /dumps/chartissimo.dump
+mongorestore -u admin -p admin --authenticationDatabase admin --host localhost --db chartissimo --drop --archive < /dumps/chartissimo.dump
 
-exit
+# exit
+
+
+
 
 
 # restoreCollection() {
