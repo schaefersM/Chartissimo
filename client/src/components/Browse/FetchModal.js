@@ -43,7 +43,7 @@ const FetchModal = () => {
 				setErrorMessage(errorMessage);
 				setHour("25");
 			} else {
-				const data = await response.json();
+				const { data } = await response.json();
 				return data;
 			}
 		} catch (e) {

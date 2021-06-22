@@ -50,9 +50,8 @@ router.get("/comparison", (req, res) => {
 					.status(404)
 					.json({ errorMessage: "No data available!" });
 			} else {
-				console.log(results);
 				console.log(`query compare at ${new Date().toUTCString()}`);
-				return res.json([...results]);
+				return res.json({data: [...results]});
 			}
 		});
 	}
@@ -80,7 +79,7 @@ router.get("/temperature", (req, res) => {
 				return res.status(404).json({ errorMessage: "No data available!" });
 			} else {
 				console.log(`query temperature at ${new Date().toUTCString()}`);
-				return res.json([...results]);
+				return res.json({data: [...results]});
 			}
 		});
 	}
@@ -109,7 +108,7 @@ router.get("/humidity", (req, res) => {
 				return res.status(404).json({ errorMessage: "No data available!" });
 			} else {
 				console.log(`query humidity at ${new Date().toUTCString()}`);
-				return res.json([...results]);
+				return res.json({data: [...results]});
 			}
 		});
 	};
