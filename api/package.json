@@ -12,7 +12,7 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mysql": "^2.18.1",
-    "mongoose": "^5.10.9",
+    "mongoose": "^6.0.4",
     "npm-check": "^5.9.2"
   },
   "scripts": {
